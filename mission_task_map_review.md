@@ -27,6 +27,8 @@ The official briefing also includes image interpretation, survey/autonomy, hurri
 
 ## Architecture implications
 
+**Ruling follow-up — 15 November 2026:** MATE's [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) state that teams may grip any portion of a mission prop to carry it; dedicated carry mechanisms are optional. For traps, tools, panels, nodes, and SGANT, do not make a handle the only candidate carry interface. This does not remove task-specific interaction requirements (such as unlatching, connecting, planting, or seating) and does not establish that all prop surfaces can safely be squeezed.
+
 The single pivot jaw and fixed face can be a common grasp/push core for early trials. The task list spans gentle object handling, high-retention transport, axial insertion/removal, lever motion, edge handling and guided docking. That combination does not establish that one fixed jaw profile will serve every prop.
 
 Keep the nose attachment capable of accepting a passive bolt-on contact tip, but do not finalize a tip shape or claim in-run tool swapping. Since the tasks are attempted in one run, test one installed configuration across the full sequence unless the detailed manual permits a change. Prefer to keep the gripper, pusher and alignment features on the vehicle simultaneously if trials show that the task approaches overlap. Do not add a second actuator based on action wording alone; determine whether ROV motion plus a passive datum can supply the required insertion and lever motions.
@@ -47,3 +49,4 @@ Use physical competition props or dimensionally faithful replicas. Conduct early
 ## Review conclusion
 
 The current pivot jaw remains a testable core, not a fully demonstrated all-task end effector. The next high-value evidence is a prop-based fit and force set followed by a single-configuration full-sequence trial. The body STEP/STP assembly is separately required to check approach corridor, thruster/camera clearance, service access, and the structural reaction path. The missing Part 1/manual and practice props prevent final tip geometry, jaw range, or actuator sizing from being responsibly frozen.
+

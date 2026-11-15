@@ -27,10 +27,10 @@ The task labels are not detailed manipulator specifications. The table below tra
 | Published action group | Likely mechanical function | End-effector implication and unresolved interface |
 |---|---|---|
 | Collect/deploy seagrass seedlings | Gentle capture, transport, release | Grip a carrier/base or approved holder, never foliage by assumption; limit squeeze and add a compliant cradle only if the actual sample requires it. |
-| Deploy new / recover old crab trap | Hook or clamp a bar/handle and retain during lift | Blunt hook plus V-channel insert is a plausible starting mode; trap handle geometry and submerged load are unknown. |
+| Deploy new / recover old crab trap | Carry by any suitable portion of the prop; engage task-specific features only where the task requires them | MATE permits gripping any portion for carrying, so a dedicated carry handle is not required. Test accessible bars, frame, and solid surfaces for damage, slip, and snagging; submerged load and working geometry remain unknown. |
 | Install primary node; place, connect, and level pressure/tilt sensor | Controlled grasp, orientation, seating, cable/connector handling | Jaw alone may not align a keyed part. Use ROV motion for fine positioning; need actual mounting faces, approach axis, seating force, and allowable roll/pitch error. |
 | Remove generator-port cover; insert power connector | Pull cover, orient and push a plug axially | Requires a reaction face and plug-body grip that does not load the cable. Confirm latch/cover retention, connector key, insertion depth/force, and cable bend space before adding any connector-specific nest. |
-| Disengage breaker; unplug/replug power; remove/install solar panel | Push/pull or actuate a lever, handle a cable plug, capture a panel edge | Broad blunt pusher and hook can supplement the jaw; panel needs a safe edge grasp. Breaker travel/force and panel release/retention geometry are unknown. |
+| Disengage breaker; unplug/replug power; remove/install solar panel | Operate a breaker and plug as task interfaces; use any suitable non-damaging panel portion for carrying | Broad blunt pusher and hook can supplement the jaw. MATE permits gripping any portion of a prop to carry it; panel contact must still preserve the sheet/frame and task function. Breaker travel/force and panel release/retention geometry are unknown. |
 | Recover dropped tool and return it | Acquire before/after bottom contact; maintain grip during transport | A self-holding jaw and open hook should tolerate varied approach orientation; test wet retention with the real tool and loss-of-power behavior. |
 | Maneuver cargo into docking bay | Align and push payload into a receptacle | Treat as a vehicle-guided push unless prop instructions require grasping; protect the payload and avoid making the end-effector obstruct the dock. |
 | Install SGANT and connect power/communications | Capture, orient, seat, then handle two links | Likely needs repeatable orientation and strain-safe connector work; verify whether both connectors and antenna can be handled with one jaw orientation or need a passive guide feature. |
@@ -41,10 +41,10 @@ The task labels are not detailed manipulator specifications. The table below tra
 
 These questions target the information that changes the jaw, pusher, load path, and actuator. The briefing calls out the tasks but leaves these interfaces undefined. The forum is linked from the [2027 resource page](https://materovcompetition.org/2027); the team can post them once the official props are being discussed.
 
-1. **Object grasp zones and loads:** For seagrass samples/seedlings, crab traps, the dropped tool, primary node, sensor, solar panel, and SGANT, which surfaces may an ROV contact or grip? Are handles/carriers built into the props, and will dimensions, submerged weights, and any maximum contact forces be published?
+1. **Object interfaces and loads:** For seagrass samples/seedlings, crab traps, the dropped tool, primary node, sensor, solar panel, and SGANT, what dimensions, submerged weights, task-operation interfaces, and any maximum contact forces apply? The official ruling permits any prop portion for carrying; are there task-specific contact restrictions or delicate areas the team should avoid?
 2. **Generator and solar power interfaces:** What exact connector, keying/latch style, insertion/removal travel and force, cable exit/bend allowance, and generator-cover retention/release motion are used? What direction, travel, and force are required to disengage and re-engage the breaker?
 3. **Placement and leveling:** What are the primary-node, pressure/tilt-sensor, and SGANT mounting features and approach axes? What seating force and sensor-level tolerance are accepted, and how are the sensor/SGANT power and communications leads terminated?
-4. **Cargo and trap movement:** What are the cargo payload and docking-bay envelopes, permitted push/contact surfaces, and required final seating condition? For the new and old crab traps, what handle/bar features and retention requirements should teams expect?
+4. **Cargo and trap movement:** What are the cargo payload and docking-bay envelopes, task-operation surfaces, and required final seating condition? For the new and old crab traps, what are the prop dimensions and task-specific handling requirements? Carrying does not require a dedicated handle under the published ruling.
 5. **Jaw safety:** What review criteria will inspectors apply to an intentionally accessible, force-limited gripper jaw mouth, given Part 2's explicit guarding language for gears but no numeric jaw-mouth gap?
 
 These are draft team questions, not additional MATE requirements. Record the official responses in the interface measurement sheet and revise the CAD against those responses rather than treating the provisional contact concepts below as confirmed prop geometry.
@@ -318,7 +318,7 @@ Use these as pass/fail checks for the first wet prototype. Replace the stated ta
 
 | ID | Requirement | First prototype passes when |
 |---|---|---|
-| GR-01 | Capture and retain handled objects | The jaw captures each actual handle/shaft/edge needed for the assigned tasks and holds it through the planned ROV translation and turn without slipping. |
+| GR-01 | Capture and retain handled objects | The jaw securely carries each required practice prop from a suitable portion of the object; the official ruling does not require a dedicated carrying handle. The team must still confirm that a candidate contact will not damage the prop or obstruct its task function, and test the required translation/turn without slip. |
 | GR-02 | Release on command | The pilot can release each held object without a second tool or a manual dive-side intervention. |
 | GR-03 | Avoid damaging delicate mission material | The lowest grip setting that retains the object does not visibly crush, cut, or snag the seagrass sample/seedling. |
 | GR-04 | Push and seat components | With the object aligned by the pilot, the anvil can transmit the required insertion/seating force without the bracket flexing enough to lose alignment. |
@@ -374,3 +374,4 @@ This is a design-review checklist, not a scored FMEA. Revisit it after prop load
 - [2026 EXPLORER/PIONEER/RANGER prop-building instructions (historical; not 2027 sizing data)](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2026/Supporting%20Documents/EX%20PN%20RN%20Prop%20Building%20Instructions%202026_Final.pdf)
 - [2025 EXPLORER/PIONEER/RANGER prop-building instructions (historical; not 2027 sizing data)](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/EX%20PN%20RN%20Prop%20Building%202025_Final.pdf)
 - User-supplied [MATE Floats! preview mission PDF](C:/Users/dealb/Desktop/2027%20MATE%20Floats%20Preview%20Mission_EXPLORER_FINAL.pdf)
+

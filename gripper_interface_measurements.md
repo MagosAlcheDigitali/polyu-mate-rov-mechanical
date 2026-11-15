@@ -2,6 +2,8 @@
 
 Use this with the physical practice props or accurate replicas before changing the OpenSCAD defaults or selecting an actuator. Record units, the prop/source, measurement method, and date. Do not infer a contact dimension from a perspective photo.
 
+MATE's [2027 Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) state that a team may grip any portion of a mission prop to carry it; a dedicated carrying feature is optional. Record several reachable, non-damaging carry-contact candidates rather than assuming a handle is mandatory. Keep carry-contact candidates separate from the task-operation interface (port, latch, mounting face, planting or docking feature), whose handling still depends on the detailed task instructions and actual prop.
+
 ## A. Geometry and grasp points
 
 Measure each item at the location the gripper can actually reach. Use millimetres unless the prop drawings specify another unit.
@@ -10,16 +12,16 @@ Measure each item at the location the gripper can actually reach. Use millimetre
 |---|---|---:|---:|---:|---:|---|---|
 | Seagrass sample collection | Holder/base, not foliage |  |  |  |  |  |  |
 | Seedling placement | Carrier/base or approved grasp zone |  |  |  |  |  |  |
-| New crab trap deployment | Handle, bar, or mesh frame |  |  |  |  |  |  |
-| Old crab trap recovery | Handle, bar, or mesh frame |  |  |  |  |  |  |
-| Primary node placement | Handle, rail, or body grasp zone |  |  |  |  |  |  |
+| New crab trap deployment | Any reachable, non-damaging portion for carrying; test bars, frame, and solid surfaces |  |  |  |  |  |  |
+| Old crab trap recovery | Any reachable, non-damaging portion for carrying; include floor-access positions |  |  |  |  |  |  |
+| Primary node placement | Any reachable body/rail area for carrying; record the node's separate mounting interface |  |  |  |  |  |  |
 | Pressure/tilt sensor placement | Sensor body / mounting feature |  |  |  |  |  |  |
 | Generator-port cover removal | Exposed lip, loop, or handle |  |  |  |  |  |  |
 | Power / communications connector | Plug body; note keying and cable exit |  |  |  |  |  |  |
 | Breaker operation | Lever, slider, or push surface |  |  |  |  |  |  |
-| Solar panel removal/replacement | Frame edge or handle |  |  |  |  |  |  |
-| Dropped tool recovery | Handle or shaft |  |  |  |  |  |  |
-| SGANT installation | Mast/base/handle |  |  |  |  |  |  |
+| Solar panel removal/replacement | Any non-damaging frame or sheet portion for carrying; record the separate retention/release feature |  |  |  |  |  |  |
+| Dropped tool recovery | Any reachable, non-damaging portion for carrying; test body and shaft contacts |  |  |  |  |  |  |
+| SGANT installation | Any suitable base/body area for carrying; do not assume the mast is a safe contact |  |  |  |  |  |  |
 | Cargo docking | Safe push/contact surface |  |  |  |  |  |  |
 
 For each plug, also record its body shape, key orientation, latch or twist action, insertion depth, cable bend radius, and whether the ROV can approach along the connector axis. Do not use the cable itself as the grasp feature.
@@ -129,3 +131,4 @@ Record answers from the [MATE Q&A forum](https://materovcomp.discourse.group/) o
 | Node, sensor, SGANT | Mounting/grasp faces, approach axes, seating/level tolerance, connector layout |  |  |  |
 | Solar panel and cargo | Allowed grip/push surfaces, payload/docking envelope, required final seating |  |  |  |
 | Gripper safety | Inspector interpretation for the functional jaw-mouth pinch zone |  |  |  |
+
