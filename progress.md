@@ -44,3 +44,11 @@
 - Fabrication package accepted by the team and synchronized to the public repository.
 
 Do not mark this goal complete until each gate has direct evidence. Do not power the current printed-stop design.
+
+
+## 15 November 2026 — Geometry extraction from the supplied STL
+
+- Used a temporary GitHub Actions job to inspect the original binary STL without accessing the user's computer. It contains 39,086 triangles in 29 disconnected components.
+- Two matching long guide plates center at X=-21.3045 mm and midpoint Y=-10.200 mm. Updated the rack/coupler axis defaults to this candidate line (X=-21.305, Y=-10.2).
+- Added `simple_gripper/reference_mesh_analysis.md` with component bounds and caveats, and linked it from the fit sheet/README.
+- The STL does not encode fixed/moving labels or exposed-rod semantics. Exact rod diameter/end, safe saddle stations, and pitch-carriage mounting remain unverified until the editable model or dimensions arrive. The temporary SVG projection job is still being retrieved; its first oversized-log attempt was canceled and a bounded-output rerun is active.
