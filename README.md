@@ -10,7 +10,7 @@ The OpenSCAD study uses a removable vehicle adapter, structural yoke, fixed reac
 
 **Actuator clarification:** `gripper_study.scad` has no selected servo. Its Ø20 x 45 mm cylinder and Ø6 mm shaft are generic packaging placeholders, not SG90 dimensions or a confirmed motor choice. `sg90_quick_gripper.scad` is a separate, simple, low-load classroom-style mockup built around an SG90 horn; it does not drive the main pivot-jaw model and is not an underwater-rated actuator recommendation.
 
-The provided vehicle image and verbal 250 x 150 x 150 mm body envelope are context, not CAD fit evidence. The team selected STEP/STP assembly as the preferred vehicle-CAD format. That assembly and mission practice-prop geometry have not been supplied. The official Explorer Part 1 mission manual is currently listed as pending, so task-specific grasp/contact features remain provisional.
+The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelope are context, not CAD fit evidence. The newly supplied whole-body concept STL is stored in `vehicle_reference/`; its scale, coordinate axes, and structural mount details are not confirmed. The team selected STEP/STP assembly as the preferred vehicle-CAD format. That assembly and mission practice-prop geometry have not been supplied. The official Explorer Part 1 mission manual is currently listed as pending, so task-specific grasp/contact features remain provisional.
 
 ## Start here
 
@@ -25,6 +25,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm body envelope are conte
 - [`tilt_mount_reference.scad`](tilt_mount_reference.scad) and [`tilt_mount_concept.md`](tilt_mount_concept.md) — pitch hinge concept using the supplied clamp STL; adapter and actuator interfaces still need measured fit-up.
 - [`prototype_meshes/README.md`](prototype_meshes/README.md) — STL inventory, bounds, topology, and mockup limits; most exports are direct downloads, while three large files are restored from `mesh_bundle/`.
 - [`prototype_meshes/pad_retention_coupon_body.stl`](prototype_meshes/pad_retention_coupon_body.stl), [`prototype_meshes/pad_retention_coupon_pad.stl`](prototype_meshes/pad_retention_coupon_pad.stl), and [`prototype_meshes/pad_retention_coupon_keepers.stl`](prototype_meshes/pad_retention_coupon_keepers.stl) — the three separate fit-coupon print parts now included in the public repo. Use with selected real inserts and fasteners; these do not qualify the printed joint for load.
+- [`vehicle_reference/vehicle_body_concept.stl`](vehicle_reference/vehicle_body_concept.stl) and [`vehicle_reference/README.md`](vehicle_reference/README.md) — supplied mesh stand-in and measured coordinate bounds for preliminary review only.
 - [`gripper_interface_measurements.md`](gripper_interface_measurements.md) — worksheet for props, loads, actuator, vehicle, and MATE clarifications.
 - [`actuator_selection_basis.md`](actuator_selection_basis.md) — source-backed commercial-versus-custom actuator comparison.
 - [`actuator_candidate_review.md`](actuator_candidate_review.md) — Tiresus's manufacturer-source shortlist and package/torque screening for depth-rated actuator candidates; not a selection or grip-force rating.

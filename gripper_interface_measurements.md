@@ -1,5 +1,9 @@
 # Gripper Interface Measurement Sheet
 
+## Current vehicle-mesh evidence
+
+The team-supplied [`vehicle body concept STL`](vehicle_reference/vehicle_body_concept.stl) has 3,860 binary-STL triangles and coordinate bounds X −124.409…348.409, Y −171…85, Z −266…442 (472.819 × 256 × 708 coordinate units). The file has no encoded units or separated component names. Treat these as raw model coordinates, not confirmed millimetres or vehicle fit. The mesh only supports rough envelope/collision review; it does not define the bay, structural mount, thruster guard solids/axes, camera, or maintenance envelope. Confirm units, origin, front/approach axis, frame members, and mount datum from the team before any placement.
+
 Use this with the physical practice props or accurate replicas before changing the OpenSCAD defaults or selecting an actuator. Record units, the prop/source, measurement method, and date. Do not infer a contact dimension from a perspective photo.
 
 MATE's [2027 Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) state that a team may grip any portion of a mission prop to carry it; a dedicated carrying feature is optional. Record several reachable, non-damaging carry-contact candidates rather than assuming a handle is mandatory. Keep carry-contact candidates separate from the task-operation interface (port, latch, mounting face, planting or docking feature), whose handling still depends on the detailed task instructions and actual prop.
