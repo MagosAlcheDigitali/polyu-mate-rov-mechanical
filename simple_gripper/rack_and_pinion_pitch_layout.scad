@@ -36,6 +36,7 @@ rack_travel_limit = 20;
 rack_w = 10;
 rack_h = 8;
 rack_x = rod_x + existing_rod_d/2 + rack_w/2 + 2;
+assert(abs(rack_travel_mm)<=rack_travel_limit, "rack_travel_mm exceeds supported preview range");
 rack_pitch = 4.712;       // module 1.5
 tooth_depth = 3.3;
 pinion_teeth = 16;
@@ -170,10 +171,10 @@ module rod_coupler_and_rack() {
         difference() {
             union() {
                 cylinder(d=rod_coupler_od,h=rod_coupler_len,center=true);
-                translate([(rod_coupler_od/2+rack_x-rack_w/2)/2,0,
+                // Side web overlaps both the collar wall and rack bar, clear of the rod bore.
+                translate([(rod_coupler_od/2+rack_x-rack_w/2-rod_x)/2,0,
                            -rear_sign*2])
-                    cube([rack_x-rack_w/2-rod_x+rod_coupler_od/2,
-                          rack_h,rod_coupler_len-4],center=true);
+                    cube([5,rack_h,rod_coupler_len-4],center=true);
             }
             cylinder(d=existing_rod_d+0.4,h=rod_coupler_len+2,center=true);
             for (sz=[-1,1])
@@ -230,22 +231,42 @@ module pinion_and_servo_interface() {
     }
 }
 
+module moving_pitch_control_arm() {
+    // Pin-hole row accepts a pushrod/servo linkage; no actuator is included.
+    color([0.86,0.34,0.16])
+    difference() {
+        translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-27])
+            cube([6,10,54],center=true);
+        for (dz=[-18,-32,-46])
+            translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z+dz])
+                x_cylinder(4.2,10);
+    }
+}
+
 module pitch_cradle() {
     union() {
         split_saddles();
         cradle_spine();
+        moving_pitch_control_arm();
     }
 }
 
 module fixed_pitch_yoke() {
     color([0.25,0.27,0.30])
     union() {
-        translate([body_cx,pitch_axis_y,pitch_axis_z-62])
+        translate([body_cx,pitch_axis_y,pitch_axis_z-82])
             cube([2*pitch_ear_offset+20,14,10],center=true);
+        // Fixed pin lug for the pitch pushrod/servo linkage.
+        difference() {
+            translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-70])
+                cube([14,22,26],center=true);
+            translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-70])
+                x_cylinder(4.2,16);
+        }
         for (s=[-1,1])
             difference() {
-                translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z-28])
-                    cube([12,30,60],center=true);
+                translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z-34])
+                    cube([12,30,100],center=true);
                 // X-axis bearing holes are coaxial with the moving trunnions.
                 translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z])
                     x_cylinder(14.5,14);
