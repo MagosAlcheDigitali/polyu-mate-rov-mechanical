@@ -20,7 +20,7 @@ Nominal geometry reported by the model:
 
 `validate_gripper_study_stop_guard_enclosure_candidate.ps1` was run locally with OpenSCAD 2021.01. Exit code 0. It compiled the complete assembly and guard-only view with `--hardwarnings`; floor intersections against support, bearing, actuator, bridge, and shaft; aggregate floor-versus-structure; and radial-wall-versus-support exports were empty. The assembled enclosure-versus-mechanism intersections were empty at 0, 22, and 44 degrees. Actual OpenSCAD PNGs were rendered for the assembly and guard-only view. QA logs, CSG outputs, empty results, and labeled pre-fix collision meshes are retained under `gripper_study_stop_guard_enclosure_candidate_qa/`.
 
-These checks show sampled static non-interference only. They do not prove continuous clearance, assembly tolerance, strength, material suitability, hardware fit, stop contact, actuator suitability, or vehicle/mission-prop fit.
+The QA folder is archived for sharing in `gripper_study_stop_guard_enclosure_candidate_qa.zip`; it includes the actual CSG/STL results, logs, PNG renders, and clearly named pre-fix collision meshes. These checks show sampled static non-interference only. They do not prove continuous clearance, assembly tolerance, strength, material suitability, hardware fit, stop contact, actuator suitability, or vehicle/mission-prop fit.
 
 ## MATE guard requirement and limits
 
