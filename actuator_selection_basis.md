@@ -1,7 +1,7 @@
 # End-Effector Actuator Selection Basis
 
 **Reviewer:** Decimus-rho  
-**Checked:** 15 November 2026  
+**Checked:** 16 November 2026  
 **Status:** Comparison basis only. No actuator is selected, purchased, or qualified by this review.
 
 ## Decision in brief
@@ -69,8 +69,15 @@ The team's verbal body envelope is approximately 250 x 150 x 150 mm. If the Newt
 
 **No actuator selected.** The most useful next act is measurement and CAD overlay, not ordering a drive. The current model is an unpowered geometry study; there is no credible basis yet to claim that either architecture meets all task loads, vehicle fit, service access, safety inspection, or wet-cycle requirements.
 
+## 16 November 2026 source and interface refresh
+
+Blue Trail Engineering's current [resources page](https://www.bluetrailengineering.com/resources) lists a `Servo STEP Files Nov 2026.zip` archive. The current [SER-203X](https://www.bluetrailengineering.com/product-page/underwater-servo-ser-203x) and [SER-213X](https://www.bluetrailengineering.com/product-page/underwater-servo-ser-213x) pages continue to specify a 6 mm titanium D-shaft, list 5.4 N·m and 5.9 N·m respectively, and warn against sustained high torque and driving against a hard stop for more than 5–10 seconds. The manufacturer says these servos lack internal overheat/overvoltage protection. The current candidate motor-side coupling is round-bored with set-screw proxies, so the torque interface is geometrically unverified against the D-shaft and available [Titanium Servo Hub](https://www.bluetrailengineering.com/product-page/titanium-servo-hub). Use the November STEP archive and hub drawing/geometry to verify exact shaft flat, hub size, retention, mounting, and envelope before any CAD fit claim.
+
+For context only, applying the listed torque to the study's 35.5 mm far-pad arm gives 152 N (5.4 N·m) and 166 N (5.9 N·m) in an ideal lossless static calculation. At the integrated candidate's 23 mm stop radius, the corresponding static reaction screens are 235 N and 257 N (`T/r`). These figures are not grip-force ratings or continuous-output guarantees and omit drivetrain loss, torque/speed behavior, duty, fault response, tolerance, impact, deflection, fatigue, and design factors. The selected actuator remains open pending measured task loads/travel/duty and body-STEP packaging.
+
 ## Sources
 
 - Blue Robotics Newton Subsea Gripper product specifications, CAD, wiring/control information, and manufacturer's cycle warning: [product page](https://bluerobotics.com/store/thrusters/grippers/newton-gripper-asm-r2-rp/).
 - MATE 2027 Explorer resources and live publication status: [2027 competition season page](https://materovcompetition.org/2027).
 - MATE 2027 Explorer electrical, pressure-housing, and inspection requirements: [Part 2 PDF](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/Manual%20Components/EXPLORER%20Part%202%20SPECIFICATIONS.pdf).
+
