@@ -79,10 +79,29 @@ foreach ($view in @('stop_guard_floor_vs_support','stop_guard_floor_vs_bearing',
     Test-EmptyIntersection $view 0 ($view + '-0')
 }
 Test-EmptyIntersection 'stop_guard_floor_structure_clearance' 0 'floor-vs-support-all'
+Test-EmptyIntersection 'stop_guard_shell_floor_clearance' 0 'shell-vs-floor'
 Test-EmptyIntersection 'stop_guard_wall_vs_support' 0 'wall-vs-support'
 # Enclosure including the split floor against all moving/fixed stop mechanisms.
 foreach ($angle in @(0,22,44)) {
     Test-EmptyIntersection 'stop_guard_enclosure_clearance' $angle ("guard-vs-mechanism-{0}" -f $angle)
+}
+
+# Export each guard component selector as a nonempty STL. These are geometry
+# exports only; self-tapped screw strength and physical assembly remain
+# unverified in the companion review.
+$printViews = @('stop_guard_shell_print','stop_guard_floor_left_print',
+                'stop_guard_floor_right_print','stop_guard_lid_print',
+                'stop_guard_hardware_proxy')
+foreach ($view in $printViews) {
+    $mesh = Join-Path $outputRoot ($view + '.stl')
+    $args = '-D "part_view=\"' + $view + '\"" -o "' + $mesh +
+        '" "' + $scad + '" --hardwarnings'
+    $result = Invoke-OpenSCAD $args $mesh $view
+    if ($result.ExitCode -ne 0 -or -not $result.OutputExists -or
+        $result.Facets -le 0 -or $result.Log -match '(?im)\b(WARNING|ERROR):') {
+        throw "$view STL export failed or was empty. Exit=$($result.ExitCode); facets=$($result.Facets)`n$($result.Log)"
+    }
+    Write-Output "PASS: $view exported to STL ($($result.Facets) facets)."
 }
 
 # Export OpenSCAD's actual preview for the complete assembly and isolated guard.
@@ -107,4 +126,3 @@ if ($script:intersections.Count -gt 0 -or $script:openScadIssues.Count -gt 0) {
     $issues = ($script:openScadIssues | ForEach-Object { "$($_.Name): $($_.Message)" }) -join '; '
     throw "Validation has overlaps/issues. Intersections: $hits. OpenSCAD issues: $issues. Raw outputs retained in $outputRoot"
 }
-

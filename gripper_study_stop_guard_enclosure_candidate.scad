@@ -250,17 +250,20 @@ stop_main_shaft_top_z = jaw_height/2+bearing_h+12.5;
 stop_shaft_extension_delta = stop_upper_shaft_top_z-stop_main_shaft_top_z;
 stop_guard_outer_d = 92;
 stop_guard_inner_d = 84;
-stop_guard_bottom_z = 11.7;
+stop_guard_bottom_z = 12.0; // 0.2 mm service clearance above the removable floor panels
 stop_guard_top_z = 33;
 stop_guard_window_deg = 0; // closed radial wall in this candidate; the old 62-degree moving opening is removed
 stop_guard_cap_t = 2.0;
 stop_guard_cap_outer_d = 100;
 stop_guard_lid_screw_d = 3.0; // placeholder removable M3-class screws
 stop_guard_lid_screw_clearance_d = 3.2;
+stop_guard_thread_pilot_d = 2.5; // nominal M3 printed/self-tapping pilot; validate in the chosen material
 stop_guard_lid_head_d = 5.5;
 stop_guard_lid_head_t = 1.5; // recessed head proxy in the lid
 stop_guard_boss_d = 8.5;
-stop_guard_boss_h = 2.0;
+stop_guard_boss_h = 5.5;
+stop_guard_insert_pilot_d = 4.6; // placeholder M3 heat-set insert pilot; confirm insert datasheet
+stop_guard_insert_length = 4.0;
 stop_guard_lid_screw_radius = stop_guard_outer_d/2-2;
 stop_guard_bottom_flange_t = 1.5;
 stop_guard_bottom_flange_outer_d = stop_guard_cap_outer_d;
@@ -271,11 +274,12 @@ stop_guard_floor_outer_d = stop_guard_bottom_flange_outer_d;
 stop_guard_floor_edge_clearance = 0.2;
 stop_guard_floor_seam = 0.4;
 stop_guard_floor_mount_radius = stop_guard_floor_outer_d/2-6;
-stop_guard_floor_mount_angles = [45,135,180,315]; // shifted from 225° off cross-tie and bridge foot
-stop_guard_floor_boss_d = 6.5; // leaves 1.65 mm nominal radial wall around the 3.2 mm passage
+stop_guard_floor_mount_angles = [45,135,165,315]; // shifted to clear cross-tie, bridge foot and reaction rail
+stop_guard_floor_boss_d = 6.5; // printed pilot boss; self-tapping retention remains a prototype assumption
+stop_guard_floor_boss_clearance = 0.4; // radial assembly clearance to split panel
 stop_guard_floor_screw_d = 3.0;
 stop_guard_floor_screw_clearance_d = 3.2;
-stop_guard_floor_head_d = 5.5;
+stop_guard_floor_head_d = 9.0; // washer-like head flange bridges panel relief around the boss
 stop_guard_floor_head_t = 1.0;
 stop_guard_fastener_socket_af = 2.5; // M3-class hex key proxy; select real hardware later
 stop_guard_fastener_socket_depth = 0.7;
@@ -363,7 +367,7 @@ actuator_reaction_ring_flange_t = 4;
 show_guard = true;
 show_mount_plate = true;
 show_reference_bay = false; // optional 250x150x150 mm ghost envelope; enable for context only
-part_view = "assembly"; // [assembly, adapter_plate, support_yoke, bearing_set, jaw_assembly, fixed_contact, fixed_pad_only, fixed_keeper_strips_only, fixed_keeper_fasteners_only, fixed_pad_thread_inserts_only, pad_coupon, pad_coupon_pair, pad_retention_coupon, pad_retention_coupon_body_only, pad_retention_coupon_pad_only, pad_retention_coupon_keepers_only, moving_jaw_body_only, moving_pad_only, moving_keeper_strips_only, moving_keeper_fasteners_only, moving_pad_thread_inserts_only, jaw_frame_overlap, pad_overlap, pivot_shaft, axial_retention, actuator_reaction_mount, stop_sector, rotating_stop, stop_guard, stop_guard_enclosure_only, stop_guard_enclosure_clearance, stop_guard_clearance_samples, stop_guard_floor_structure_clearance, stop_guard_access_diagnostic, integrated_bridge, bridge_joint_fasteners, post_sector_fasteners, stop_block_fasteners, actuator_dshaft_coupler, rotating_stop_bridge_fasteners_overlap, rotating_stop_post_fasteners_overlap, rotating_stop_block_fasteners_overlap, stop_sector_fork_overlap, stop_bridge_fork_overlap, stop_bridge_plate_fork_overlap, stop_guard_overlap, actuator_package]
+part_view = "assembly"; // [assembly, adapter_plate, support_yoke, bearing_set, jaw_assembly, fixed_contact, fixed_pad_only, fixed_keeper_strips_only, fixed_keeper_fasteners_only, fixed_pad_thread_inserts_only, pad_coupon, pad_coupon_pair, pad_retention_coupon, pad_retention_coupon_body_only, pad_retention_coupon_pad_only, pad_retention_coupon_keepers_only, moving_jaw_body_only, moving_pad_only, moving_keeper_strips_only, moving_keeper_fasteners_only, moving_pad_thread_inserts_only, jaw_frame_overlap, pad_overlap, pivot_shaft, axial_retention, actuator_reaction_mount, stop_sector, rotating_stop, stop_guard, stop_guard_enclosure_only, stop_guard_shell_print, stop_guard_floor_left_print, stop_guard_floor_right_print, stop_guard_lid_print, stop_guard_hardware_proxy, stop_guard_enclosure_clearance, stop_guard_clearance_samples, stop_guard_floor_structure_clearance, stop_guard_shell_floor_clearance, stop_guard_access_diagnostic, integrated_bridge, bridge_joint_fasteners, post_sector_fasteners, stop_block_fasteners, actuator_dshaft_coupler, rotating_stop_bridge_fasteners_overlap, rotating_stop_post_fasteners_overlap, rotating_stop_block_fasteners_overlap, stop_sector_fork_overlap, stop_bridge_fork_overlap, stop_bridge_plate_fork_overlap, stop_guard_overlap, actuator_package]
 reference_bay_assumed_cm = [25,15,15]; // [length, width, height] interpreted as cm
 reference_bay_panel_t = 3; // illustrative acrylic thickness in the overlay only
 echo(str("Nominal mechanical stop range: ",stop_open_hard_limit_deg,
@@ -1131,7 +1135,7 @@ module stop_block_fasteners() {
         joint_nut_proxy(x,y,stop_sector_bottom_z-joint_nut_h/2);
     }
 }
-module stop_guard_enclosure_body() {
+module stop_guard_shell_body() {
     pivot_x=jaw_gap/2+jaw_thickness/2;
     translate([pivot_x,pivot_y,0]) {
         // Full 360-degree radial wall. The previous jaw-following 62-degree
@@ -1156,14 +1160,18 @@ module stop_guard_enclosure_body() {
                                      center=true);
             }
 
-        // Four local bosses carry removable lid screws. They extend the
-        // outside envelope to 96.5 mm diameter; exact wall/hub thickness is TBD.
+        // Four hollow pilot bosses carry removable lid screws. Thread retention
+        // is a prototype assumption and must be validated in the printed material.
         for (a=[45,135,225,315])
             rotate([0,0,a])
                 translate([stop_guard_lid_screw_radius,0,
                            stop_guard_top_z-stop_guard_boss_h/2])
-                    cylinder(d=stop_guard_boss_d,h=stop_guard_boss_h,
-                             center=true);
+                    difference() {
+                        cylinder(d=stop_guard_boss_d,h=stop_guard_boss_h,
+                                 center=true);
+                        cylinder(d=stop_guard_thread_pilot_d,
+                                 h=stop_guard_boss_h+0.2,center=true);
+                    }
 
         // Four perimeter bosses support removable split lower panels; they
         // join the annular flange and remain outside the bridge-post radius.
@@ -1176,14 +1184,29 @@ module stop_guard_enclosure_body() {
                         cylinder(d=stop_guard_floor_boss_d,
                             h=stop_guard_bottom_z+stop_guard_bottom_flange_t
                               -stop_guard_floor_bottom_z,center=true);
-                        cylinder(d=stop_guard_floor_screw_clearance_d,
+                        cylinder(d=stop_guard_thread_pilot_d,
                             h=stop_guard_bottom_z+stop_guard_bottom_flange_t
                               -stop_guard_floor_bottom_z+0.2,center=true);
                     }
 
-        // Floor panels touch the skirt at z=12 and use the bosses above.
-        stop_guard_lower_floor();
     }
+}
+
+module stop_guard_enclosure_body() {
+    stop_guard_shell_body();
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    translate([pivot_x,pivot_y,0]) stop_guard_lower_floor();
+}
+
+module stop_guard_shell_print() {
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    translate([-pivot_x,-pivot_y,0]) stop_guard_shell_body();
+}
+
+module stop_guard_floor_panel_print(side=1) {
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    translate([-pivot_x,-pivot_y,-stop_guard_floor_bottom_z])
+        stop_guard_lower_floor_panel(side);
 }
 
 module stop_guard_lower_floor() {
@@ -1240,12 +1263,8 @@ module stop_guard_lower_floor_panel(side=1) {
                 rotate([0,0,a]) {
                     translate([stop_guard_floor_mount_radius,0,
                                stop_guard_floor_bottom_z+stop_guard_floor_t/2])
-                        cylinder(d=stop_guard_floor_screw_clearance_d,
+                     cylinder(d=stop_guard_floor_boss_d+2*stop_guard_floor_boss_clearance,
                                  h=stop_guard_floor_t+0.4,center=true);
-                    translate([stop_guard_floor_mount_radius,0,
-                               stop_guard_floor_bottom_z+stop_guard_floor_head_t/2])
-                        cylinder(d=stop_guard_floor_head_d,
-                                 h=stop_guard_floor_head_t+0.2,center=true);
                 }
         }
 }
@@ -1253,16 +1272,20 @@ module stop_guard_lower_floor_panel(side=1) {
 module stop_guard_lower_floor_fasteners() {
     for (a=stop_guard_floor_mount_angles) rotate([0,0,a])
         translate([stop_guard_floor_mount_radius,0,0]) {
-                translate([0,0,stop_guard_floor_bottom_z+1.5])
+                translate([0,0,(stop_guard_floor_bottom_z-stop_guard_floor_head_t
+                    +stop_guard_bottom_z+stop_guard_bottom_flange_t)/2])
                     color([0.72,0.75,0.78])
-                        cylinder(d=stop_guard_floor_screw_d,h=3.0,center=true);
-                translate([0,0,stop_guard_floor_bottom_z+stop_guard_floor_head_t/2])
+                        cylinder(d=stop_guard_floor_screw_d,
+                            h=stop_guard_bottom_z+stop_guard_bottom_flange_t
+                              -stop_guard_floor_bottom_z+stop_guard_floor_head_t,
+                            center=true);
+                translate([0,0,stop_guard_floor_bottom_z-stop_guard_floor_head_t/2])
                     color([0.72,0.75,0.78])
                         difference() {
                             cylinder(d=stop_guard_floor_head_d,
                                      h=stop_guard_floor_head_t,center=true);
-                            translate([0,0,stop_guard_floor_head_t/2
-                                          -stop_guard_fastener_socket_depth/2])
+                            translate([0,0,-stop_guard_floor_head_t/2
+                                          +stop_guard_fastener_socket_depth/2])
                                 cylinder(d=stop_guard_fastener_socket_af/cos(30),
                                          h=stop_guard_fastener_socket_depth,
                                          $fn=6,center=true);
@@ -1290,6 +1313,17 @@ module stop_guard_lower_floor_structure_clearance() {
             bridge_joint_fasteners();
             pivot_through_shaft();
             pivot_axial_retention();
+        }
+    }
+}
+
+module stop_guard_shell_floor_clearance() {
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    intersection() {
+        translate([pivot_x,pivot_y,0]) stop_guard_shell_body();
+        translate([pivot_x,pivot_y,0]) union() {
+            stop_guard_lower_floor_panel(-1);
+            stop_guard_lower_floor_panel(1);
         }
     }
 }
@@ -1374,7 +1408,7 @@ module stop_guard_lid() {
                 translate([stop_guard_lid_screw_radius,0,
                            stop_guard_top_z+stop_guard_cap_t
                            -stop_guard_lid_head_t/2])
-                    cylinder(d=joint_stop_head_recess_d,
+                    cylinder(d=stop_guard_lid_head_d,
                              h=stop_guard_lid_head_t+0.2,center=true);
             }
         }
@@ -1385,10 +1419,12 @@ module stop_guard_lid_fasteners() {
     translate([pivot_x,pivot_y,0])
         for (a=[45,135,225,315]) rotate([0,0,a]) {
             translate([stop_guard_lid_screw_radius,0,
-                       stop_guard_top_z-stop_guard_boss_h/2])
+                       stop_guard_top_z-stop_guard_boss_h/2
+                       +(stop_guard_cap_t-stop_guard_lid_head_t)/2])
                 color([0.72,0.75,0.78])
                     cylinder(d=stop_guard_lid_screw_d,
-                             h=stop_guard_boss_h,center=true);
+                             h=stop_guard_boss_h+stop_guard_cap_t
+                               -stop_guard_lid_head_t,center=true);
             translate([stop_guard_lid_screw_radius,0,
                        stop_guard_top_z+stop_guard_cap_t
                        -stop_guard_lid_head_t/2])
@@ -1460,13 +1496,14 @@ module stop_guard_access_diagnostic() {
         " mm around ",support_cross_tie_width," x 10 mm beam; 0.2 mm nominal edge gaps, beam top z=15 mm, wall resumes z=15.2 mm."));
     echo(str("Radial-wall cheek port = ",12+2*stop_guard_floor_edge_clearance,
         " x ",stop_guard_top_z-21," mm nominal above the 12 mm-wide cheek; the cheek fills its lower portion."));
-    echo(str("Four floor screw passages = ",stop_guard_floor_screw_clearance_d,
-        " mm, underside head recesses = ",stop_guard_floor_head_d,
-        " mm; all are filled by removable socket-head screws when installed."));
+    echo(str("Four floor boss pilots = ",stop_guard_thread_pilot_d,
+        " mm; panel boss relief = ",stop_guard_floor_boss_d+2*stop_guard_floor_boss_clearance,
+        " mm; underside head flange = ",stop_guard_floor_head_d,
+        " mm and bears outside the relief."));
     echo(str("Lower screw boss OD = ",stop_guard_floor_boss_d,
-        " mm; nominal wall around the 3.2 mm hole = ",
-        (stop_guard_floor_boss_d-stop_guard_floor_screw_clearance_d)/2,
-        " mm; shifted 180 deg boss clearance to left reaction rail = 0.75 mm nominal."));
+        " mm; pilot engagement length = ",
+        stop_guard_bottom_z+stop_guard_bottom_flange_t-stop_guard_floor_bottom_z,
+        " mm; M3 self-tapping retention in the chosen print material must be tested."));
     echo("Top lid is removable with four placeholder screws; countersunk access is modeled for driver access. This is a service panel, not an IP-20 acceptance test.");
     echo(str("Floor top z = ",
         stop_guard_floor_bottom_z+stop_guard_floor_t,
@@ -1494,6 +1531,19 @@ module stop_guard_enclosure_only() {
     stop_guard_enclosure_body();
     stop_guard_lid();
     stop_guard_lid_fasteners();
+}
+
+module stop_guard_lid_print() {
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    translate([-pivot_x,-pivot_y,-stop_guard_top_z]) stop_guard_lid();
+}
+
+module stop_guard_hardware_proxy() {
+    pivot_x=jaw_gap/2+jaw_thickness/2;
+    translate([-pivot_x,-pivot_y,0]) {
+        stop_guard_lower_floor_fasteners();
+        stop_guard_lid_fasteners();
+    }
 }
 
 module stop_sector_guard() {
@@ -2034,9 +2084,15 @@ else if (part_view == "stop_sector") fixed_stop_sector();
 else if (part_view == "rotating_stop") rotating_stop_arm();
 else if (part_view == "stop_guard") stop_sector_guard();
 else if (part_view == "stop_guard_enclosure_only") stop_guard_enclosure_only();
+else if (part_view == "stop_guard_shell_print") stop_guard_shell_print();
+else if (part_view == "stop_guard_floor_left_print") stop_guard_floor_panel_print(-1);
+else if (part_view == "stop_guard_floor_right_print") stop_guard_floor_panel_print(1);
+else if (part_view == "stop_guard_lid_print") stop_guard_lid_print();
+else if (part_view == "stop_guard_hardware_proxy") stop_guard_hardware_proxy();
 else if (part_view == "stop_guard_enclosure_clearance") stop_guard_enclosure_clearance();
 else if (part_view == "stop_guard_clearance_samples") stop_guard_enclosure_clearance_samples();
 else if (part_view == "stop_guard_floor_structure_clearance") stop_guard_lower_floor_structure_clearance();
+else if (part_view == "stop_guard_shell_floor_clearance") stop_guard_shell_floor_clearance();
 else if (part_view == "stop_guard_floor_vs_support") stop_guard_lower_floor_clearance_vs("support");
 else if (part_view == "stop_guard_floor_vs_bearing") stop_guard_lower_floor_clearance_vs("bearing");
 else if (part_view == "stop_guard_floor_vs_actuator") stop_guard_lower_floor_clearance_vs("actuator");
