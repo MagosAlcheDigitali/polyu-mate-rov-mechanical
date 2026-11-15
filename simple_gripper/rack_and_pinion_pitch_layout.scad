@@ -30,12 +30,12 @@ pinion_teeth = 16;
 pinion_module = 1.5;
 pinion_rp = pinion_module*pinion_teeth/2;
 pinion_width = 10;
-pinion_center = [rod_x + rack_w/2 + pinion_rp, rod_y, zmin+20];
+pinion_center = [rod_x + rack_w/2 + 3.3 + pinion_rp, rod_y, zmin-25];
 gear_angle = -rack_travel_mm/pinion_rp*180/PI;
-rack_start_z = zmin - 82 + rack_travel_mm;
+rack_start_z = zmin - 110 + rack_travel_mm;
 rack_end_z = zmin + 68 + rack_travel_mm;
-guide_z1 = zmin + 4;
-guide_z2 = zmin + 49;
+guide_z1 = zmin - 84;
+guide_z2 = zmin - 54;
 
 module y_cylinder(d,h) { rotate([90,0,0]) cylinder(d=d,h=h,center=true); }
 
@@ -48,7 +48,7 @@ module reference_clamp() {
 module rod_and_rack() {
     // Round central push/pull rod enters the clamp; the rack extends behind it.
     color([0.18,0.45,0.82])
-        translate([rod_x,rod_y,(rack_start_z+zmax)/2+rack_travel_mm])
+        translate([rod_x,rod_y,(rack_start_z+zmax)/2])
             cylinder(d=rod_d,h=zmax-(rack_start_z),center=true);
     color([0.16,0.35,0.70]) {
         translate([rod_x,rod_y,(rack_start_z+rack_end_z)/2])
