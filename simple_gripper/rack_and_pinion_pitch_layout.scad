@@ -103,7 +103,7 @@ module saddle_half(zc, upper=true) {
                     cube([saddle_inner_w,saddle_inner_d,saddle_band_t+2],center=true);
             }
             translate([body_cx,body_cy+(upper?1:-1)*saddle_outer_d/4,zc])
-                cube([saddle_outer_w+2,saddle_outer_d/2+1,saddle_band_t+2],center=true);
+                cube([saddle_outer_w+2,saddle_outer_d/2,saddle_band_t+2],center=true);
         }
         for (sx=[-1,1])
             translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),body_cy,zc])
