@@ -1,7 +1,7 @@
 # 2027 Explorer Mission and Resource Status Refresh
 
 **Reviewer:** Rho-mu 31  
-**Checked:** 15 November 2026  
+**Checked:** 16 November 2026  
 **Scope:** Recheck official MATE resource status and distinguish ROV product-demonstration actions from the provided MATE Floats preview. This is a research note for end-effector planning, not a competition ruling.
 
 ## Official resource status
@@ -84,5 +84,9 @@ The current preview PDF is specifically Task 3: MATE Floats. Its rules cover a s
 The live [2027 Official Rulings document](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) says teams do not need to use dedicated carrying mechanisms on mission props and may grip any portion of a prop to carry it. This removes “must use the handle” as a carry-only assumption in the prototype plan. It does not establish that any contact point is safe for every interaction, nor does it specify squeeze limits or contact permissions for task mechanisms. Test accessible solid faces, frames, and bars on representative props while checking damage, slip, and whether the grip blocks the prop's function.
 
 The same rulings say there is no universal 1 m square opening that all objects must pass through in 2027, and tasks may generally be attempted in any order unless the manual states a dependency. Thus the end effector need not satisfy that absent aperture, and the team may optimize mission order around visibility/approach. The official page still marks the Explorer manual and Part 1 pending; these rulings do not authorize in-run tool changes. The 2027 rulings sections for Tasks 1–4 currently have no task-specific text in the published document, so continue to recheck it as it is updated.
+
+## Live status recheck — 16 November 2026
+
+Rechecked MATE's live [2027 season resources](https://materovcompetition.org/2027) and [Explorer class page](https://materovcompetition.org/explorer). The Explorer full manual and Part 1 Product Demonstration remain marked Pending. Part 2 remains available. The Explorer page lists prop-building instructions, updated shopping lists, Q&A/demo, mission-prop CAD, and environment CAD, but these resource labels still have no active download links in the page output. No current prop geometry, grasp zones, allowed contacts, force/travel values, or detailed task instructions were released there. The Float preview remains Task 3 float/NRD material, not an ROV manipulator specification. This confirms no new official input for task-specific jaw sizing since the 15 November check; recheck before freezing interfaces. Sources: [MATE 2027 season resources](https://materovcompetition.org/2027), [Explorer class resources](https://materovcompetition.org/explorer), [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub), and [Explorer Part 2](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/Manual%20Components/EXPLORER%20Part%202%20SPECIFICATIONS.pdf).
 
 
