@@ -27,7 +27,8 @@
 - `brief.md` is the current decision/requirements summary. `README.md` is the artifact index. Detailed component reports remain the source for calculations and limits.
 
 - **15 November 2026 — CAD and repository verification:** OpenSCAD 2021.01 compiled the active `gripper_study.scad` with `--hardwarnings` (exit 0; no warnings). The legacy `simple_gripper/rack_and_pinion_pitch_layout.scad` still emits an undefined `servo_output_end_y` warning; it is now clearly marked archived with Cawl and Dalathrust audit findings. Synced the current project documentation to the public repository and verified the remote tree and body-mesh blob SHA. No formal software test suite exists; compilation does not test fit, strength, or operation.
-
+- **Cawl — stop integration audit:** the separate double-supported cross-pin study cannot drop into the main pivot stack. Matching sector supports, fork/shaft retention, and a redesigned guard are required; nominal z-stack overlap calculations are documented in `mechanism_design_review.md`. No dimensions or load rating were invented.
+- **OpenSCAD pose intersection sweep:** rendered the `jaw_frame_overlap` diagnostic at each integer angle from 0–44° plus the 45.456° hard-close angle (46 poses). Every intersection mesh was empty (zero facets); a representative render reported only `Current top level object is empty` and no warnings/errors, which is OpenSCAD's result for an empty intersection. This checks only the jaw body against the support frame at sampled poses; it does not test the full assembly, clearances/tolerances, or continuous motion.
 ## Next design actions
 
 1. Use the actual vehicle STEP/STP assembly to replace the generic mount, then sweep the complete jaw, actuator, guard, service path, thrusters, camera view, buoyancy and tether clearances.
@@ -46,18 +47,3 @@
 - Fabrication package accepted by the team and synchronized to the public repository.
 
 Do not mark this goal complete until each gate has direct evidence. Do not power the current printed-stop design.
-
-
-## 15 November 2026 — Mesh-aligned axis and rack corrections
-
-- Updated the rack candidate centerline to X=-21.305/Y=-10.2 mm, derived from the midpoint of two matching long plates in the supplied STL.
-- Corrected rack/pinion rotation so positive rack Z motion produces the matching positive pinion rotation. Moved the near rack guide 18 mm farther from the sleeve to reduce end-stroke overlap, and defined the missing servo-side shaft-end datum/length used by the CAD.
-- Replaced the README with the standalone simple-gripper scope and removed the instruction to use a different design. Updated the fit sheet and linked component report.
-- Saddle sizes/stations, exposed rod diameter/end, and moving/fixed feature semantics remain unverified; the component report is geometric only.
-
-
-## 15 November 2026 — Component projection completed
-
-- The bounded-output GitHub Actions run completed successfully. Added `simple_gripper/reference_mesh_projection.svg`, three orthographic views color-coded by disconnected mesh component, alongside the numerical bounds report.
-- Removed the temporary analysis workflow after capturing its results.
-- No editable CAD file has appeared in the repository yet; exact moving/fixed roles, rod end, and saddle-safe stations remain open until that model or measurements are available.
