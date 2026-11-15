@@ -74,7 +74,7 @@ cradle_plate_z1 = max(zmax,saddle_station_2)+15;
 cradle_plate_zc = (cradle_plate_z0+cradle_plate_z1)/2;
 cradle_plate_h = cradle_plate_z1-cradle_plate_z0;
 pitch_axis_z = 80;
-pitch_ear_offset = saddle_outer_w/2+18;
+pitch_ear_offset = saddle_outer_w/2+12;
 pitch_axis_y = cradle_plate_y+16;
 servo_plate_y = ymax+8;
 servo_plate_t = 4;
@@ -141,7 +141,7 @@ module cradle_spine() {
     color([0.30,0.33,0.37])
     union() {
         translate([body_cx,cradle_plate_y,cradle_plate_zc])
-            cube([saddle_outer_w+20,cradle_plate_t,cradle_plate_h],center=true);
+            cube([saddle_outer_w+32,cradle_plate_t,cradle_plate_h],center=true);
         for (zc=[saddle_station_1,saddle_station_2])
             translate([body_cx,(body_cy+saddle_outer_d/2+cradle_plate_y)/2,zc])
                 cube([saddle_outer_w,saddle_wall+cradle_plate_t,saddle_band_t],center=true);
