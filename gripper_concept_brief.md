@@ -374,4 +374,3 @@ This is a design-review checklist, not a scored FMEA. Revisit it after prop load
 - [2026 EXPLORER/PIONEER/RANGER prop-building instructions (historical; not 2027 sizing data)](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2026/Supporting%20Documents/EX%20PN%20RN%20Prop%20Building%20Instructions%202026_Final.pdf)
 - [2025 EXPLORER/PIONEER/RANGER prop-building instructions (historical; not 2027 sizing data)](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/EX%20PN%20RN%20Prop%20Building%202025_Final.pdf)
 - User-supplied [MATE Floats! preview mission PDF](C:/Users/dealb/Desktop/2027%20MATE%20Floats%20Preview%20Mission_EXPLORER_FINAL.pdf)
-

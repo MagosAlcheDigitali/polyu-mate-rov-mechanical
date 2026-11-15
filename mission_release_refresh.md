@@ -85,4 +85,3 @@ The live [2027 Official Rulings document](https://docs.google.com/document/d/e/2
 
 The same rulings say there is no universal 1 m square opening that all objects must pass through in 2027, and tasks may generally be attempted in any order unless the manual states a dependency. Thus the end effector need not satisfy that absent aperture, and the team may optimize mission order around visibility/approach. The official page still marks the Explorer manual and Part 1 pending; these rulings do not authorize in-run tool changes. The 2027 rulings sections for Tasks 1–4 currently have no task-specific text in the published document, so continue to recheck it as it is updated.
 
-

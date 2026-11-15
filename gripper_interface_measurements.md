@@ -131,4 +131,3 @@ Record answers from the [MATE Q&A forum](https://materovcomp.discourse.group/) o
 | Node, sensor, SGANT | Mounting/grasp faces, approach axes, seating/level tolerance, connector layout |  |  |  |
 | Solar panel and cargo | Allowed grip/push surfaces, payload/docking envelope, required final seating |  |  |  |
 | Gripper safety | Inspector interpretation for the functional jaw-mouth pinch zone |  |  |  |
-
