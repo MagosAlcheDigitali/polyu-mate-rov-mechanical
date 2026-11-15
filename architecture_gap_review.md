@@ -46,3 +46,4 @@ This is a provisional packaging decision, not a claim that the team may swap too
 ## Recommendation summary
 
 The currently modeled clamp is an appropriate general-purpose prototype core, but it is not yet a fully verified all-task end effector. The task list mixes soft-object handling, load retention, axial plug work, lever actuation, and guided pushing. The best current decision is to preserve a modular passive nose interface and test the common core against practice props; detailed end features and actuator sizing remain gated on official Part 1/prop information or measured faithful props.
+
