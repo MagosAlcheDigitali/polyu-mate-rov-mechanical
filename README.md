@@ -49,7 +49,7 @@ The remaining reviews are indexed in `brief.md`; they cover geometry, mounting, 
 ## Current prototype limits
 
 - STL files are unpowered geometry mockups. A `Simple: yes` mesh result does not certify a part for printing or loading.
-- The OpenSCAD diagnostic views found no modeled jaw-body/frame overlap at six sampled poses through 45.456°, and no pad overlap at three closing poses. They do not test continuous motion, tolerances, props, or the vehicle.
+- The OpenSCAD jaw-body/frame check passed at 46 sampled poses from 0–44° plus 45.456°; the pad check passed at three sampled closing poses. They do not test continuous motion, tolerances, props, or the vehicle.
 - The actuator, coupling, shaft retention, pad fasteners, vehicle mount pattern, materials, and structural load path are not selected or qualified.
 - The separate double-supported stop candidate has only passed sampled static geometry checks. Its proposed shaft extension and top retainer are placeholders, its support bridge is not tied to the actual vehicle structure, and its guard is not an IP-20 inspection result.
 - The nominal pivot grooves use one manufacturer's DIN 471 size-8 reference dimensions. The circlip model itself is still a simplified profile and does not establish a selected part or load rating.
