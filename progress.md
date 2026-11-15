@@ -204,3 +204,10 @@ The provided PNG and the 25 x 15 x 15 cm ghost body assumption do not establish 
 - Corrected the pitch bearing axis to X. The moving trunnions are coaxial with the rotation and enter matching fixed-yoke bearings. The yoke sits in a separate plane behind the cradle and connects through outboard side arms to avoid occupying the moving spine.
 - Added a pinion-to-shaft cross-pin, a shaft stub extending past the servo mounting plate, a pitch-link hole row, and a fixed yoke anchor hole for a pushrod/actuator. Actuator bodies remain omitted.
 - Static source review confirms these features are present and in the same assembly transform. Exact fit is still unverified: the connector cannot parse/render the binary STL, so measure the rod end and the two nonmoving saddle sections and check clearance/link travel before manufacture. The pinion tooth profile and loads also remain conceptual.
+
+
+## 15 November 2026 — Fit dimensions identified for exact clamp mating
+
+- Added `simple_gripper/FIT_MEASUREMENTS.md`, mapping the current rod, saddle, pitch, stroke, and tilt assumptions to the measurements needed to set them from the supplied clamp.
+- Current blocker to exact default-fit verification: the GitHub connector confirms the reference STL blob (1,954,384 bytes) but returns no binary geometry content. The source CAD/rod/saddle interfaces therefore remain dimension-adjustable rather than mesh-verified.
+- Next evidence needed: an editable STEP/STP/native clamp file in the repo, or the measured values listed in the fit sheet. The simple-gripper scope and existing connection architecture remain unchanged.
