@@ -22,8 +22,8 @@ body_w = xmax-xmin;
 body_d = ymax-ymin;
 
 // Existing sliding rod interface. Adjust axis, diameter and coupling end to the STL.
-rod_x = -22;
-rod_y = -11;
+rod_x = -21.305;  // midpoint of the supplied STL's two long guide plates
+rod_y = -10.2;    // midpoint between the guide-plate centerlines; verify against the rod
 existing_rod_d = 8;
 coupler_z0 = zmin+8;
 rod_coupler_od = 20;
