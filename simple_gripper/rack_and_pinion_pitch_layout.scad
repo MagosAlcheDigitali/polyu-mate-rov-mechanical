@@ -92,6 +92,7 @@ pitch_link_body_d = 11;
 pitch_link_rod_d = 6;
 pitch_pin_d = 4;
 pitch_link_sleeve_fraction = 0.62;
+pinion_cross_pin_d = 2;   // leaves a usable wall through the 4 mm output shaft
 
 module x_cylinder(d,h) { rotate([0,90,0]) cylinder(d=d,h=h,center=true); }
 module y_cylinder(d,h) { rotate([90,0,0]) cylinder(d=d,h=h,center=true); }
@@ -256,14 +257,14 @@ module pinion_and_servo_interface() {
                                 cube([3,pinion_width,2.2],center=true);
                 }
                 y_cylinder(4,pinion_width+6);
-                x_cylinder(3.2,18);
+                x_cylinder(pinion_cross_pin_d+0.2,18);
             }
 
-    // Metal cross-pin locks gear to the shaft; the shaft is drilled to match.
+    // A 2 mm metal cross-pin locks the gear to the shaft.
     color([0.18,0.19,0.21])
     translate(pinion_center)
         rotate([0,gear_angle,0])
-            x_cylinder(3,16);
+            x_cylinder(pinion_cross_pin_d,16);
 
     // Shaft joins pinion to the generic servo mounting datum; servo is not modeled.
     color([0.25,0.27,0.30])
@@ -274,7 +275,7 @@ module pinion_and_servo_interface() {
             y_cylinder(4,shaft_len);
         translate(pinion_center)
             rotate([0,gear_angle,0])
-                x_cylinder(3.2,18);
+                x_cylinder(pinion_cross_pin_d+0.2,18);
     }
 
     color([0.42,0.44,0.47])
