@@ -10,7 +10,7 @@ show_pitch_link = true;       // pin-to-pin pitch actuator interface (actuator b
 $fn = 48;
 
 // Approximate bounds for the supplied STL. Verify the central rod and body
-// sections at the selected coupling/saddle stations before fabrication.
+// sections at the selected coupling and guide-clip stations before fabrication.
 xmin = -96.265;
 xmax = 49.270;
 ymin = -38.000;
@@ -165,7 +165,7 @@ module cradle_spine() {
     union() {
         translate([body_cx,cradle_plate_y,cradle_plate_zc])
             cube([rail_clip_outer_w+32,cradle_plate_t,cradle_plate_h],center=true);
-        // Rigid crossbar joins pitch journals to the same saddle-mounted spine.
+        // Rigid crossbar joins pitch journals to the same rail-clip-mounted spine.
         translate([body_cx,pitch_axis_y,pitch_axis_z])
             cube([2*pitch_ear_offset,14,16],center=true);
         for (s=[-1,1]) {
@@ -384,7 +384,7 @@ module fixed_pitch_yoke() {
 }
 
 module moving_gripper_and_drive() {
-    // One rigid assembly: clamp, saddle, rack/rod coupling, pinion, and trunnions.
+    // One rigid assembly: clamp, rail clips, rack/rod coupling, pinion, and trunnions.
     // The X-axis journal remains coaxial with the pitch transform while it tilts.
     translate([body_cx,pitch_axis_y,pitch_axis_z])
         rotate([tilt_angle_deg,0,0])
