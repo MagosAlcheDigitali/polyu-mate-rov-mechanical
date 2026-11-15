@@ -90,7 +90,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 3. Measure wet retention, safe squeeze, push/pull/insertion forces, travel, and required cycle time.
 4. Select a real depth-rated actuator and complete its power, torque reaction, shaft-retention, guarding, and mounting interfaces.
 5. Validate a physical prototype through bench and wet task trials; resolve inspection/safety review.
-6. Release an updated, fabrication-ready design package. The public GitHub repository is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its current snapshot has 50 files, including the three separate pad-retention coupon parts; 39 locally tracked STL meshes (38,984,911 bytes) remain to be mirrored, and the vehicle STEP/STP assembly is outstanding.
+6. Release an updated, fabrication-ready design package. The public GitHub repository is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its public `main` branch contains the project documents and all 43 STL outputs: 40 direct STL blobs plus three full meshes in a nine-part recovery bundle. The three truncated blobs were removed. The vehicle STEP/STP assembly and practice-prop geometry are still outstanding.
 
 ## How to maintain this tracker
 
@@ -102,4 +102,3 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 ## User file delivery
 
 The user selected a vehicle STEP/STP assembly as the preferred format; no body model is attached yet. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Include units, vehicle front/approach axis, mount datum, thruster axes/guard envelopes, camera location, structural material/thickness, and service-access envelope. Add official prop CAD when it becomes available.
-

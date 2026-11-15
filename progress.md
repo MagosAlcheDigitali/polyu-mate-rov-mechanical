@@ -185,3 +185,5 @@ The provided PNG and the 25 x 15 x 15 cm ghost body assumption do not establish 
 
 
 - **15 November 2026 — Public mesh integrity repair:** a size audit against the local 43 STL exports found that 40 remote blobs exactly matched their local byte lengths, while three had been silently truncated by the GitHub connector. Preserved the complete originals in a SHA-256-identified ZIP split into nine 180,000-byte chunks under mesh_bundle/; removed the three incomplete direct blobs from the public tree and documented restoration. Remaining design and physical qualification gates are unchanged.
+
+- Reassembled the nine published chunks and verified the documented ZIP SHA-256. Extracted all three restored meshes and compared SHA-256 against their local originals; all three matched. The nine remote chunk blob sizes and Git blob SHA-1s also match the local chunk files. The update is on main at commit 81449f5; no project test suite was run.
