@@ -22,6 +22,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 - [`simple_gripper/README.md`](simple_gripper/README.md) — separate rack/pinion pitch-cradle candidate around the supplied clamp STL; fit and actuator interfaces remain open.
 - [`validate_rack_pitch_study.ps1`](validate_rack_pitch_study.ps1) — compile and six endpoint/zero-travel guide collision checks for that alternate layout.
 - [`validate_gripper_study.ps1`](validate_gripper_study.ps1) — OpenSCAD hard-warning compile plus a bounded 46-pose jaw-body/support-frame intersection check.
+- [`powered_stop_integrated_candidate.scad`](powered_stop_integrated_candidate.scad) and [`validate_powered_stop_candidate.ps1`](validate_powered_stop_candidate.ps1) — separate, unpowered replacement-stop packaging candidate and sampled intersection check. The candidate is not merged into the main model and is not load-rated. A visual review PNG is available in the local project folder.
 - [`gripper_torque_test_fixture.scad`](gripper_torque_test_fixture.scad) — bench-only 100 mm torque lever and extended test-shaft layout; secure the passive yoke and use matched real retention hardware before loading.
 - The torque-test fixture STL preview is in the local project folder; the public snapshot contains its editable OpenSCAD source only. Use neither as a load-rated print release.
 - [`sg90_quick_gripper_README.md`](sg90_quick_gripper_README.md) and [`sg90_quick_gripper.scad`](sg90_quick_gripper.scad) — separate SG90-horn quick mockup for light dry fit trials; not the main pivot jaw or a depth-rated drive.
@@ -50,6 +51,7 @@ The remaining reviews are indexed in `brief.md`; they cover geometry, mounting, 
 - STL files are unpowered geometry mockups. A `Simple: yes` mesh result does not certify a part for printing or loading.
 - The OpenSCAD diagnostic views found no modeled jaw-body/frame overlap at six sampled poses through 45.456°, and no pad overlap at three closing poses. They do not test continuous motion, tolerances, props, or the vehicle.
 - The actuator, coupling, shaft retention, pad fasteners, vehicle mount pattern, materials, and structural load path are not selected or qualified.
+- The separate double-supported stop candidate has only passed sampled static geometry checks. Its proposed shaft extension and top retainer are placeholders, its support bridge is not tied to the actual vehicle structure, and its guard is not an IP-20 inspection result.
 - The nominal pivot grooves use one manufacturer's DIN 471 size-8 reference dimensions. The circlip model itself is still a simplified profile and does not establish a selected part or load rating.
 - M3 stainless threaded inserts in the pad rails are a fit-study candidate only. The host plastic/process and insert pullout strength have not been qualified; print and test the included retention coupon before loading the pad joint.
 - Do not power the jaw against the modeled integral printed stop pin. Do not use the current tool as a load-rated or depth-rated assembly.
