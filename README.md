@@ -34,6 +34,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 - [`gripper_interface_measurements.md`](gripper_interface_measurements.md) — worksheet for props, loads, actuator, vehicle, and MATE clarifications.
 - [`actuator_selection_basis.md`](actuator_selection_basis.md) — source-backed commercial-versus-custom actuator comparison.
 - [`actuator_candidate_review.md`](actuator_candidate_review.md) — Tiresus's manufacturer-source shortlist and package/torque screening for depth-rated actuator candidates; not a selection or grip-force rating.
+- [`actuator_dshaft_coupler_module.scad`](actuator_dshaft_coupler_module.scad) and [`validate_actuator_dshaft_coupler_module.ps1`](validate_actuator_dshaft_coupler_module.ps1) — standalone 6 mm D/round-to-8 mm D coupling interface proxy and two-profile `--hardwarnings` compile check. Flat depths, engagement, retention and strength remain unqualified pending vendor CAD.
 - [`pivot_hardware_basis.md`](pivot_hardware_basis.md) — manufacturer-referenced 8 mm shaft/retaining-ring interface review.
 - [`mission_release_refresh.md`](mission_release_refresh.md) — current official resource status and task-source distinction.
 - [`mission_mechanical_trial_matrix.md`](mission_mechanical_trial_matrix.md) — Videx's 22-row action-to-prototype trial matrix with interface evidence, measurements, and pass criteria left open until props are known.
