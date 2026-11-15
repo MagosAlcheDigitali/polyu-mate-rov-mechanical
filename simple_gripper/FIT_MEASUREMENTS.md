@@ -6,7 +6,7 @@ Use the supplied `Michelangelo Dealberti FInal Clamp Design.stl` as the only par
 
 | SCAD parameter | Current default | Measure from the clamp |
 |---|---:|---|
-| `rod_x`, `rod_y` | -22, -11 mm | X/Y center of the existing moving center rod, using the STL origin |
+| `rod_x`, `rod_y` | -21.305, -10.2 mm candidate | Midpoint of the STL's two long guide plates; verify against the actual sliding rod |
 | `existing_rod_d` | 8 mm | Diameter of the exposed straight rod section |
 | `coupler_z0` | `zmin+8` | Z center of an 18 mm long sleeve landing area on the exposed rod |
 | `rear_sign` | -1 | Use -1 if the actuator belongs at low-Z, +1 if at high-Z |
@@ -19,7 +19,7 @@ Use the supplied `Michelangelo Dealberti FInal Clamp Design.stl` as the only par
 
 The split sleeve has an 18 mm grip length and a bore clearance of 0.4 mm over `existing_rod_d`. Confirm at least that much straight rod is exposed and that the two M3 screw points land on a sound portion of the rod.
 
-## To finish the interface
+## Mesh evidence\n\nThe [component bounds report](reference_mesh_analysis.md) shows two 1,192-triangle guide plates at Y=0…2.6 and Y=-23…-20.4 mm. Their centerline gives the current rack-axis candidate. The report also shows a second pair of broad plates around Z=37…92 mm, but the STL does not say which parts move, so do not use those bounds alone to place the saddles.\n\n## To finish the interface
 
 Either add an editable STEP/STP or native CAD file for this clamp to the GitHub repo, or supply the measurements in the table. A dimensioned drawing or a screenshot with caliper values is also useful. Once the mating geometry is available, update the defaults and verify that:
 
