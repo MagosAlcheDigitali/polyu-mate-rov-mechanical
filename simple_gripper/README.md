@@ -17,7 +17,7 @@ This mechanism study uses only `Michelangelo Dealberti FInal Clamp Design.stl`. 
 
 Open the SCAD file in OpenSCAD. `rack_travel_mm` moves the rack and center-rod sleeve; `tilt_angle_deg` pitches the complete clamp-and-drive cradle about X. The controls are independent. `rear_sign` selects the low-Z or high-Z actuator end.
 
-## Fit values to measure
+See [FIT_MEASUREMENTS.md](FIT_MEASUREMENTS.md) for the exact SCAD parameters and measurements needed to finalize the clamp interfaces.\n\n## Fit values to measure
 
 The source uses approximate bounds X = -96.27…49.27 mm, Y = -38.00…14.44 mm, Z = -14.19…175.68 mm. Set these to match the actual part before printing:
 
