@@ -168,4 +168,3 @@ if (part_view == "clamp_reference")
     translate(ref_origin) import("Michelangelo Dealberti FInal Clamp Design.stl", convexity=10);
 if (part_view == "moving_cradle") moving_cradle();
 if (part_view == "stationary_frame") fixed_frame();
-

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Preliminary MATE ROV gripper concept</title>
+  <desc id="desc">Not-to-scale front and side views of a forward mounted one degree of freedom gripper with a fixed anvil, single pivoting jaw, guarded actuator, and compliant task contact pads.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fafc}.panel{fill:#fff;stroke:#cad5e0;stroke-width:2}.title{font:700 28px Arial,sans-serif;fill:#17324d}.head{font:700 19px Arial,sans-serif;fill:#23445f}.label{font:15px Arial,sans-serif;fill:#263b4d}.small{font:13px Arial,sans-serif;fill:#526779}.frame{fill:#dbe5ed;stroke:#24445d;stroke-width:3}.metal{fill:#aac1d1;stroke:#24445d;stroke-width:3}.dark{fill:#284a63;stroke:#17324d;stroke-width:3}.pad{fill:#f1c36d;stroke:#795a1b;stroke-width:2}.water{fill:none;stroke:#27a5b7;stroke-width:3;stroke-dasharray:8 7}.motion{fill:none;stroke:#df6b45;stroke-width:3;stroke-dasharray:7 6}.arrow{fill:none;stroke:#df6b45;stroke-width:3;marker-end:url(#arrowhead)}.line{stroke:#61798c;stroke-width:2}.note{fill:#edf4f7;stroke:#c8d7e1;stroke-width:1.5}
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#df6b45"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text class="title" x="40" y="48">MATE ROV end effector — prototype layout</text>
+  <text class="small" x="40" y="76">Concept only • not to scale • final geometry depends on mission props and the vehicle STEP model</text>
+
+  <rect class="panel" x="30" y="105" width="555" height="555" rx="12"/>
+  <text class="head" x="55" y="142">Front view — grasp and push</text>
+  <!-- vehicle interface / tool plate -->
+  <rect class="frame" x="245" y="175" width="130" height="64" rx="5"/>
+  <circle cx="265" cy="195" r="6" fill="#fff" stroke="#24445d" stroke-width="2"/><circle cx="355" cy="195" r="6" fill="#fff" stroke="#24445d" stroke-width="2"/>
+  <circle cx="265" cy="219" r="6" fill="#fff" stroke="#24445d" stroke-width="2"/><circle cx="355" cy="219" r="6" fill="#fff" stroke="#24445d" stroke-width="2"/>
+  <text class="label" x="395" y="202">Vehicle tool plate</text><path class="line" d="M385 206 L370 206"/>
+  <text class="small" x="395" y="224">4 cheek bolts behind plate</text><path class="line" d="M386 219 L367 225"/>
+  <!-- guarded actuator -->
+  <rect class="dark" x="270" y="255" width="80" height="112" rx="12"/>
+  <rect x="286" y="270" width="48" height="76" rx="5" fill="#eaf0f4" stroke="#90a6b6" stroke-width="2"/>
+  <path d="M300 280 L320 280 M300 292 L320 292 M300 304 L320 304 M300 316 L320 316 M300 328 L320 328" stroke="#61798c" stroke-width="2"/>
+  <text class="label" x="392" y="287">Actuator envelope</text><path class="line" d="M382 292 L350 292"/>
+  <text class="small" x="392" y="309">(Ø20 body / Ø38 guard proxy)</text>
+  <text class="small" x="392" y="332">Split clamp reacts motor torque</text><path class="line" d="M384 328 L347 348"/>
+  <text class="small" x="392" y="351">through twin rails into yoke</text><path class="line" d="M384 347 L340 354"/>
+  <!-- fixed anvil and jaw -->
+  <path class="metal" d="M285 367 L335 367 L335 438 L436 438 L436 475 L318 475 Q285 475 285 444 Z"/>
+  <rect class="pad" x="345" y="427" width="91" height="15" rx="5"/>
+  <rect x="346" y="424" width="89" height="3" rx="1" fill="#61798c"/><rect x="346" y="442" width="89" height="3" rx="1" fill="#61798c"/>
+  <path d="M345 430 Q354 434 345 439" fill="none" stroke="#795a1b" stroke-width="2"/>
+  <text class="label" x="58" y="442">Fixed anvil</text><path class="line" d="M155 438 L278 438"/>
+  <text class="small" x="58" y="462">broad, blunt push face</text><path class="line" d="M199 456 L344 456"/>
+  <circle cx="309" cy="376" r="11" fill="#fff" stroke="#24445d" stroke-width="3"/>
+  <path class="metal" d="M300 377 L265 410 L184 410 Q165 410 165 430 L165 447 L277 447 Q291 447 301 437 L327 412 Z"/>
+  <path class="pad" d="M164 423 L231 423 L231 438 L164 438 Q157 431 164 423 Z"/>
+  <path d="M165 420 L229 420 L229 423 L165 423 Z M165 438 L229 438 L229 441 L165 441 Z" fill="#61798c"/>
+  <path d="M231 426 Q222 430 231 435" fill="none" stroke="#795a1b" stroke-width="2"/>
+  <circle cx="288" cy="434" r="19" fill="#dce7ec" fill-opacity="0.75" stroke="#526779" stroke-width="2" stroke-dasharray="5 4"/>
+  <path class="motion" d="M240 402 A92 92 0 0 1 185 465"/>
+  <path class="arrow" d="M245 383 L226 405"/>
+  <text class="label" x="56" y="377">Pivoting jaw</text><path class="line" d="M148 382 L205 412"/>
+  <text class="small" x="56" y="398">one moving member</text>
+  <text class="label" x="58" y="508">Compliant contact pads</text><path class="line" d="M212 503 L185 441"/>
+  <text class="small" x="58" y="530">Round/V channel or flat pad; rounded hook</text>
+  <text class="small" x="58" y="549">profile to confirmed prop contact points</text>
+  <text class="small" x="365" y="466">Round handle shown in channel pads</text><path class="line" d="M360 460 L305 446"/>
+  <text class="small" x="365" y="486">Flat inserts suit panel edges</text>
+  <!-- pinch guard outline -->
+  <path d="M252 360 Q235 374 235 395 L235 453 Q235 468 251 479" fill="none" stroke="#7c8f9d" stroke-width="5" stroke-dasharray="5 5"/>
+  <text class="small" x="391" y="526">Shroud concept only</text><path class="line" d="M386 520 L321 452"/>
+  <text class="small" x="55" y="615">Clamp on a handle/object; use the anvil face to push into a seat.</text>
+  <text class="small" x="55" y="638">24 mm opening and Ø20 actuator package are placeholders; verify with prop/vendor CAD.</text>
+
+  <rect class="panel" x="615" y="105" width="555" height="555" rx="12"/>
+  <text class="head" x="640" y="142">Side view — vehicle integration</text>
+  <!-- electronics bay side schematic -->
+  <rect class="frame" x="810" y="245" width="250" height="190" rx="7"/>
+  <rect x="835" y="275" width="200" height="125" fill="#f5f8fa" stroke="#57748b" stroke-width="2" stroke-dasharray="7 5"/>
+  <text class="label" x="854" y="326">Sealed housing</text>
+  <text class="small" x="850" y="350">inside roofless service frame</text>
+  <!-- frame rails and bracket -->
+  <path class="dark" d="M780 222 L1085 222 L1085 240 L780 240 Z"/>
+  <path class="dark" d="M780 437 L1085 437 L1085 455 L780 455 Z"/>
+  <rect class="metal" x="760" y="265" width="36" height="150" rx="4"/>
+  <path class="metal" d="M770 285 L715 285 L715 305 L770 305 Z M770 388 L715 388 L715 408 L770 408 Z"/>
+  <text class="label" x="840" y="486">Structural frame / side plates</text><path class="line" d="M910 475 L910 455"/>
+  <text class="small" x="843" y="508">Front bridge spreads load into both side walls</text>
+  <!-- gripper at nose -->
+  <rect class="dark" x="675" y="310" width="64" height="42" rx="8"/>
+  <path class="metal" d="M739 319 L775 319 L775 336 L812 336 L812 353 L759 353 L759 341 L739 341 Z"/>
+  <path class="metal" d="M675 341 L645 358 L617 358 L617 368 L674 368 L701 350 Z"/>
+  <rect class="pad" x="618" y="355" width="42" height="11" rx="4"/>
+  <rect class="pad" x="775" y="334" width="36" height="10" rx="4"/>
+  <text class="label" x="634" y="288">Gripper head</text><path class="line" d="M684 294 L690 310"/>
+  <path class="arrow" d="M712 387 L807 387"/>
+  <text class="small" x="716" y="411">approach / insertion axis</text>
+  <!-- camera and view -->
+  <circle cx="866" cy="200" r="13" fill="#17324d"/><circle cx="866" cy="200" r="5" fill="#b8e2ee"/>
+  <path class="water" d="M853 206 L748 291 M879 206 L748 291"/>
+  <text class="label" x="897" y="204">Forward camera</text><path class="line" d="M888 200 L880 200"/>
+  <text class="small" x="647" y="556">Keep the jaws and target inside the camera view.</text>
+  <text class="small" x="647" y="578">Check full jaw swing against thruster guards, tether, and frame.</text>
+  <text class="small" x="647" y="612">ROV thrusters position the tool; no wrist rotation is assumed.</text>
+
+  <rect class="note" x="30" y="680" width="1140" height="48" rx="8"/>
+  <text class="small" x="52" y="709">Sizing gate: confirm prop interfaces, hull units, mount coordinates, actuator stroke/current, and collision envelope before dimensioning.</text>
+</svg>

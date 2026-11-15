@@ -1,0 +1,18 @@
+# Local editor and Codex working files
+.codex/
+.vscode/
+.idea/
+
+# Temporary CAD/export diagnostics and generated presentation build files
+openscad_err.txt
+openscad_out.txt
+*.csg
+presentation_build/
+team_update/~$*.pptx
+.chart-data-*/
+*.inspect.ndjson
+*.tmp
+
+# OS noise
+Thumbs.db
+Desktop.ini

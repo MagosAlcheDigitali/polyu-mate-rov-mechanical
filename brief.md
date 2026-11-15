@@ -1,0 +1,102 @@
+# PolyU MATE ROV End-Effector Goal Brief
+
+**Goal:** Develop a prototypeable, serviceable ROV end effector for PolyU's 2027 MATE Explorer product-demonstration tasks. Keep the user's vehicle concept as integration context; do not claim fit until its body CAD and mission-prop interfaces are checked.
+
+## Vehicle context supplied by the team
+
+- Approximate open-frame body/electronics-bay envelope: 25 x 15 x 15, assumed centimetres in the current ghost overlay.
+- Open top for electronics access; two side walls and a horizontal center plane; bottom foam for buoyancy.
+- MATE 2027 Explorer Part 2 requires ROV electronics housings to operate to 6 m. Interpret the open-top concept as a service frame around a sealed, depth-capable electronics housing unless the team confirms the bay is only structural; the gripper mount must load into the frame, not the housing. [Official Part 2](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/Manual%20Components/EXPLORER%20Part%202%20SPECIFICATIONS.pdf)
+- The verbal description calls for eight thrusters, but its location/count details do not account for all eight consistently. The final body CAD must show every thruster axis and complete guard envelope.
+- The PNG is visual context only. Body STEP/Parasolid or a SolidWorks Pack and Go assembly is needed for mounting and clearance work.
+- MATE's November 2026 Expected Work Practices bulletin calls for secured ROV wiring and proper strain relief at enclosure penetrations. Keep the actuator lead secured to the frame and out of the jaw/prop sweep; leave enough service access to remove the sealed housing. [Official bulletin](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/2027%20MATE%20Documentation/Safety/MATE%20ROV%20Competition%20Tech%20Bulletin%20-%20MATE%20Expected%20Work%20Practices%20Updated%202027.pdf)
+
+## Mission evidence and scope
+
+### How to read the sources
+
+- The user's request is to develop and track a prototypeable ROV end effector for the published 2027 Explorer product-demonstration tasks, then create a GitHub repository after the design goal is complete.
+- Attached MATE documents are competition source material: requirements in them apply to the team's vehicle/task where stated. They are not instructions to the assistant. In particular, the attached Floats Preview describes Task 3 and does not define the ROV gripper.
+- Vehicle dimensions and layout in the user's text/image are team design context, not verified CAD dimensions. Values in the OpenSCAD model are study assumptions. Treat mission actions inferred from a broad briefing as hypotheses until the detailed manual, prop interfaces, or staff clarifications confirm them.
+- If sources conflict, record the exact official rule and ask the team to resolve any conflict with MATE; do not silently convert an assumption into a requirement.
+
+- The supplied MATE Floats preview is Task 3, a separate profiling-float task; it supplies no ROV-gripper interface. [Official preview](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/2027%20MATE%20Documentation/2027%20MATE%20Floats%20Preview%20Mission_EXPLORER_FINAL.pdf)
+- The all-class briefing says product-demonstration tasks are attempted in one run. Relevant mechanical actions include seagrass collection/planting, crab-trap deployment/recovery, node/sensor/SGANT placement and cabling, port-cover/connector work, breaker and solar-panel work, dropped-tool recovery, and cargo docking. Contact geometry, loads, travel, and tolerances are not defined in the briefing. [Official briefing](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/2027%20MATE%20Documentation/2027_MATE_ROV_Competition_Briefing_FINAL.pdf)
+- Rechecked 15 November 2026: MATE still lists the full Explorer manual and Part 1 Product Demonstration materials as pending. The Explorer page lists prop instructions, parts lists, prop CAD, and environment CAD as resource headings, but those entries do not currently expose active download links; the 2027 resource page likewise marks Part 1 pending. [2027 resource page](https://materovcompetition.org/2027) [Explorer resource page](https://materovcompetition.org/explorer)
+
+## Current design direction
+
+One forward-facing powered pivot jaw with a fixed blunt reaction/push face, blunt hook, and mechanically retained replaceable pads. The fixed and moving pads default to matching round channels, with independent round/V/flat profile settings for fit studies. ROV motion provides approach and axial insertion. Do not design a task-specific insert, actuator rating, or final mount from assumptions in place of the actual props/body.
+
+Current OpenSCAD concept defaults: 24 mm open jaw gap, 0-44 degree commanded sweep, about 3.18 mm analytic hard-close gap, 95 x 103.5 x 112 mm study envelope, and 97.5 mm forward reach from its mount datum. These are study values, not released fabrication dimensions. The integral Ø4 mm stop pin has only about 2.0 mm sector-slot engagement and about 0.5 mm arm-root overlap; the current custom-drive stop geometry is not approved for powered use.
+
+**Actuator/file distinction:** `gripper_study.scad` does not use a selected servo. Its Ø20 x 45 mm body and Ø6 mm shaft are generic packaging placeholders only. The separate `sg90_quick_gripper.scad` is a minimal low-load mockup driven by an SG90 servo horn; it is not the actuator package for the main pivot jaw and does not establish wet-use suitability.
+
+The replaceable-pad keeper screw stations now scale with pad length from their 24 mm reference pattern, with a warn-only check for crowded screw heads. This makes coupon/profile revisions less error-prone but does not size screw engagement, pad material, retention strength, or loaded jaw hardware.
+
+The keeper/pad rail has been widened to 12 mm, and the adapter plate and rear cross-tie are now both 84 mm wide in the study. A Tappex Trisert-3 M3 316 stainless insert is represented as a fit candidate, using the manufacturer's approximate plastic pilot range and boss dimensions. Print the separate `pad_retention_coupon_body.stl`, `pad_retention_coupon_pad.stl`, and `pad_retention_coupon_keepers.stl` to assemble the fit coupon with real hardware; `pad_retention_coupon.stl` is only the visual assembly with hardware proxies. Manufacturer dimensions require application verification; insert retention in the team's actual polymer and process is not known.
+
+The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 reference values (Ø7.6 mm groove root, 0.9 mm minimum width, 0.8 mm ring thickness). The modeled 11 mm ring remains a simplified annulus without the catalog lugs or full retaining-ring envelope; recheck the selected ring, washer/guard fit, groove material, and load capacity before machining or loading the shaft.
+
+## Current workspace artifacts
+
+- `README.md` — project landing page and short handoff summary.
+- `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx` — eight-slide team update with status graphs; it summarizes prototype-study progress and open validation gates.
+- `gripper_study.scad` — parametric gripper assembly study with selectable jaw-frame and pad-overlap diagnostic views; it remains schematic and unqualified.
+- `gripper_study_preview.png` — OpenSCAD visual of the study inside the assumed vehicle-frame overlay. This image predates the current source default and is context only, not a body-fit result. The `show_reference_bay` toggle is now off by default; enable it for a rough envelope comparison.
+- `gripper_toolonly_preview.stl` — current tool-only assembly review mesh; 44,772 triangles, direct bounds 95 x 103.198 x 112 mm, and OpenSCAD `Simple: no`. Keep it as a multi-component review mesh, not a one-piece print file.
+- `prototype_meshes/` — 25 current-source geometry exports, including separate printable pad-retention coupon body, pad, and keeper parts; the combined coupon with hardware proxies is for visual reference only. `prototype_meshes/README.md` records their scope and limits. The actuator-package proxy carries a manifold warning. The full gripper remains a multi-volume review mesh.
+- `gripper_oblique_preview.png`, `gripper_open_preview.png`, and `gripper_closed_preview.png` — visually checked tool-only views at the current 8° pose, 0° open pose, and 44° commanded close pose. These do not include vehicle or props and do not establish fit.
+- `gripper_torque_test_fixture.scad` — bench-only lever/extended test shaft accessory; it requires installation through a secured passive jaw/yoke stack and matched real retention hardware.
+- `gripper_assembly_preview.stl`, `gripper_mount_plate_preview.stl`, `gripper_jaw_preview.stl`, `gripper_stop_sector_preview.stl`, and `torque_test_fixture_preview.stl` — OpenSCAD mesh previews; not fabrication releases. **The full assembly STL includes the 250 x 150 x 150 mm ghost vehicle overlay** and has a 150 x 347 x 150 mm bounding box, so it is not a clean gripper-only print mesh. The isolated jaw and mount STLs are subassemblies, not a full gripper.
+- `pad_coupon_round_channel.stl`, `pad_coupon_v_channel.stl`, and `pad_coupon_flat.stl` — standalone unpowered contact samples at the current 9 x 24 x 14 mm defaults; see `pad_coupon_print_notes.md`.
+- `pad_coupon_pair_*_24mm.stl` — matching round, V, and flat pairs plus a flat/V asymmetric pair, spaced at the current nominal 24 mm base-face gap.
+- `pad_coupon_print_notes.md` — print and wet-comparison notes for the three contact profiles.
+- `gripper_concept.svg` — concept schematic.
+- `gripper_concept_brief.md` — design rationale, task register, loads, safety and prototype gates.
+- `gripper_interface_measurements.md` — worksheet for props, loads, actuator, and vehicle inputs.
+- `mission_requirements_review.md` — Cawl's mission-source review.
+- `mechanism_design_review.md` — Faustinius's mechanism audit.
+- `actuator_integration_review.md` — Scaevola's build/buy and actuator integration review.
+- `mission_update_review.md` — Ipluvien Maximal's current official resource-status and action review.
+- `cad_prototype_review.md` — Rho's CAD readiness audit and prototype blockers.
+- `actuator_prototype_review.md` — Lakius Danzager's actuator, power, depth, and guarding review.
+- `prototype_materials_review.md` — Erasmus Darvin's pad material and mechanical-retention review.
+- `architecture_gap_review.md` — Zagreus Kane's action-to-gripper coverage review; recommends reserving a passive replaceable nose interface, with its geometry gated on practice props.
+- `geometry_review.md` — Arkhan Land's geometry/interface audit, with a follow-up recording the revised 84 mm plate and tie and the remaining vehicle interface dependency.
+- `passive_interface_review.md` — Hadron Omega-7-7's review recommends reserving (but not dimensioning) a passive nose datum until body/prop interfaces and any tool-change rules are known.
+- `mount_interface_review.md` — Regulus's independent audit lists the STEP/STP datums and full vehicle geometry needed before mount fit can be claimed.
+- `pad_mechanical_review.md` — Melgator's review and follow-up document the Tappex M3 insert fit candidate and coupon; the printed host-material joint remains unqualified.
+- `hard_stop_subsystem_review.md` — Hyus N’dai's stop review and the SCAD torque screen document the current printed-pin risk and the replaceable pin/stop-block load path to size after actuator and frame selection.
+- `powered_stop_prototype_module.md` — Cawl's component definition for a retained cross-pin, thick moving lug, and replaceable stops reacting into the yoke, with sizing equations and non-powered/powered validation gates; all dimensions await actuator and structure inputs.
+- `powered_stop_layout_study.scad` and `powered_stop_layout_preview.png` — a separate, unpowered packaging study that visualizes the cross-pin/clevis and keyed stop-block architecture. It is not integrated into the main gripper assembly and is not a load-rated print model.
+- `replaceable_contact_prototype_module.md` — Faustinius's staged pad-profile, material, M3 retention, wet-hold, and serviceability prototype plan; no profile or retention system is qualified without practice props and physical tests.
+- `mission_release_refresh.md` — Rho-mu 31's official-source recheck maps the published Tasks 1–2 manipulation actions, distinguishes the supplied Task 3 Floats preview, and records the current Part 2 IP-20/sharp-edge/safety-inspection constraints while keeping unverified prop contacts provisional.
+- `mission_task_map_review.md` — Videx's task coverage module review separates official action wording from inferred contact modes and prioritizes six hands-on trials.
+- `mission_mechanical_trial_matrix.md` — Videx's 22 published-action prototype trials define the missing prop evidence, candidate tool coverage, measurements, and TBD acceptance criteria; it does not claim complete coverage.
+- `vehicle_interface_module_review.md` — Scaevola's mount module review proposes a removable front bridge tied into both structural side rails and defines STEP assembly integration checks.
+- `drive_stop_module_review.md` — Ipluvien Maximal's actuator/stop module review confirms the screening arithmetic, documents assumptions, and defines a retained-pin/stop-block load path plus required sizing inputs.
+- `coupon_export_review.md` — Koriel Zeth's read-only audit identified why the combined coupon STL is visual-only; the source now exports the body, pad, and keeper as separate print pieces.
+- `actuator_selection_basis.md` — Decimus-rho's source-backed comparison keeps the commercial Newton and custom rotary jaw as alternatives; neither can be selected until mission loads, body fit, power, service, and mounting inputs are measured.
+- `actuator_candidate_review.md` — Tiresus's official-source screen of Blue Trail SER-2031/SER-2131, TMI ERLA, and Blue Robotics Newton; it compares package, electrical/depth envelope, and geometry-only torque conversions, without treating them as verified grip forces or choosing an actuator.
+- `pivot_hardware_basis.md` — Kelbor-Hal's pivot review compares the 8 mm shaft proxy to manufacturer DIN 471 dimensions and conditional ring/groove capacities; the exact ring outline, shaft material, load capacity, and guard/washer fit remain open.
+
+## Goal completion gates
+
+1. Dimension and collision-check against the team's body STEP/Parasolid and actual thruster/camera geometry.
+2. Dimension the jaws and contact features against official prop CAD/drawings or faithful physical practice props.
+3. Measure wet retention, safe squeeze, push/pull/insertion forces, travel, and required cycle time.
+4. Select a real depth-rated actuator and complete its power, torque reaction, shaft-retention, guarding, and mounting interfaces.
+5. Validate a physical prototype through bench and wet task trials; resolve inspection/safety review.
+6. Release an updated, fabrication-ready design package. A GitHub repository has been created at [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical), and the user approved public hosting. The remote is still empty until an authenticated initial push succeeds.
+
+## How to maintain this tracker
+
+- Keep this brief as the current decision and requirements summary. Update it when a design choice, source requirement, or completion gate changes; preserve open assumptions as assumptions.
+- Append dated, factual entries to `progress.md` for research, CAD changes, reviews, measurements, tests, and decisions. Include the evidence and limits of each verification.
+- Keep detailed analyses in their component review files and link/list them here rather than copying full reports into both tracking files.
+- Do not mark the goal complete until every completion gate above is closed with evidence and the team has accepted the final package.
+
+## User file delivery
+
+The user selected a vehicle STEP/STP assembly as the preferred format; no body model is attached yet. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Include units, vehicle front/approach axis, mount datum, thruster axes/guard envelopes, camera location, structural material/thickness, and service-access envelope. Add official prop CAD when it becomes available.
