@@ -6,7 +6,7 @@ Reference: `Michelangelo Dealberti FInal Clamp Design.stl` only. This sheet maps
 
 - Four split channel clips clamp the two long guide plates at Z=12 and 28 mm. Their openings use the STL-derived plate span (58.599 mm) and thickness (2.6 mm), with 0.5 mm total clearance. Side ribs join each clip to the rear spine while routing around the centerline.
 - An 18 mm sleeve and two M3 set screws provide an adjustable connection from the candidate moving center member to the rack through a solid side web. The sleeve outside diameter is 18 mm, leaving 1.2 mm clearance to each guide plate in the measured 20.4 mm gap. The screws face along -X, away from the plates and rack web.
-- Rack teeth engage a pinion on a common datum: rack motion is along Z and the pinion shaft axis is Y. A cross-pin connects the pinion to a generic rear servo output shaft; the servo body is omitted.
+- Rack teeth engage a pinion on a common datum: rack motion is along Z and the pinion shaft axis is Y. A 2 mm cross-pin connects the pinion to the generic 4 mm rear output shaft through a 2.2 mm hole, leaving 0.9 mm shaft walls; the servo body is omitted.
 - The clips, rear spine, rack guides, servo datum and pitch trunnions form one cradle. A fixed-yoke pin and a moving-arm pin are joined by a telescoping pitch-control interface with retaining pins. `tilt_angle_deg` updates its pin-to-pin length; the actuator body is omitted.
 
 ## Evidence and unresolved geometry
