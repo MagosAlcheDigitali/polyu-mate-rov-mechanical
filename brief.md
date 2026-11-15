@@ -22,6 +22,7 @@
 
 - The supplied MATE Floats preview is Task 3, a separate profiling-float task; it supplies no ROV-gripper interface. [Official preview](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/2027%20MATE%20Documentation/2027%20MATE%20Floats%20Preview%20Mission_EXPLORER_FINAL.pdf)
 - The all-class briefing says product-demonstration tasks are attempted in one run. Relevant mechanical actions include seagrass collection/planting, crab-trap deployment/recovery, node/sensor/SGANT placement and cabling, port-cover/connector work, breaker and solar-panel work, dropped-tool recovery, and cargo docking. Contact geometry, loads, travel, and tolerances are not defined in the briefing. [Official briefing](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/2027%20MATE%20Documentation/2027_MATE_ROV_Competition_Briefing_FINAL.pdf)
+- Part 2 adds system constraints that affect the end effector: MECH-001 depth-capable electronics housing to 6 m; MECH-002 vehicle maximum 22 kg and 100 cm in any dimension; MECH-006 thruster guarding; MECH-007/008 harmful-sharp and guarded gear/pinch-point requirements; and ELEC-001E/002E/005E/020E power-source, fuse, nominal 48 V, onboard voltage-conversion, and no-onboard-power rules for the primary ROV. The manipulator is part of the ROV system; Task 3's float is the only 2027 non-ROV device. See `mission_release_refresh.md` for the detailed evidence and design implications. [Official Explorer Part 2](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/Manual%20Components/EXPLORER%20Part%202%20SPECIFICATIONS.pdf)
 - Rechecked 15 November 2026: MATE still lists the full Explorer manual and Part 1 Product Demonstration materials as pending. The Explorer page lists prop instructions, parts lists, prop CAD, and environment CAD as resource headings, but those entries do not currently expose active download links; the 2027 resource page likewise marks Part 1 pending. [2027 resource page](https://materovcompetition.org/2027) [Explorer resource page](https://materovcompetition.org/explorer)
 
 ## Current design direction
@@ -88,7 +89,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 3. Measure wet retention, safe squeeze, push/pull/insertion forces, travel, and required cycle time.
 4. Select a real depth-rated actuator and complete its power, torque reaction, shaft-retention, guarding, and mounting interfaces.
 5. Validate a physical prototype through bench and wet task trials; resolve inspection/safety review.
-6. Release an updated, fabrication-ready design package. A GitHub repository has been created at [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical), and the user approved public hosting. The remote is still empty until an authenticated initial push succeeds.
+6. Release an updated, fabrication-ready design package. The public GitHub repository is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its current snapshot has 47 files; 42 locally tracked STL mesh exports (about 40.7 MB) still need to be mirrored, and the vehicle STEP/STP assembly is outstanding.
 
 ## How to maintain this tracker
 
@@ -100,3 +101,4 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 ## User file delivery
 
 The user selected a vehicle STEP/STP assembly as the preferred format; no body model is attached yet. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Include units, vehicle front/approach axis, mount datum, thruster axes/guard envelopes, camera location, structural material/thickness, and service-access envelope. Add official prop CAD when it becomes available.
+

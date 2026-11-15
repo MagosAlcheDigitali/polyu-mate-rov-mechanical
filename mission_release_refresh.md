@@ -60,3 +60,23 @@ This update strengthens the mechanical coverage and safety checklist but does no
 
 Reopened both official resource pages after the previous check. The 2027 season page continues to show Explorer Full Manual and Part 1 as Pending, while Part 2–5 and the all-class Product Demo and Specs Briefing are available. The Explorer page now visibly lists the prop-building instructions, updated shopping lists, the prop CAD ZIP, and the Explorer environment CAD, but those entries remain unlinked in the current page output; the briefing, preview, 48 V supply information, and official rulings links are active. Do not infer prop dimensions or access from the listed-but-unlinked labels. Recheck these pages before the team freezes contact geometry. [2027 season resource status](https://materovcompetition.org/2027) · [Explorer resource list](https://materovcompetition.org/explorer)
 
+## Mechanical design constraints from the available Explorer Part 2
+
+The official [Explorer Part 2 specifications](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2027%20MATE%20ROV%20Competition/Manual%20Components/EXPLORER%20Part%202%20SPECIFICATIONS.pdf) are available even though the full manual and Part 1 remain pending. These rules affect the tool concept but do not supply grasp-force or prop-interface values.
+
+| Published rule | End-effector design implication — inference |
+|---|---|
+| MECH-001: ROV electronics housings must operate to 6 m at the World Championship. | Any actuator, cable, connector, and penetrator used underwater must be qualified for the planned depth. Keep the user's serviceable open frame separate from a sealed depth-capable electronics housing. |
+| MECH-002: vehicle maximum 22 kg in air and no single dimension over 100 cm; the ROV must be safely hand-launched. | Keep tool mass and projection inside the team's system budget. Treat the 95 x 103.5 x 112 mm CAD envelope as a study envelope until integrated with the body. |
+| MECH-006: propellers need full guards, extending at least 2 mm ahead/behind, with openings under 12.5 mm. | Check the end-effector mount and cables against every thruster guard and flow path in body CAD; avoid adding snag points near the propulsors. |
+| MECH-007/008: harmful sharp edges/points are prohibited; exposed gears and pinch points must be guarded to IP-20 access limits (under 12.5 mm openings) or solidly covered. | Use blunt, radiused contact features and guard the drive/transmission. This requirement does not make an exposed working-jaw gap automatically acceptable; the jaw pinch zone still needs safety inspection and review. |
+| ELEC-001E: external power for the ROV, including manipulators, comes from the MATE supply through the required protection. ELEC-002E sets nominal 48 VDC; ELEC-005E permits lower voltage only after conversion aboard the ROV. ELEC-020E disallows onboard power on the primary ROV. | Treat a powered gripper as part of the ROV electrical system, not a Task 3 non-ROV device. Select the motor/driver, onboard conversion, wiring, fusing, and loss-of-power behavior against the team's system design; do not assign an onboard battery to the gripper. |
+| ELEC-3.3.1 identifies the vertical profiling float as the only 2027 non-ROV device. | Keep float design and gripper design as separate workstreams. The supplied Float preview must not drive gripper dimensions or actuator selection. |
+
+## Resulting prototype direction
+
+The all-class briefing still presents the Tasks 1–2 physical work as one demonstration run. The most useful shared mechanical modes are (1) capture, carry, and controlled release; (2) supported pull/push and axial connector handling; and (3) placement and alignment. The current pivot jaw, replaceable pads, blunt fixed reaction face, and blunt hook are candidate features for those modes, not proven coverage. Compare the existing round, V, flat, and asymmetric pad coupons first, then test a single installed jaw configuration across actual props before adding more mechanisms or assuming tool changes are permitted. Record forces, travel, contact zones, cable loading, release, damage, and clearance in `gripper_interface_measurements.md` and `mission_mechanical_trial_matrix.md`.
+
+The current preview PDF is specifically Task 3: MATE Floats. Its rules cover a separate buoyancy-driven profiling float and data link; they do not specify or require an ROV gripper. The team should route float-specific questions to its separate workstream.
+
+
