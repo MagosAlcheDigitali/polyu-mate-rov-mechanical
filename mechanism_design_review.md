@@ -57,3 +57,22 @@ Checked the current source again at the stop, shaft, reaction mount, and guard m
 **Prototype power-on gate:** keep the actuator electrically disconnected until the team has replaced the printed stop pin with a supported, positively retained metal stop; selected and installed the actual rated coupling and axial-retention hardware; sized and inspected the full reaction path; and checked assembled guard openings. First powered testing should be on a secured bench fixture with the jaw path clear, a conservative current/torque limit, emergency disconnect, and no hands near the mechanism. This gate does not authorize pool use; wet testing follows only after bench load and safety review.
 
 No new strength test, CAD interference sweep, hardware selection, or formal software test was performed in this re-audit. These are source-geometry observations and prototype recommendations, not a design release.
+
+## Stop alternative integration audit — 15 November 2026
+
+**Cawl — read-only integration assessment.** Compared `powered_stop_layout_study.scad` with the current upper bearing, stop, shaft-retention, and guard coordinates in `gripper_study.scad`. No CAD was changed by the reviewer and no load rating or fit was established.
+
+The double-supported cross-pin layout is **not a drop-in replacement** for the current Ø36 x 2.5 mm sector, Ø12 mm stop radius, Ø44/48 mm guard, and single-arm Ø4 mm pin. The separate study uses a Ø64 x 3 mm sector, Ø23 mm stop radius, Ø8 mm pin, and two cheeks, with ear holes extending roughly ±36 mm. The current bearing bracket is 32 mm wide and its fixed-stop attachments are two local posts at x=±6 mm, y=−10 mm; there is no matching support pattern for the larger sector.
+
+The nominal upper-bearing stack in the main model occupies z=8–12 mm; washer and ring occupy approximately z=12–13.5 mm; the existing stop plate spans z=14.5–17 mm. Aligning the separate sector's lower face with z=14.5 mm requires a +19 mm Z translation. Its lower cheek would then span z=10–13 mm and overlap the upper bearing over z=10–12 mm and the retainer over z=12.7–13 mm. The fork hub spans approximately z=10–25 mm through the bearing/retainer zone; the upper cheek spans z=22–25 mm and overlaps the existing guard-cap stack. Raising the fork to clear the bearing pushes the other cheek/pin farther beyond the current guard envelope. The current guard wall also overlaps the fork's radial/axial envelope.
+
+### Required redesign before integration
+
+1. Set one pivot datum and transform the new assembly to the main model's `pivot_x`, `pivot_y`; calculate every axial station from bearing faces and selected retainer hardware.
+2. Design a new fixed-sector bridge into the yoke/bearing support with attachment pads matching the sector ears; check its full radius against jaw, frame, keepers, and vehicle.
+3. Re-stack the pivot shaft, upper axial retention, and two fork cheeks so they do not compete for the same axial space.
+4. Replace the single keyed hub/arm, radial guard, and cap with geometry that houses and retains the fork and pin; inspect openings and service access on the assembled guard.
+5. Recalculate the stop faces for the commanded jaw limits and run a full swept-solid check across the jaw, pads, bearing, sector, fork, shaft, drive, and guard.
+
+These are nominal CAD-package comparisons only. The replacement module is display-only; actual maximum actuator torque, impact case, material/process, fastening, support stiffness, and vehicle structure are still unspecified. Keep the current main stop unpowered. Integrate and proof the replacement only after these mechanical interfaces are redesigned and sized.
+
