@@ -19,6 +19,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 - [`team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx`](team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx) — team progress presentation with editable status graphs and an ordered file tour.
 - [`gripper_concept_brief.md`](gripper_concept_brief.md) — mechanism concept, task mapping, force calculations, safety gates, and prototype sequence.
 - [`gripper_study.scad`](gripper_study.scad) — parametric geometry study.
+- [`validate_gripper_study.ps1`](validate_gripper_study.ps1) — OpenSCAD hard-warning compile plus a bounded 46-pose jaw-body/support-frame intersection check.
 - [`gripper_torque_test_fixture.scad`](gripper_torque_test_fixture.scad) — bench-only 100 mm torque lever and extended test-shaft layout; secure the passive yoke and use matched real retention hardware before loading.
 - The torque-test fixture STL preview is in the local project folder; the public snapshot contains its editable OpenSCAD source only. Use neither as a load-rated print release.
 - [`sg90_quick_gripper_README.md`](sg90_quick_gripper_README.md) and [`sg90_quick_gripper.scad`](sg90_quick_gripper.scad) — separate SG90-horn quick mockup for light dry fit trials; not the main pivot jaw or a depth-rated drive.
