@@ -75,7 +75,7 @@ cradle_plate_zc = (cradle_plate_z0+cradle_plate_z1)/2;
 cradle_plate_h = cradle_plate_z1-cradle_plate_z0;
 pitch_axis_z = 80;
 pitch_ear_offset = saddle_outer_w/2+18;
-pitch_axis_y = cradle_plate_y;
+pitch_axis_y = cradle_plate_y+16;
 servo_plate_y = ymax+8;
 servo_plate_t = 4;
 servo_mount_hole_dx = 10;
@@ -116,10 +116,16 @@ module saddle_bolts(zc) {
     for (sx=[-1,1]) {
         translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
                    body_cy,zc])
-            y_cylinder(4,saddle_outer_d);
+            y_cylinder(4,saddle_outer_d+6);
         translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
                    body_cy+saddle_outer_d/2+1.5,zc])
             y_cylinder(7,3);
+        translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
+                   body_cy-saddle_outer_d/2-1.5,zc])
+            difference() {
+                rotate([90,0,0]) cylinder(d=7,h=3,center=true,$fn=6);
+                y_cylinder(4.3,5);
+            }
     }
 }
 
@@ -142,9 +148,18 @@ module cradle_spine() {
         // Rigid crossbar joins pitch journals to the same saddle-mounted spine.
         translate([body_cx,pitch_axis_y,pitch_axis_z])
             cube([2*pitch_ear_offset,14,16],center=true);
-        for (s=[-1,1])
+        for (s=[-1,1]) {
+            // Side arms bridge the cradle spine to the separated pitch-yoke plane.
+            translate([body_cx+s*pitch_ear_offset,
+                       (cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
+                cube([12,pitch_axis_y-cradle_plate_y+14,12],center=true);
             translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z])
                 x_cylinder(14,22);
+        }
+        // Outboard support for the pitch-link arm; it clears the gripper body.
+        translate([body_cx+pitch_ear_offset-12,
+                   (cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
+            cube([8,pitch_axis_y-cradle_plate_y+12,8],center=true);
     }
 }
 
