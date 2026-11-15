@@ -89,7 +89,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 3. Measure wet retention, safe squeeze, push/pull/insertion forces, travel, and required cycle time.
 4. Select a real depth-rated actuator and complete its power, torque reaction, shaft-retention, guarding, and mounting interfaces.
 5. Validate a physical prototype through bench and wet task trials; resolve inspection/safety review.
-6. Release an updated, fabrication-ready design package. The public GitHub repository is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its current snapshot has 47 files; 42 locally tracked STL mesh exports (about 40.7 MB) still need to be mirrored, and the vehicle STEP/STP assembly is outstanding.
+6. Release an updated, fabrication-ready design package. The public GitHub repository is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its current snapshot has 50 files, including the three separate pad-retention coupon parts; 39 locally tracked STL meshes (38,984,911 bytes) remain to be mirrored, and the vehicle STEP/STP assembly is outstanding.
 
 ## How to maintain this tracker
 

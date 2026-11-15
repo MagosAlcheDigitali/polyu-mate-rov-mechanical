@@ -2,7 +2,7 @@
 
 These 25 STL files were exported from `../gripper_study.scad` with OpenSCAD 2021.01 after the 15 November 2026 CAD update. Units are millimetres. Component views retain assembly coordinates, so translate and orient them as needed for an unpowered shape mockup.
 
-**Repository note (15 November 2026):** this inventory and the source CAD are on the public GitHub snapshot, but the generated STL mesh bundle remains in the local project folder and is not mirrored there yet. Do not interpret a missing repository mesh as a completed print release.
+**Repository note (15 November 2026):** the separate [coupon body](pad_retention_coupon_body.stl), [coupon pad](pad_retention_coupon_pad.stl), and [coupon keeper strips](pad_retention_coupon_keepers.stl) are now in the public GitHub snapshot. The other 22 STL exports in this inventory remain in the local project folder. The coupons support a fit/retention trial only; no printed joint load rating is established.
 
 ## Inventory
 
