@@ -104,5 +104,5 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 
 ## User file delivery
 
-The user selected a vehicle STEP/STP assembly as the preferred format; no body model is attached yet. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Include units, vehicle front/approach axis, mount datum, thruster axes/guard envelopes, camera location, structural material/thickness, and service-access envelope. Add official prop CAD when it becomes available.
+The team has supplied a whole-vehicle concept STL with stand-ins; it is stored under `vehicle_reference/` and remains visual context only. The preferred next handoff is the full vehicle STEP/STP assembly. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Preserve named components and millimetre scale; include the vehicle origin/front approach axis, structural members and proposed mount region, all thruster axes and guard envelopes, camera, electronics housing and removal/service space, buoyancy foam, and tether/cable routes. Add official prop CAD when it becomes available.
 
