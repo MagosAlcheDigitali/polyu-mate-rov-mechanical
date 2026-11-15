@@ -1,25 +1,25 @@
-# Standalone simple gripper: rack drive and pitch cradle
+# Standalone clamp drive and pitch cradle study
 
-This folder is for the simple clamp in `Michelangelo Dealberti FInal Clamp Design.stl` only.
+This is a separate mechanism study for the clamp reference mesh `Michelangelo Dealberti FInal Clamp Design.stl`. It is not the active pivot-jaw model in the workspace root `gripper_study.scad`.
 
-## Mechanical connection path
+## Mechanism layout
 
-- Four split channel clips clamp the two long guide plates in the STL at Z=12 and 28 mm. Their openings use the plates' measured X span and 2.6 mm thickness. Rear ribs connect the clips to the cradle spine outside the center-rod path.
-- A sleeve surrounds the candidate center-rod axis between those guide plates. Two M3 set screws retain the rod; a solid side web joins the sleeve to the rack. The STL does not label the rod or give its diameter, so those remain fit inputs.
-- Rack teeth engage the Y-axis pinion. The rack travels along Z, so the pinion turns around Y. Its 4 mm output shaft reaches a generic rear servo mounting plate and is cross-pinned to the gear. The servo is omitted.
-- The guide-plate clips, rear spine, rack guides and pinion plate form one moving cradle. X-axis trunnions support that cradle in the fixed pitch yoke.
-- A telescoping pitch-control linkage connects a pin on the fixed yoke to a selected pin on the moving cradle arm. The actuator body is omitted; `tilt_angle_deg` moves the assembly and updates the linkage pin-to-pin length datum.
+- Four split clips attach the cradle to two long guide-plate components in the STL at Z=12 and 28 mm. Their measured X span and 2.6 mm plate thickness are geometry inputs; the mesh does not say whether these components are fixed chassis rails.
+- A candidate Ø18 mm sleeve and two M3 set screws connect the presumed center member to a translating rack through a solid side web. The mesh does not establish that member's axis, diameter, straight engagement length, or motion.
+- The rack translates on Z and meshes with a Y-axis pinion. The pinion drives a generic 4 mm shaft with a transverse-pin proxy and a rear servo plate. No servo body, output spline, rated hub, or actual coupling is selected.
+- The rack guide layout is a collision-checked candidate: 128 mm rack; pinion center 54 mm from the sleeve datum; guide centers 76 and 100 mm from that datum; ±20 mm rack travel. A side support rib is moved clear of the rack path.
+- The clamp and drive are carried on an X-axis pitch cradle. A telescoping pin-to-pin linkage shows a possible actuator connection; the pitch actuator and required angle/stroke are not selected.
 
-## Files and controls
+## Files and checks
 
-- `rack_and_pinion_pitch_layout.scad` — parametric assembly and editable interfaces.
-- `reference_mesh_analysis.md` — connected-component bounds measured from the supplied STL.
-- [reference mesh projection](reference_mesh_projection.svg) — three orthographic views colored by disconnected STL component.
-- `FIT_MEASUREMENTS.md` — dimensions still needed to fit the interfaces.
-- `../Michelangelo Dealberti FInal Clamp Design.stl` — original clamp reference.
+- `rack_and_pinion_pitch_layout.scad` — parametric layout and two intersection diagnostic views.
+- `validate_rack_pitch_study.ps1` (workspace root) — compiles this source with hard warnings and checks rack/guide and pinion/guide intersections at -20, 0, and +20 mm travel.
+- `reference_mesh_analysis.md`, `reference_mesh_components.md`, `reference_mesh_axis_sections.md`, and `reference_mesh_projection.svg` — mesh measurements and component visualization.
+- `FIT_MEASUREMENTS.md` — inputs still needed for exact interface fit.
 
-In OpenSCAD, `rack_travel_mm` translates the rack and rod sleeve. `tilt_angle_deg` pivots the clamp, cradle, rack drive and shaft plate about X. These are independent preview controls.
+The reproducible check found empty guide/rack and guide/pinion intersections for its six tested cases. It does **not** test rack/pinion tooth mesh, moving clamp collisions, pitch-link range, structural strength, actuator coupling, vehicle fit, or underwater performance.
 
 ## Fit status
 
-The clip dimensions come from two measured guide-plate components, assuming they are stationary chassis rails. Confirm that assumption before printing. The rod axis is only the midpoint between these rails; the STL does not identify the rod diameter or exposed length, fixed versus moving clamp parts, or full-motion clearance. The pitch pivot and actuator travel also remain layout values. Confirm the fit sheet against editable clamp CAD or direct measurements before fabrication.
+The separate `FIT_MEASUREMENTS.md` records current assumptions and evidence. Confirm the two guide plates are fixed and obtain editable clamp CAD or direct measurements for the moving member before building. Keep this as a layout candidate; it is not a fabrication or powered-use release.
+
