@@ -59,3 +59,4 @@ Record physical dimensions from actual props or dimensionally faithful replicas 
 
 The single pivot-jaw concept is a common prototype core, not a demonstrated all-task end effector. Soft-sample handling, trap/tool retention, axial connector work, breaker actuation, panel replacement, sensor leveling, SGANT connections and cargo docking require actual prop-interface evidence. Some may need separate passive contact features or another tool, but this matrix does not select those features. The complete manual, Part 1, practice props, vehicle STEP/STP assembly, actuator duty requirements and physical tests remain open gates.
 
+
