@@ -6,6 +6,7 @@ tilt_angle_deg = 0;       // complete clamp and drive cradle pitch about X
 rack_travel_mm = 0;       // rack and clamped center-rod travel, suggested +/-20
 show_reference_mesh = true;
 show_pitch_support = true;
+show_pitch_link = true;       // pin-to-pin pitch actuator interface (actuator body omitted)
 $fn = 48;
 
 // Approximate bounds for the supplied STL. Verify the central rod and body
@@ -46,7 +47,7 @@ pinion_width = 10;
 coupler_z = coupler_z0 + rack_travel_mm;
 rack_rear_z = coupler_z0 + rear_sign*rack_length + rack_travel_mm;
 rack_mid_z = (coupler_z+rack_rear_z)/2;
-pinion_center = [rack_x+rack_w/2+tooth_depth+pinion_rp,
+pinion_center = [rack_x+rack_w/2+tooth_depth/2+pinion_rp,
                  rod_y,
                  coupler_z0+rear_sign*rack_length*0.50];
 gear_angle = rack_travel_mm/pinion_rp*180/PI; // positive rack Z travel requires positive pinion rotation
@@ -82,6 +83,11 @@ servo_output_end_y = servo_plate_y + servo_plate_t/2 + 8; // shaft engagement st
 shaft_len = servo_output_end_y - pinion_center[1];
 servo_mount_hole_dx = 10;
 servo_mount_hole_dz = 8;
+pitch_link_pin_dz = -32;      // selected moving-arm pin offset below the pitch axis
+pitch_link_body_d = 11;
+pitch_link_rod_d = 6;
+pitch_pin_d = 4;
+pitch_link_sleeve_fraction = 0.62;
 
 module x_cylinder(d,h) { rotate([0,90,0]) cylinder(d=d,h=h,center=true); }
 module y_cylinder(d,h) { rotate([90,0,0]) cylinder(d=d,h=h,center=true); }
@@ -228,8 +234,9 @@ module pinion_and_servo_interface() {
         rotate([0,gear_angle,0])
             difference() {
                 union() {
-                    cylinder(d=2*pinion_rp-2,h=pinion_width,center=true);
-                    cylinder(d=14,h=pinion_width+4,center=true);
+                    // Pinion axis is Y: rack motion along Z then drives rotation about Y.
+                    y_cylinder(2*pinion_rp-2,pinion_width);
+                    y_cylinder(14,pinion_width+4);
                     for (a=[0:360/pinion_teeth:359])
                         rotate([0,a,0])
                             translate([pinion_rp,0,0])
@@ -271,7 +278,7 @@ module pinion_and_servo_interface() {
 }
 
 module moving_pitch_control_arm() {
-    // Pin-hole row accepts a pushrod/servo linkage; no actuator is included.
+    // Pin-hole row accepts the moving eye of the pitch actuator connection; no actuator is included.
     color([0.86,0.34,0.16])
     difference() {
         translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-27])
@@ -280,6 +287,49 @@ module moving_pitch_control_arm() {
             translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z+dz])
                 x_cylinder(4.2,10);
     }
+}
+
+function pitch_fixed_pin() =
+    [body_cx+pitch_ear_offset-12, pitch_axis_y, pitch_axis_z-70];
+
+function pitch_moving_pin() =
+    let(dz=pitch_link_pin_dz, a=tilt_angle_deg)
+    [body_cx+pitch_ear_offset-12,
+     pitch_axis_y-dz*sin(a),
+     pitch_axis_z+dz*cos(a)];
+
+// A pin-to-pin, telescoping actuator datum joins the fixed pitch yoke to the
+// moving cradle arm. The actuator motor/body is intentionally omitted.
+// Its length follows the pitch preview angle so the two interfaces stay joined.
+module pitch_control_link() {
+    p0 = pitch_fixed_pin();
+    p1 = pitch_moving_pin();
+    link_len = norm(p1-p0);
+    link_angle = atan2(-(p1[1]-p0[1]),p1[2]-p0[2]);
+    sleeve_len = link_len*pitch_link_sleeve_fraction;
+    rod_start = link_len*(pitch_link_sleeve_fraction-0.12);
+    color([0.72,0.30,0.13])
+    translate(p0)
+        rotate([link_angle,0,0]) {
+            // Clevis eyes have X-axis bores matching the two lug pin axes.
+            for (zpos=[0,link_len]) {
+                translate([0,0,zpos])
+                difference() {
+                    sphere(d=13);
+                    x_cylinder(4.4,16);
+                }
+            }
+            // These overlapping telescoping members show the actuator stroke
+            // envelope; replace with the selected actuator and end clevises.
+            translate([0,0,sleeve_len/2])
+                cylinder(d=pitch_link_body_d,h=sleeve_len,center=true);
+            translate([0,0,(rod_start+link_len)/2])
+                cylinder(d=pitch_link_rod_d,h=link_len-rod_start,center=true);
+        }
+    // Retaining pins pass through the fixed yoke, actuator eye, and moving arm.
+    color([0.18,0.19,0.21])
+    for (p=[p0,p1])
+        translate(p) x_cylinder(pitch_pin_d,22);
 }
 
 module pitch_cradle() {
@@ -330,3 +380,4 @@ module moving_gripper_and_drive() {
 
 if (show_pitch_support) fixed_pitch_yoke();
 moving_gripper_and_drive();
+if (show_pitch_support && show_pitch_link) pitch_control_link();
