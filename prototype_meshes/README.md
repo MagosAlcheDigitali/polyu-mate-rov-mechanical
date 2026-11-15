@@ -45,3 +45,4 @@ The complete `../gripper_toolonly_preview.stl` assembly review mesh has 44,772 t
 - The pad thread insert dimensions are a manufacturer-based fit candidate. Print the coupon in the actual rail material and process, inspect the insert and screw fit, and measure retention before using the joint under load.
 - The `jaw_frame_overlap` and `pad_overlap` CAD views check selected discrete poses only. They do not cover tolerances, continuous motion, keepers, fasteners, props, body geometry, or deformation.
 - Do not power the integral printed stop pin. No mesh is a load-rated or final fabrication file.
+
