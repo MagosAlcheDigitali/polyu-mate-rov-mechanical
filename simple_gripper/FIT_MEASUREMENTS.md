@@ -23,7 +23,11 @@ The [component inventory](reference_mesh_components.md) lists all 29 disconnecte
 | `rail_clip_stations` | 12, 28 mm | Confirm the two guide plates are fixed and unobstructed there |
 | `pitch_axis_z` | 80 mm | Confirm pivot location and full-angle clearance |
 | `pitch_link_pin_dz` | -32 mm | Choose moving-arm hole and actuator stroke/load |
+| `rack_length` | 128 mm candidate | Recheck cradle extent and tooth engagement after rod/stroke measurement |
+| `pinion_distance_mm` | 54 mm candidate | Verify gear location against the real clamp and servo shaft envelope |
+| `rack_guide_distances_mm` | [76, 100] mm candidate | Preserve sleeve, pinion and rack-end clearances if rack dimensions change |
 | `rack_travel_limit` | 20 mm | Measure stroke needed to open and close the clamp |
 | `tilt_angle_deg` | preview input | Specify required up/down angle and actuator travel |
 
-An editable STEP/STP/native clamp model, or a dimensioned drawing of the moving member and rail mounting surfaces, is needed to verify the mating fit and full jaw sweep.
+The `validate_rack_pitch_study.ps1` check reports no rack/guide or pinion/guide intersection at -20, 0, and +20 mm rack travel. It does not prove rack/pinion tooth contact, moving-clamp clearance, rail fixedness, or physical fit. An editable STEP/STP/native clamp model, or a dimensioned drawing of the moving member and rail mounting surfaces, is still needed to verify the mating fit and full jaw sweep.
+
