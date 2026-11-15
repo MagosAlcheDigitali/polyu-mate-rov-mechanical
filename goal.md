@@ -4,18 +4,17 @@ Design a simple gripper mechanism around only the supplied reference mesh, `Mich
 
 ## Required behavior
 
-- A central rod slides axially in and out to open and close the gripper.
-- A servo sits behind the gripper and turns a pinion. The pinion meshes with a rack on the sliding rod, converting servo rotation into linear travel.
-- Do not model or include the servo body. Show only the pinion/shaft and a generic, adjustable mounting interface.
-- The gripper and its rack drive tilt together up and down about a separate pitch pivot.
-- Keep this as a standalone gripper assembly. Do not use a larger rotating-jaw or vehicle design as the basis.
+- The gripper's existing central rod slides axially to open and close the clamp.
+- A rack bar is mechanically clamped to that rod with a split sleeve and set screws. A pinion turns the rack; a rear-mounted servo connects to the pinion shaft through the mounting interface. Do not model the servo body.
+- Split saddle bands fasten the clamp body to a moving cradle. The rack guides, pinion support, and servo interface are attached to the same cradle.
+- X-axis trunnions on the moving cradle sit in a fixed pitch yoke so the complete gripper and drive tilt together.
+- Provide a moving pitch-link arm and fixed yoke anchor so a pushrod/actuator can control the pitch. Do not use a larger rotary-jaw or vehicle design as the basis.
 
 ## Deliverables
 
-- A parametric OpenSCAD layout in `simple_gripper/` showing the supplied clamp mesh, central sliding rod/rack, guides, pinion, and pitch yoke.
-- A short design note with the operation, adjustable assumptions, and checks needed before fabrication.
-- This file and `progress.md` track the goal.
+- Parametric OpenSCAD assembly in `simple_gripper/` using the supplied STL and showing the rod sleeve-to-rack link, body saddle-to-cradle link, rack/pinion/shaft link, trunnion/yoke link, and pitch-link interfaces.
+- Design note and dated `progress.md` entry describing operation, fit assumptions, and remaining validation.
 
 ## Current status
 
-Concept layout is in the repository. It is a mechanism study, not a print-ready release: the STL does not expose a verified moving-rod interface in mesh metadata, and the final jaw connection, servo bolt pattern, clearances, strength, and physical travel still need measurement and validation.
+The CAD now includes each mechanical interface, with adjustable dimensions for the exposed center rod and two clamp-body saddle stations. The reference STL remains the layout basis. The rod diameter/end location and body sections at the saddle stations still need exact measurement against the mesh/physical gripper; verify those fits and the pitch linkage before fabrication.
