@@ -49,8 +49,8 @@ rack_mid_z = (coupler_z+rack_rear_z)/2;
 pinion_center = [rack_x+rack_w/2+tooth_depth+pinion_rp,
                  rod_y,
                  coupler_z0+rear_sign*rack_length*0.50];
-gear_angle = -rear_sign*rack_travel_mm/pinion_rp*180/PI;
-guide_z1 = coupler_z0 + rear_sign*22;
+gear_angle = rack_travel_mm/pinion_rp*180/PI; // positive rack Z travel requires positive pinion rotation
+guide_z1 = coupler_z0 + rear_sign*40;
 guide_z2 = coupler_z0 + rear_sign*78;
 
 // Two-piece adjustable saddle bands clamp around the gripper body and attach
@@ -78,6 +78,8 @@ pitch_ear_offset = saddle_outer_w/2+12;
 pitch_axis_y = cradle_plate_y+16;
 servo_plate_y = ymax+8;
 servo_plate_t = 4;
+servo_output_end_y = servo_plate_y + servo_plate_t/2 + 8; // shaft engagement stub beyond the servo plate
+shaft_len = servo_output_end_y - pinion_center[1];
 servo_mount_hole_dx = 10;
 servo_mount_hole_dz = 8;
 
