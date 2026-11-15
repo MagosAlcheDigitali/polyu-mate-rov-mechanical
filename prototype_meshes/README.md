@@ -2,6 +2,8 @@
 
 These 25 STL files were exported from `../gripper_study.scad` with OpenSCAD 2021.01 after the 15 November 2026 CAD update. Units are millimetres. Component views retain assembly coordinates, so translate and orient them as needed for an unpowered shape mockup.
 
+**Repository note (15 November 2026):** this inventory and the source CAD are on the public GitHub snapshot, but the generated STL mesh bundle remains in the local project folder and is not mirrored there yet. Do not interpret a missing repository mesh as a completed print release.
+
 ## Inventory
 
 | File | OpenSCAD view | Use and limits |
@@ -43,3 +45,4 @@ The complete `../gripper_toolonly_preview.stl` assembly review mesh has 44,772 t
 - The pad thread insert dimensions are a manufacturer-based fit candidate. Print the coupon in the actual rail material and process, inspect the insert and screw fit, and measure retention before using the joint under load.
 - The `jaw_frame_overlap` and `pad_overlap` CAD views check selected discrete poses only. They do not cover tolerances, continuous motion, keepers, fasteners, props, body geometry, or deformation.
 - Do not power the integral printed stop pin. No mesh is a load-rated or final fabrication file.
+

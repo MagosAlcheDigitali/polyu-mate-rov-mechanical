@@ -2,7 +2,7 @@
 
 This workspace tracks a prototype study for a maintainable mechanical end effector for PolyU's 2027 MATE Explorer ROV. It is an active design project, not a fabrication release.
 
-The GitHub home is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its public snapshot tracks the project documentation, parametric source files, selected previews, and the team progress presentation. The existing clamp STL and tilt-mount references on the remote were preserved. This is a design-study snapshot, not a fabrication release.
+The GitHub home is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its public snapshot tracks project documentation, parametric source files, selected previews, and the team progress presentation. The existing clamp STL and tilt-mount references were preserved. The separately exported prototype STL mesh bundle is still in the local project folder and has not been mirrored to GitHub; this is a design-study snapshot, not a fabrication release.
 
 ## Current concept
 
@@ -20,10 +20,10 @@ The provided vehicle image and verbal 250 x 150 x 150 mm body envelope are conte
 - [`gripper_concept_brief.md`](gripper_concept_brief.md) — mechanism concept, task mapping, force calculations, safety gates, and prototype sequence.
 - [`gripper_study.scad`](gripper_study.scad) — parametric geometry study.
 - [`gripper_torque_test_fixture.scad`](gripper_torque_test_fixture.scad) — bench-only 100 mm torque lever and extended test-shaft layout; secure the passive yoke and use matched real retention hardware before loading.
-- [`torque_test_fixture_preview.stl`](torque_test_fixture_preview.stl) — refreshed assembly mesh for the torque-test fixture; use for visual fit only, not as a load-rated print release.
+- The torque-test fixture STL preview is in the local project folder; the public snapshot contains its editable OpenSCAD source only. Use neither as a load-rated print release.
 - [`sg90_quick_gripper_README.md`](sg90_quick_gripper_README.md) and [`sg90_quick_gripper.scad`](sg90_quick_gripper.scad) — separate SG90-horn quick mockup for light dry fit trials; not the main pivot jaw or a depth-rated drive.
 - [`tilt_mount_reference.scad`](tilt_mount_reference.scad) and [`tilt_mount_concept.md`](tilt_mount_concept.md) — pitch hinge concept using the supplied clamp STL; adapter and actuator interfaces still need measured fit-up.
-- [`prototype_meshes/README.md`](prototype_meshes/README.md) — STL inventory, bounds, topology, and mockup limits.
+- [`prototype_meshes/README.md`](prototype_meshes/README.md) — STL inventory, bounds, topology, and mockup limits; the generated STL bundle is local-only in this snapshot.
 - [`gripper_interface_measurements.md`](gripper_interface_measurements.md) — worksheet for props, loads, actuator, vehicle, and MATE clarifications.
 - [`actuator_selection_basis.md`](actuator_selection_basis.md) — source-backed commercial-versus-custom actuator comparison.
 - [`actuator_candidate_review.md`](actuator_candidate_review.md) — Tiresus's manufacturer-source shortlist and package/torque screening for depth-rated actuator candidates; not a selection or grip-force rating.
