@@ -75,28 +75,27 @@ module rod_and_rack() {
 module guide(zc) {
     color([0.92,0.58,0.14])
     difference() {
-        translate([rod_x,rod_y,zc]) cube([24,22,10],center=true);
-        translate([rod_x,rod_y,zc]) cylinder(d=rod_d+0.8,h=12,center=true);
+        translate([rod_x,rod_y,zc]) cube([30,24,10],center=true);
+        // Rectangular clearance carries the rack section while leaving its teeth exposed.
+        translate([rod_x+2,rod_y,zc]) cube([rack_w+7,rack_h+2,12],center=true);
     }
 }
 
 module pinion() {
     color([0.88,0.60,0.12])
     translate(pinion_center) {
+        // Through-bore belongs to the whole pinion, for the servo output adapter.
         rotate([0,gear_angle,0])
-            union() {
-                y_cylinder(2*pinion_rp-2, pinion_width);
-                for (a=[0:360/pinion_teeth:359])
-                    rotate([0,a,0])
-                        translate([pinion_rp,0,0])
-                            cube([3.0,pinion_width,2.2],center=true);
+            difference() {
+                union() {
+                    y_cylinder(2*pinion_rp-2, pinion_width);
+                    for (a=[0:360/pinion_teeth:359])
+                        rotate([0,a,0])
+                            translate([pinion_rp,0,0])
+                                cube([3.0,pinion_width,2.2],center=true);
+                }
+                y_cylinder(4,pinion_width+2);
             }
-        // Through-bore on the pinion axis for the servo output adapter/shaft.
-        color([0.22,0.22,0.24])
-        difference() {
-            y_cylinder(10,pinion_width+1);
-            y_cylinder(4,pinion_width+2);
-        }
         // Generic mounting datum behind the pinion; pattern remains adjustable.
         color([0.42,0.44,0.47,0.8])
             translate([0,9,0]) cube([32,3,30],center=true);
