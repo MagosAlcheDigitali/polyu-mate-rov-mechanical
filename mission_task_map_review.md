@@ -49,3 +49,4 @@ Use physical competition props or dimensionally faithful replicas. Conduct early
 ## Review conclusion
 
 The current pivot jaw remains a testable core, not a fully demonstrated all-task end effector. The next high-value evidence is a prop-based fit and force set followed by a single-configuration full-sequence trial. The body STEP/STP assembly is separately required to check approach corridor, thruster/camera clearance, service access, and the structural reaction path. The missing Part 1/manual and practice props prevent final tip geometry, jaw range, or actuator sizing from being responsibly frozen.
+
