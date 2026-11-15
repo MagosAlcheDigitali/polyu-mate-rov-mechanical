@@ -32,7 +32,7 @@ rod_coupler_len = 18;
 rear_sign = -1;           // -1: rack/servo at low-Z end; +1: high-Z end
 
 // Rack drive. Rack sits beside the existing rod and clamps to it at the sleeve.
-rack_length = 108;
+rack_length = 128; // provisional extension to keep both guides on the rack at +/-20 mm travel
 rack_travel_limit = 20;
 rack_w = 10;
 rack_h = 8;
@@ -44,15 +44,39 @@ pinion_teeth = 16;
 pinion_module = 1.5;
 pinion_rp = pinion_module*pinion_teeth/2;
 pinion_width = 10;
+pinion_distance_mm = 54; // preserve the original gear datum while extending the rack
+pinion_outer_radius = pinion_rp+1.5; // approximate tooth-tip radius for guide keep-out only
+rack_guide_z_t = 10;
+rack_guide_clearance_mm = 2;
+rack_guide_distances_mm = [76,100]; // from sleeve center along the rack
+rack_guide_support_w = 4;
+rack_guide_support_clearance_mm = 1;
 coupler_z = coupler_z0 + rack_travel_mm;
 rack_rear_z = coupler_z0 + rear_sign*rack_length + rack_travel_mm;
 rack_mid_z = (coupler_z+rack_rear_z)/2;
 pinion_center = [rack_x+rack_w/2+tooth_depth/2+pinion_rp,
                  rod_y,
-                 coupler_z0+rear_sign*rack_length*0.50];
+                 coupler_z0+rear_sign*pinion_distance_mm];
 gear_angle = rack_travel_mm/pinion_rp*180/PI; // positive rack Z travel requires positive pinion rotation
-guide_z1 = coupler_z0 + rear_sign*40;
-guide_z2 = coupler_z0 + rear_sign*78;
+guide_z1 = coupler_z0 + rear_sign*rack_guide_distances_mm[0];
+guide_z2 = coupler_z0 + rear_sign*rack_guide_distances_mm[1];
+guide_min_from_sleeve_mm = rack_travel_limit+rod_coupler_len/2
+    +rack_guide_z_t/2+rack_guide_clearance_mm;
+guide_max_from_rack_tail_mm = rack_length-rack_travel_limit
+    -rack_guide_z_t/2-rack_guide_clearance_mm;
+guide_min_from_pinion_mm = pinion_outer_radius+rack_guide_z_t/2
+    +rack_guide_clearance_mm;
+assert(rack_guide_distances_mm[0]>=guide_min_from_sleeve_mm,
+       "Near rack guide collides with the moving sleeve at full travel.");
+assert(rack_guide_distances_mm[1]<=guide_max_from_rack_tail_mm,
+       "Far rack guide leaves the rack at full travel.");
+assert(abs(rack_guide_distances_mm[0]-pinion_distance_mm)>=guide_min_from_pinion_mm,
+       "Near rack guide enters the pinion keep-out.");
+assert(abs(rack_guide_distances_mm[1]-pinion_distance_mm)>=guide_min_from_pinion_mm,
+       "Far rack guide enters the pinion keep-out.");
+assert(rack_guide_distances_mm[1]-rack_guide_distances_mm[0]>=rack_guide_z_t
+       +rack_guide_clearance_mm,
+       "Rack guide stations overlap or have insufficient spacing.");
 
 // The STL contains two long, thin parallel guide plates. Their measured
 // bounds define split clips. Confirm they are stationary before fabrication.
@@ -233,11 +257,38 @@ module rack_guide(zc) {
     color([0.92,0.58,0.14])
     union() {
         difference() {
-            translate([rack_x,rod_y,zc]) cube([30,24,10],center=true);
-            translate([rack_x+2,rod_y,zc]) cube([rack_w+7,rack_h+2,12],center=true);
+            translate([rack_x,rod_y,zc])
+                cube([30,24,rack_guide_z_t],center=true);
+            // The centered rack bar and its +X tooth profile fit within this
+            // through-window; the side support stays behind the -X rack edge.
+            translate([rack_x+2,rod_y,zc])
+                cube([rack_w+7,rack_h+2,rack_guide_z_t+2],center=true);
         }
-        translate([rack_x,(rod_y+cradle_plate_y)/2,zc])
-            cube([8,cradle_plate_y-rod_y,8],center=true);
+        translate([rack_x-rack_w/2-rack_guide_support_clearance_mm
+                   -rack_guide_support_w/2,
+                   (rod_y+cradle_plate_y)/2,zc])
+            cube([rack_guide_support_w,cradle_plate_y-rod_y,
+                  rack_guide_z_t-2],center=true);
+    }
+}
+
+module rack_guide_overlap_diagnostic() {
+    intersection() {
+        rod_coupler_and_rack();
+        union() {
+            rack_guide(guide_z1);
+            rack_guide(guide_z2);
+        }
+    }
+}
+
+module rack_pinion_overlap_diagnostic() {
+    intersection() {
+        pinion_and_servo_interface();
+        union() {
+            rack_guide(guide_z1);
+            rack_guide(guide_z2);
+        }
     }
 }
 
@@ -400,6 +451,12 @@ module moving_gripper_and_drive() {
         }
 }
 
-if (show_pitch_support) fixed_pitch_yoke();
-moving_gripper_and_drive();
-if (show_pitch_support && show_pitch_link) pitch_control_link();
+part_view = "assembly"; // [assembly,rack_guide_overlap,rack_pinion_overlap]
+if (part_view=="rack_guide_overlap") rack_guide_overlap_diagnostic();
+else if (part_view=="rack_pinion_overlap") rack_pinion_overlap_diagnostic();
+else {
+    if (show_pitch_support) fixed_pitch_yoke();
+    moving_gripper_and_drive();
+    if (show_pitch_support && show_pitch_link) pitch_control_link();
+}
+
