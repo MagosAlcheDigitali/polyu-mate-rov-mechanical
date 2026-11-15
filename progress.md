@@ -189,3 +189,13 @@ The provided PNG and the 25 x 15 x 15 cm ghost body assumption do not establish 
 - Reassembled the nine published chunks and verified the documented ZIP SHA-256. Extracted all three restored meshes and compared SHA-256 against their local originals; all three matched. The nine remote chunk blob sizes and Git blob SHA-1s also match the local chunk files. The update is on main at commit 81449f5; no project test suite was run.
 
 - **15 November 2026 — Source and next-fit update:** rechecked the live MATE season page; Explorer Part 1 and the full Explorer manual remain marked pending. The official Blue Trail Engineering resources page lists a November 2026 Servo STEP files ZIP in addition to its current SER-series datasheet. Added that source to the actuator review as a route to exact case/mount geometry after a candidate is chosen. The STEP archive was not downloaded or inspected; servo choice and all prop/body load gates remain open. Sources: [MATE 2027 resources](https://materovcompetition.org/2027) and [Blue Trail Engineering resources](https://www.bluetrailengineering.com/resources).
+
+
+## 15 November 2026 — Mechanical interfaces added to the simple gripper
+
+- Replaced the loose rack/clevis concept with a rack bar beside the existing center rod, a split sleeve with two modeled M3 set screws, and a side web joining the sleeve to the rack.
+- Added a two-piece, bolted saddle at two adjustable body stations and a cradle spine tying those saddles to the rack guides, pinion support, servo shaft datum, and pitch trunnions.
+- Corrected the pitch joint to X-axis journals coaxial with the CAD pitch rotation. The fixed yoke now has matching bearing holes and a lower support beam.
+- Added a three-position pitch-link hole row on the moving cradle and a fixed yoke anchor lug. A pushrod/actuator can connect these points; actuator hardware remains omitted.
+- Added a cross-pin interface between the pinion and its shaft. No servo body is present.
+- Remaining fit work: measure the STL's exposed rod axis/diameter and end, set saddle openings and stations to clear the actual clamp/jaw travel, confirm servo pattern and pitch-link geometry, then inspect clearances and strength. GitHub's connector exposes the STL file as a binary reference but cannot parse/render its triangles, so no exact mesh-fit claim is made.
