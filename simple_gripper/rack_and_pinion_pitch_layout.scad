@@ -247,9 +247,9 @@ module pinion_and_servo_interface() {
     color([0.25,0.27,0.30])
     difference() {
         translate([pinion_center[0],
-                   (pinion_center[1]+servo_plate_y)/2,
+                   (pinion_center[1]+servo_output_end_y)/2,
                    pinion_center[2]])
-            y_cylinder(4,servo_plate_y-pinion_center[1]+2);
+            y_cylinder(4,shaft_len);
         translate(pinion_center)
             rotate([0,gear_angle,0])
                 x_cylinder(3.2,18);
