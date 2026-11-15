@@ -45,6 +45,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 - `README.md` — project landing page and short handoff summary.
 - `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx` — eight-slide team update with status graphs; it summarizes prototype-study progress and open validation gates.
 - `gripper_study.scad` — parametric gripper assembly study with selectable jaw-frame and pad-overlap diagnostic views; it remains schematic and unqualified.
+- `validate_gripper_study.ps1` — compile and 46-pose jaw-body/support-frame intersection check; its scope is limited and it does not qualify the mechanism.
 - `gripper_study_preview.png` — OpenSCAD visual of the study inside the assumed vehicle-frame overlay. This image predates the current source default and is context only, not a body-fit result. The `show_reference_bay` toggle is now off by default; enable it for a rough envelope comparison.
 - `gripper_toolonly_preview.stl` — current tool-only assembly review mesh; 44,772 triangles, direct bounds 95 x 103.198 x 112 mm, and OpenSCAD `Simple: no`. Keep it as a multi-component review mesh, not a one-piece print file.
 - `prototype_meshes/` — 25 current-source geometry exports, including separate printable pad-retention coupon body, pad, and keeper parts; the combined coupon with hardware proxies is for visual reference only. `prototype_meshes/README.md` records their scope and limits. The actuator-package proxy carries a manifold warning. The full gripper remains a multi-volume review mesh.
@@ -58,7 +59,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 - `gripper_concept_brief.md` — design rationale, task register, loads, safety and prototype gates.
 - `gripper_interface_measurements.md` — worksheet for props, loads, actuator, and vehicle inputs.
 - `mission_requirements_review.md` — Cawl's mission-source review.
-- `mechanism_design_review.md` — Faustinius's mechanism audit.
+- `mechanism_design_review.md` — Faustinius's mechanism audit plus Cawl's replacement-stop integration assessment.
 - `actuator_integration_review.md` — Scaevola's build/buy and actuator integration review.
 - `mission_update_review.md` — Ipluvien Maximal's current official resource-status and action review.
 - `cad_prototype_review.md` — Rho's CAD readiness audit and prototype blockers.
