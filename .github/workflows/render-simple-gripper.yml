@@ -1,0 +1,36 @@
+name: Render simple gripper pitch positions
+on:
+  push:
+    paths:
+      - ".github/workflows/render-simple-gripper.yml"
+      - "simple_gripper/rack_and_pinion_pitch_layout.scad"
+      - "Michelangelo Dealberti FInal Clamp Design.stl"
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install OpenSCAD renderer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb
+      - name: Render neutral, up, and down poses
+        run: |
+          for angle in -20 0 20; do
+            QT_QPA_PLATFORM=xcb xvfb-run -a openscad \
+              --imgsize=1400,1050 --viewall --autocenter --projection=o \
+              -D "tilt_angle_deg=$angle" -D "rack_travel_mm=0" \
+              -o "simple_gripper/pitch_${angle}.png" \
+              simple_gripper/rack_and_pinion_pitch_layout.scad
+          done
+      - name: Commit preview renders
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add simple_gripper/pitch_-20.png simple_gripper/pitch_0.png simple_gripper/pitch_20.png
+          git commit -m "Render gripper pitch position previews" || exit 0
+          git push
