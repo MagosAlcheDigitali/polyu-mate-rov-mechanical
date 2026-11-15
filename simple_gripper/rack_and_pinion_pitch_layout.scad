@@ -54,28 +54,32 @@ gear_angle = rack_travel_mm/pinion_rp*180/PI; // positive rack Z travel requires
 guide_z1 = coupler_z0 + rear_sign*40;
 guide_z2 = coupler_z0 + rear_sign*78;
 
-// Two-piece adjustable saddle bands clamp around the gripper body and attach
-// it to the drive/pitch cradle. Set the opening dimensions to the body section
-// at these stations; these are editable fit dimensions, not measured guarantees.
-saddle_inner_w = body_w-8;
-saddle_inner_d = body_d-8;
-saddle_wall = 5;
-saddle_band_t = 8;
-saddle_station_1 = zmin+18;
-saddle_station_2 = zmin+42;
-saddle_outer_w = saddle_inner_w+2*saddle_wall;
-saddle_outer_d = saddle_inner_d+2*saddle_wall;
+// The STL contains two long, thin parallel guide plates. Their measured
+// bounds define split clips. Confirm they are stationary before fabrication.
+guide_plate_xmin = -50.604;
+guide_plate_xmax = 7.995;
+guide_plate_y_centers = [1.300,-21.700];
+guide_plate_thickness = 2.6;
+guide_plate_cx = (guide_plate_xmin+guide_plate_xmax)/2;
+rail_clip_clearance = 0.5;
+rail_clip_inner_w = guide_plate_xmax-guide_plate_xmin+rail_clip_clearance;
+rail_clip_inner_d = guide_plate_thickness+rail_clip_clearance;
+rail_clip_wall = 3;
+rail_clip_band_t = 8;
+rail_clip_outer_w = rail_clip_inner_w+2*rail_clip_wall;
+rail_clip_outer_d = rail_clip_inner_d+2*rail_clip_wall;
+rail_clip_stations = [12,28];
 
-// Cradle spine is behind the reference mesh on +Y. It carries both rack guides,
-// the servo output datum and pitch trunnions so the drive tilts with the clamp.
-cradle_plate_y = body_cy+saddle_outer_d/2+12;
+// Rear spine stays beyond the mesh's Y maximum and supports the rail clips,
+// rack guides, servo datum and pitch trunnions as one moving cradle.
+cradle_plate_y = 20;
 cradle_plate_t = 6;
 cradle_plate_z0 = min(coupler_z0,rack_rear_z)-20;
-cradle_plate_z1 = max(zmax,saddle_station_2)+15;
+cradle_plate_z1 = max(zmax,rail_clip_stations[1])+15;
 cradle_plate_zc = (cradle_plate_z0+cradle_plate_z1)/2;
 cradle_plate_h = cradle_plate_z1-cradle_plate_z0;
 pitch_axis_z = 80;
-pitch_ear_offset = saddle_outer_w/2+12;
+pitch_ear_offset = rail_clip_outer_w/2+12;
 pitch_axis_y = cradle_plate_y+16;
 servo_plate_y = ymax+8;
 servo_plate_t = 4;
@@ -98,38 +102,37 @@ module reference_clamp() {
             import("../Michelangelo Dealberti FInal Clamp Design.stl", convexity=10);
 }
 
-// Separate halves let the printed band fit around the existing gripper.
-// Bolts along Y join the halves and squeeze the adjustable body opening.
-module saddle_half(zc, upper=true) {
+// Two-piece channel clips grip the measured guide plates at two Z stations.
+// Split bolts sit outside the plate edges; the center rod remains unobstructed.
+module rail_clip_half(yc,zc,upper=true) {
     color(upper ? [0.94,0.58,0.16] : [0.88,0.42,0.12])
     difference() {
         intersection() {
             difference() {
-                translate([body_cx,body_cy,zc])
-                    cube([saddle_outer_w,saddle_outer_d,saddle_band_t],center=true);
-                translate([body_cx,body_cy,zc])
-                    cube([saddle_inner_w,saddle_inner_d,saddle_band_t+2],center=true);
+                translate([guide_plate_cx,yc,zc])
+                    cube([rail_clip_outer_w,rail_clip_outer_d,rail_clip_band_t],center=true);
+                translate([guide_plate_cx,yc,zc])
+                    cube([rail_clip_inner_w,rail_clip_inner_d,rail_clip_band_t+2],center=true);
             }
-            translate([body_cx,body_cy+(upper?1:-1)*saddle_outer_d/4,zc])
-                cube([saddle_outer_w+2,saddle_outer_d/2,saddle_band_t+2],center=true);
+            translate([guide_plate_cx,yc+(upper?1:-1)*rail_clip_outer_d/4,zc])
+                cube([rail_clip_outer_w+2,rail_clip_outer_d/2,rail_clip_band_t+2],center=true);
         }
         for (sx=[-1,1])
-            translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),body_cy,zc])
-                y_cylinder(4.3,saddle_outer_d+2);
+            translate([guide_plate_cx+sx*(rail_clip_inner_w/2+rail_clip_wall/2),yc,zc])
+                y_cylinder(4.3,rail_clip_outer_d+2);
     }
 }
 
-module saddle_bolts(zc) {
+module rail_clip_fasteners(yc,zc) {
     color([0.20,0.22,0.24])
     for (sx=[-1,1]) {
-        translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
-                   body_cy,zc])
-            y_cylinder(4,saddle_outer_d+6);
-        translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
-                   body_cy+saddle_outer_d/2+1.5,zc])
+        translate([guide_plate_cx+sx*(rail_clip_inner_w/2+rail_clip_wall/2),yc,zc])
+            y_cylinder(4,rail_clip_outer_d+6);
+        translate([guide_plate_cx+sx*(rail_clip_inner_w/2+rail_clip_wall/2),
+                   yc+rail_clip_outer_d/2+1.5,zc])
             y_cylinder(7,3);
-        translate([body_cx+sx*(saddle_inner_w/2+saddle_wall/2),
-                   body_cy-saddle_outer_d/2-1.5,zc])
+        translate([guide_plate_cx+sx*(rail_clip_inner_w/2+rail_clip_wall/2),
+                   yc-rail_clip_outer_d/2-1.5,zc])
             difference() {
                 rotate([90,0,0]) cylinder(d=7,h=3,center=true,$fn=6);
                 y_cylinder(4.3,5);
@@ -137,22 +140,31 @@ module saddle_bolts(zc) {
     }
 }
 
-module split_saddles() {
-    for (zc=[saddle_station_1,saddle_station_2]) {
-        saddle_half(zc,false);
-        saddle_half(zc,true);
-        saddle_bolts(zc);
+module rail_clip_station(yc,zc) {
+    rail_clip_half(yc,zc,false);
+    rail_clip_half(yc,zc,true);
+    rail_clip_fasteners(yc,zc);
+    // Rear support ribs attach the clip to the spine outside the moving rod axis.
+    for (sx=[-1,1]) {
+        support_x = guide_plate_cx+sx*(rail_clip_inner_w/2+rail_clip_wall/2);
+        support_y0 = yc+rail_clip_outer_d/2;
+        support_y1 = cradle_plate_y-cradle_plate_t/2;
+        translate([support_x,(support_y0+support_y1)/2,zc])
+            cube([8,support_y1-support_y0,rail_clip_band_t],center=true);
     }
+}
+
+module rail_clamps() {
+    for (yc=guide_plate_y_centers)
+        for (zc=rail_clip_stations)
+            rail_clip_station(yc,zc);
 }
 
 module cradle_spine() {
     color([0.30,0.33,0.37])
     union() {
         translate([body_cx,cradle_plate_y,cradle_plate_zc])
-            cube([saddle_outer_w+32,cradle_plate_t,cradle_plate_h],center=true);
-        for (zc=[saddle_station_1,saddle_station_2])
-            translate([body_cx,(body_cy+saddle_outer_d/2+cradle_plate_y)/2,zc])
-                cube([saddle_outer_w,saddle_wall+cradle_plate_t,saddle_band_t],center=true);
+            cube([rail_clip_outer_w+32,cradle_plate_t,cradle_plate_h],center=true);
         // Rigid crossbar joins pitch journals to the same saddle-mounted spine.
         translate([body_cx,pitch_axis_y,pitch_axis_z])
             cube([2*pitch_ear_offset,14,16],center=true);
@@ -334,7 +346,7 @@ module pitch_control_link() {
 
 module pitch_cradle() {
     union() {
-        split_saddles();
+        rail_clamps();
         cradle_spine();
         moving_pitch_control_arm();
     }
