@@ -46,3 +46,11 @@
 - Fabrication package accepted by the team and synchronized to the public repository.
 
 Do not mark this goal complete until each gate has direct evidence. Do not power the current printed-stop design.
+
+
+## 15 November 2026 — Mesh-aligned axis and rack corrections
+
+- Updated the rack candidate centerline to X=-21.305/Y=-10.2 mm, derived from the midpoint of two matching long plates in the supplied STL.
+- Corrected rack/pinion rotation so positive rack Z motion produces the matching positive pinion rotation. Moved the near rack guide 18 mm farther from the sleeve to reduce end-stroke overlap, and defined the missing servo-side shaft-end datum/length used by the CAD.
+- Replaced the README with the standalone simple-gripper scope and removed the instruction to use a different design. Updated the fit sheet and linked component report.
+- Saddle sizes/stations, exposed rod diameter/end, and moving/fixed feature semantics remain unverified; the component report is geometric only.
