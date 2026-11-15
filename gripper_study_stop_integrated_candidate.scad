@@ -312,7 +312,7 @@ actuator_reaction_ring_flange_t = 4;
 show_guard = true;
 show_mount_plate = true;
 show_reference_bay = false; // optional 250x150x150 mm ghost envelope; enable for context only
-part_view = "assembly"; // [assembly, adapter_plate, support_yoke, bearing_set, jaw_assembly, stop_sector, rotating_stop, stop_guard, integrated_bridge, integrated_stop_clearance, stop_sector_fork_overlap, stop_bridge_fork_overlap, stop_bridge_plate_fork_overlap, stop_guard_overlap, actuator_package]
+part_view = "assembly"; // [assembly, adapter_plate, support_yoke, bearing_set, jaw_assembly, fixed_contact, fixed_pad_only, fixed_keeper_strips_only, fixed_keeper_fasteners_only, fixed_pad_thread_inserts_only, pad_coupon, pad_coupon_pair, pad_retention_coupon, pad_retention_coupon_body_only, pad_retention_coupon_pad_only, pad_retention_coupon_keepers_only, moving_jaw_body_only, moving_pad_only, moving_keeper_strips_only, moving_keeper_fasteners_only, moving_pad_thread_inserts_only, jaw_frame_overlap, pad_overlap, pivot_shaft, axial_retention, actuator_reaction_mount, stop_sector, rotating_stop, stop_guard, integrated_bridge, stop_sector_fork_overlap, stop_bridge_fork_overlap, stop_bridge_plate_fork_overlap, stop_guard_overlap, actuator_package]
 reference_bay_assumed_cm = [25,15,15]; // [length, width, height] interpreted as cm
 reference_bay_panel_t = 3; // illustrative acrylic thickness in the overlay only
 echo(str("Nominal mechanical stop range: ",stop_open_hard_limit_deg,
