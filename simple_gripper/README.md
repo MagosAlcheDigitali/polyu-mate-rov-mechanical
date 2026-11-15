@@ -1,17 +1,24 @@
-# ARCHIVED EXPERIMENT — NOT THE ACTIVE END EFFECTOR
+# Standalone simple gripper: rack drive and pitch cradle
 
-This rack-and-pinion plus pitch-cradle layout is an earlier standalone experiment around `Michelangelo Dealberti FInal Clamp Design.stl`. The active end-effector concept is the pivot jaw in the workspace-root `gripper_study.scad`. Do not use this folder's default geometry for fabrication or powered operation.
+This folder is for the simple clamp in `Michelangelo Dealberti FInal Clamp Design.stl`.
 
-## Verified audit findings — 15 November 2026
+## Mechanical connection path
 
-- OpenSCAD compilation reports an undefined `servo_output_end_y` datum in the generic servo-interface module. The servo, horn/coupler interface, and actual shaft dimensions are not selected.
-- **Cawl — rack/pinion review:** the rack rotation sign is wrong when `rear_sign = +1`; the near rack guide intersects the moving sleeve near the travel limit; and the two-guide layout does not fit within the current rack length without redesign. The gear mesh and full-stroke clearance have not been validated.
-- **Dalathrust — clamp/cradle review:** the default saddle stations at Z≈3.8 and 27.8 mm do not match the local clamp sections. Candidate stations at Z=102 and 116 mm require different contoured profiles; the monolithic STL cannot identify fixed versus moving regions or validate clearance over motion. They are packaging leads only.
-- The pitch linkage has no selected actuator, pushrod length/stroke, hard stops, or verified range. The shaft-to-servo torque connection and servo mounting pattern are not defined.
+- The rack runs beside the existing center rod. A split sleeve with two M3 screws clamps to the rod, and a solid web joins the sleeve to the rack.
+- Split saddle bands attach the clamp body to a moving cradle. The cradle spine carries the rack guides, pinion support, and servo shaft plate.
+- A cross-pin locks the pinion to the 4 mm output shaft. The shaft passes through a generic servo mounting plate and leaves an adapter stub behind it. The servo body is omitted.
+- X-axis trunnions on the cradle sit in matching fixed-yoke bearings. The gripper and rack drive tilt together.
+- A moving arm and fixed yoke lug provide pin holes for a pitch-control linkage.
 
 ## Files and controls
 
-- `rack_and_pinion_pitch_layout.scad` — parametric but unvalidated mechanism study.
-- `../Michelangelo Dealberti FInal Clamp Design.stl` — original reference mesh.
+- `rack_and_pinion_pitch_layout.scad` — parametric assembly.
+- `reference_mesh_analysis.md` — measured connected-component bounds from the supplied STL.
+- `FIT_MEASUREMENTS.md` — dimensions needed to replace the remaining assumptions.
+- `../Michelangelo Dealberti FInal Clamp Design.stl` — original reference.
 
-The parameters can still support an educational layout discussion, but no assembly fit, torque transfer, jaw stroke, pitch range, clearance, or structural performance is established. Use the root `gripper_study.scad` and its review documents for the active project direction.
+In OpenSCAD, `rack_travel_mm` moves the rack and sleeve, while `tilt_angle_deg` pitches the whole moving assembly about X. The preview controls are independent.
+
+## Fit status
+
+The rack axis now uses the midpoint between the two long guide plates measured from the STL. The rod diameter and exposed end, saddle sections/stations, pitch linkage, and moving clearances are not identified by the STL's triangle geometry. The current saddle values are only layout placeholders. See the fit sheet before making or printing parts.
