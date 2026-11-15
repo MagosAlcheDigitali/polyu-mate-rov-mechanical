@@ -5,16 +5,17 @@ Design a simple gripper mechanism around only the supplied reference mesh, `Mich
 ## Required behavior
 
 - The gripper's existing central rod slides axially to open and close the clamp.
-- A rack bar is mechanically clamped to that rod with a split sleeve and set screws. A pinion turns the rack; a rear-mounted servo connects to the pinion shaft through the mounting interface. Do not model the servo body.
-- Split saddle bands fasten the clamp body to a moving cradle. The rack guides, pinion support, and servo interface are attached to the same cradle.
-- X-axis trunnions on the moving cradle sit in a fixed pitch yoke so the complete gripper and drive tilt together.
-- Provide a moving pitch-link arm and fixed yoke anchor so a pushrod/actuator can control the pitch. Do not use a larger rotary-jaw or vehicle design as the basis.
+- A rack bar is mechanically clamped to that rod with a split sleeve and two set screws. A pinion turns the rack; a rear-mounted servo couples to the pinion shaft through a generic interface. Do not model servo bodies.
+- Split saddle bands fasten the clamp body to a moving cradle. Rack guides, pinion support, and the servo shaft interface attach to the same cradle.
+- X-axis trunnions on the moving cradle sit in matching fixed yoke bearings so the complete clamp and drive tilt together without binding.
+- Provide pin interfaces on the moving cradle and fixed yoke for a pitch actuator/linkage.
+- Keep this as a standalone simple gripper based on the supplied STL only.
 
 ## Deliverables
 
-- Parametric OpenSCAD assembly in `simple_gripper/` using the supplied STL and showing the rod sleeve-to-rack link, body saddle-to-cradle link, rack/pinion/shaft link, trunnion/yoke link, and pitch-link interfaces.
-- Design note and dated `progress.md` entry describing operation, fit assumptions, and remaining validation.
+- Parametric OpenSCAD assembly in `simple_gripper/` showing the supplied STL and the mechanical connection path from gripper rod to rack/pinion and from clamp body to moving cradle to fixed pitch yoke.
+- Design note and dated `progress.md` entries describing the connections and their remaining fit checks.
 
 ## Current status
 
-The CAD now includes each mechanical interface, with adjustable dimensions for the exposed center rod and two clamp-body saddle stations. The reference STL remains the layout basis. The rod diameter/end location and body sections at the saddle stations still need exact measurement against the mesh/physical gripper; verify those fits and the pitch linkage before fabrication.
+The CAD includes explicit mechanical connection features: split rod sleeve with radial screws and a rack side web; bolted split body saddles tied to a cradle spine; a pinion cross-pin and servo-side shaft stub; coaxial X-axis trunnions and yoke bearings; and pitch-link pin holes in the moving arm and fixed anchor. Exact rod and saddle dimensions remain adjustable until measured against the mesh/body. Inspect clearances and linkage travel before fabrication.
