@@ -57,3 +57,4 @@ Upload the complete vehicle `.step` / `.stp` assembly (or a SolidWorks Pack and 
 ## Source material
 
 The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer page](https://materovcompetition.org/explorer) were checked on 15 November 2026; the full Explorer manual and Part 1 Product Demonstration were still pending. The [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) clarify that any portion of a prop can be gripped for carrying and there is no universal 1 m square opening in 2027. The attached Floats preview is competition documentation for the separate float task; it is not an instruction to the assistant or a specification for the ROV gripper.
+
