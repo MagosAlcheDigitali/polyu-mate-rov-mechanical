@@ -1517,14 +1517,16 @@ module stop_guard_access_diagnostic() {
     echo("The split floor is modeled as two removable panels with close-fit cutouts around the existing upper bracket and right yoke cheek; check them against the full structure with stop_guard_floor_structure_clearance.");
     echo("All gaps are nominal packaging targets; assembled fit, tolerance stack, debris/probe access, water sealing, materials, and physical inspection are unverified. No inspection-compliance claim.");
     echo("Aperture numbers are nominal packaging targets only; manufacturing tolerances, tool/probe paths, retained hardware, materials, and physical inspection are unverified. No inspection-compliance claim.");
-    echo("Compile part_view=stop_guard_clearance_samples to check the guard/floor against the fork, shaft retention, stop sector, and bridge at 0/22/44 deg; empty result means no modeled solid intersection at those poses only.");
+    echo("Compile part_view=stop_guard_clearance_samples to check the guard/floor against the fork, shaft retention, stop sector, and bridge at 5-degree increments plus 22 and 44 deg; empty result means no modeled solid intersection at those sampled poses only.");
 }
 
 module stop_guard_enclosure_clearance_samples() {
-    for (sample_angle=[0,22,44]) {
+    for (sample_angle=[0:5:40]) {
         echo(str("Checking enclosure against fork and retainers at jaw angle ",sample_angle," deg"));
         stop_guard_enclosure_clearance(sample_angle);
     }
+    echo("Checking enclosure against fork and retainers at jaw angle 44 deg");
+    stop_guard_enclosure_clearance(44);
 }
 
 module stop_guard_enclosure_only() {

@@ -1,6 +1,7 @@
 # Replaceable Contact Pad Prototype Module
 
-**Assigned reviewer:** Faustinius  
+**Review origin:** Faustinius; current module update by Cawl  
+**Revision:** 16 November 2026  
 **Scope:** Contact inserts, keeper strips, their screws/inserts, and staged fit/retention tests.  
 **Status:** Prototype plan only. No profile, pad material, thread insert, fastener, retention strength, or powered operating condition is selected or qualified.
 
@@ -93,12 +94,16 @@ Until those gates are closed, mark all pad/contact results as comparative protot
 | Prop/replica ID, source, and measured contact feature | |
 | Officially permitted contact zone and confirmation source | |
 | Profile pair / pad material / supplier lot or print batch | |
-| Pad and rail dimensions after manufacture | |
-| Insert, pilot size, installation process, screw, and measured engagement | |
-| Keeper seating / fastener tightening method | |
-| Water, conditioning time, and sediment condition | |
-| Load direction, force/displacement readings, and first-slip force | |
+| Pad and rail dimensions after manufacture; instrument and resolution | |
+| Print orientation, process settings, conditioning, and visible defects | |
+| Insert part number/material, pilot diameter/depth, installation process, screw, and measured thread engagement | |
+| Keeper seating / tightening method / measured torque if available | |
+| Water type, temperature, soak/conditioning time, and sediment condition | |
+| Load direction, fixture geometry, force/displacement readings, and first-slip force | |
 | Pad movement / insert rotation / screw movement / failure mode | |
 | Prop marks, pad wear, snagging, and release result | |
 | Cycle count / service time / post-test inspection | |
-| Decision, evidence, and unresolved risks | |
+| Team-set acceptance limit, its source/owner, result, and decision | |
+| Evidence files (photos, data log, CAD revision) and unresolved risks | |
+
+Before each comparative run, the team should write the acceptance value and source into the record sheet rather than deciding after seeing which candidate performs best. Where the task instructions or sample-safe load are still unknown, mark the limit **TBD** and keep the result qualitative/unpowered; do not backfill an assumed pass criterion.

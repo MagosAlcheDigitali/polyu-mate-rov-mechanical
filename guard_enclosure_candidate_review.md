@@ -11,7 +11,7 @@ Key nominal values:
 - Radial enclosure: 92 mm OD / 84 mm ID; lid Ø100 x 2 mm.
 - Shaft passages: Ø11.8 mm; cheek port: 12.4 x 12 mm; split-panel seam: 0.4 mm.
 - Floor panels: z=10.3 to 11.8 mm. Shell flange begins at z=12.0 mm, leaving 0.2 mm nominal vertical service clearance.
-- Lower bosses: Ø6.5 mm with Ø2.5 mm pilot, 3.2 mm engagement length. Panel relief Ø7.3 mm (0.4 mm radial clearance); a Ø9 x 1 mm underside screw-head flange bears on the panel around that relief.
+- Lower bosses: Ø6.5 mm with Ø2.5 mm pilot, 3.2 mm engagement length; the reaction-rail-near station is placed at 165°. Panel relief Ø7.3 mm (0.4 mm radial clearance); a Ø9 x 1 mm underside screw-head flange bears on the panel around that relief.
 - Lid bosses: Ø8.5 mm with Ø2.5 mm pilot and 5.5 mm boss height. Placeholder screw shanks pass through the lid and into the pilots.
 - Large bracket, support, and beam reliefs depend on their matched structural members fully occupying the removed panel/wall areas. A static no-intersection check does not prove that they close every access path.
 
@@ -23,7 +23,7 @@ The screws are M3-class geometry proxies intended to self-tap into printed pilot
 
 - `assembly` and `stop_guard_enclosure_only` compiled without warnings.
 - Floor/support, floor/bearing, floor/actuator, floor/bridge, floor/shaft, aggregate floor/structure, shell/floor, and wall/support intersection outputs were empty.
-- Guard/mechanism intersections were empty at 0, 22, and 44 degrees.
+- Guard/mechanism intersections were empty at 0, 5, 10, 15, 20, 22, 25, 30, 35, 40, and 44 degrees (11 static samples).
 - Individual STL exports were nonempty: shell 2,136 facets; left panel 384; right panel 404; lid 1,456; hardware proxy 2,656.
 - Actual OpenSCAD previews were rendered for the full assembly and isolated enclosure.
 
@@ -43,3 +43,5 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - The vehicle STEP/STP assembly in millimetres is still needed to locate the end effector, mount, thrusters, cameras, and service envelope.
 - Official task props or measured faithful practice props are needed to set jaw opening, contact geometry, forces, and task coverage.
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
+
+

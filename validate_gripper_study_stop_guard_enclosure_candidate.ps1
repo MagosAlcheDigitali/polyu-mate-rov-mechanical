@@ -82,7 +82,7 @@ Test-EmptyIntersection 'stop_guard_floor_structure_clearance' 0 'floor-vs-suppor
 Test-EmptyIntersection 'stop_guard_shell_floor_clearance' 0 'shell-vs-floor'
 Test-EmptyIntersection 'stop_guard_wall_vs_support' 0 'wall-vs-support'
 # Enclosure including the split floor against all moving/fixed stop mechanisms.
-foreach ($angle in @(0,22,44)) {
+foreach ($angle in @(0,5,10,15,20,22,25,30,35,40,44)) {
     Test-EmptyIntersection 'stop_guard_enclosure_clearance' $angle ("guard-vs-mechanism-{0}" -f $angle)
 }
 
