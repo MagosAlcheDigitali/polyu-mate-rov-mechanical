@@ -51,3 +51,4 @@ After these inputs arrive, overlay SER-2031/SER-2131 and the Newton public CAD a
 ## CAD availability
 
 Blue Trail Engineering's current [Resources page](https://www.bluetrailengineering.com/resources) now lists a **Servo STEP Files Nov 2026** ZIP. Once the team chooses which servo model(s) to evaluate, use the manufacturer's STEP rather than the cylindrical placeholder to check the case, mount faces, shaft projection, connector and service path. The archive itself has not been downloaded or inspected in this workspace, and no servo model is selected. Do not assume that package dimensions alone define shaft engagement or mounting-hole locations; verify those details from the supplied CAD and current datasheet.
+
