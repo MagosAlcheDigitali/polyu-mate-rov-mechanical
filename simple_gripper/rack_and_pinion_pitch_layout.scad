@@ -27,7 +27,7 @@ rod_x = -21.305;  // midpoint of the supplied STL's two long guide plates
 rod_y = -10.2;    // midpoint between the guide-plate centerlines; verify against the rod
 existing_rod_d = 8;
 coupler_z0 = zmin+8;
-rod_coupler_od = 20;
+rod_coupler_od = 18; // 1.2 mm side clearance in the measured 20.4 mm rail gap
 rod_coupler_len = 18;
 rear_sign = -1;           // -1: rack/servo at low-Z end; +1: high-Z end
 
@@ -212,17 +212,18 @@ module rod_coupler_and_rack() {
                     cube([7,rack_h,rod_coupler_len-4],center=true);
             }
             cylinder(d=existing_rod_d+0.4,h=rod_coupler_len+2,center=true);
+            // Set-screw bores face away from the close guide-plate gap.
             for (sz=[-1,1])
-                translate([0,rod_coupler_od/2-1,sz*5])
-                    y_cylinder(3.2,12);
+                translate([-rod_coupler_od/2+0.75,0,sz*5])
+                    x_cylinder(3.2,12);
         }
         // Two modeled M3 radial screws bear on the existing rod.
         color([0.18,0.19,0.21])
         for (sz=[-1,1]) {
-            translate([rod_x,rod_y+rod_coupler_od/2-3,coupler_z+sz*5])
-                y_cylinder(3,8);
-            translate([rod_x,rod_y+rod_coupler_od/2+0.8,coupler_z+sz*5])
-                y_cylinder(5.5,1.6);
+            translate([rod_x-rod_coupler_od/2+3,rod_y,coupler_z+sz*5])
+                x_cylinder(3,8);
+            translate([rod_x-rod_coupler_od/2-0.8,rod_y,coupler_z+sz*5])
+                x_cylinder(5.5,1.6);
         }
     }
 }
