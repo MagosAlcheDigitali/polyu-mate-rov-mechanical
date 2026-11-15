@@ -197,7 +197,7 @@ module rod_coupler_and_rack() {
                 // Side web overlaps both the collar wall and rack bar, clear of the rod bore.
                 translate([(rod_coupler_od/2+rack_x-rack_w/2-rod_x)/2,0,
                            -rear_sign*2])
-                    cube([5,rack_h,rod_coupler_len-4],center=true);
+                    cube([7,rack_h,rod_coupler_len-4],center=true);
             }
             cylinder(d=existing_rod_d+0.4,h=rod_coupler_len+2,center=true);
             for (sz=[-1,1])
