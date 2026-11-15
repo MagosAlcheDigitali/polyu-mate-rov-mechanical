@@ -14,6 +14,7 @@ This folder is for the simple clamp in `Michelangelo Dealberti FInal Clamp Desig
 
 - `rack_and_pinion_pitch_layout.scad` — parametric assembly.
 - `reference_mesh_analysis.md` — measured connected-component bounds from the supplied STL.
+- [reference_mesh_projection.svg](reference_mesh_projection.svg) — three orthographic views colored by disconnected STL component.
 - `FIT_MEASUREMENTS.md` — dimensions needed to replace the remaining assumptions.
 - `../Michelangelo Dealberti FInal Clamp Design.stl` — original reference.
 
