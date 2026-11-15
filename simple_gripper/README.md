@@ -4,10 +4,10 @@ This folder is for the simple clamp in `Michelangelo Dealberti FInal Clamp Desig
 
 ## Mechanical connection path
 
-- A sleeve surrounds the candidate center-rod axis between the two long guide plates. Two M3 set screws retain the rod; a solid side web joins the sleeve to the rack bar. The rod axis and 8 mm rod diameter remain fit inputs because the STL does not label either.
-- Rack teeth face the Y-axis pinion. The rack travels along Z, so this pinion turns around Y. Its 4 mm output shaft reaches a generic rear servo mounting plate and is cross-pinned to the gear. The servo is omitted.
-- Two split saddle bands attach the clamp to a moving cradle. The cradle carries the rack guides, pinion and servo datum, so the drive tilts with the clamp.
-- X-axis trunnions support the moving cradle in the fixed pitch yoke.
+- Four split channel clips clamp the two long guide plates in the STL at Z=12 and 28 mm. Their openings use the plates' measured X span and 2.6 mm thickness. Rear ribs connect the clips to the cradle spine outside the center-rod path.
+- A sleeve surrounds the candidate center-rod axis between those guide plates. Two M3 set screws retain the rod; a solid side web joins the sleeve to the rack. The STL does not label the rod or give its diameter, so those remain fit inputs.
+- Rack teeth engage the Y-axis pinion. The rack travels along Z, so the pinion turns around Y. Its 4 mm output shaft reaches a generic rear servo mounting plate and is cross-pinned to the gear. The servo is omitted.
+- The guide-plate clips, rear spine, rack guides and pinion plate form one moving cradle. X-axis trunnions support that cradle in the fixed pitch yoke.
 - A telescoping pitch-control linkage connects a pin on the fixed yoke to a selected pin on the moving cradle arm. The actuator body is omitted; `tilt_angle_deg` moves the assembly and updates the linkage pin-to-pin length datum.
 
 ## Files and controls
@@ -22,4 +22,4 @@ In OpenSCAD, `rack_travel_mm` translates the rack and rod sleeve. `tilt_angle_de
 
 ## Fit status
 
-The default rack axis is a candidate centerline midway between the two long guide plates. The STL does not identify the rod diameter or exposed length, local body sections for the saddles, fixed versus moving clamp parts, or clear pitch-axis locations. The saddle values and actuator stroke are therefore layout placeholders. Confirm the fit sheet against editable clamp CAD or direct measurements before fabrication.
+The clip dimensions come from two measured guide-plate components, assuming they are stationary chassis rails. Confirm that assumption before printing. The rod axis is only the midpoint between these rails; the STL does not identify the rod diameter or exposed length, fixed versus moving clamp parts, or full-motion clearance. The pitch pivot and actuator travel also remain layout values. Confirm the fit sheet against editable clamp CAD or direct measurements before fabrication.
