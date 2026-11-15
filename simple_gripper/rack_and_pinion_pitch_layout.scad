@@ -355,8 +355,16 @@ module pitch_cradle() {
 module fixed_pitch_yoke() {
     color([0.25,0.27,0.30])
     union() {
-        translate([body_cx,pitch_axis_y,pitch_axis_z-82])
-            cube([2*(pitch_ear_offset+14)+20,14,10],center=true);
+        // Fixed base plate has four through-holes to bolt the pitch yoke
+        // to the vehicle-side support.
+        difference() {
+            translate([body_cx,pitch_axis_y,pitch_axis_z-82])
+                cube([2*(pitch_ear_offset+14)+20,14,10],center=true);
+            for (sx=[-1,1],sy=[-1,1])
+                translate([body_cx+sx*pitch_ear_offset,
+                           pitch_axis_y+sy*4,pitch_axis_z-82])
+                    cylinder(d=5.2,h=12,center=true);
+        }
         // Fixed pin lug for the pitch pushrod/servo linkage.
         difference() {
             translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-70])
