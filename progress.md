@@ -183,3 +183,11 @@ The provided PNG and the 25 x 15 x 15 cm ghost body assumption do not establish 
 
 - **15 November 2026 — Official Rulings clarification:** the live 2027 document says any portion of a mission prop may be gripped for carrying, dedicated carrying features are optional, there is no universal 1 m square opening all objects must pass through, and tasks may generally be performed in any order unless explicitly sequenced. It currently has no task-specific entries under Tasks 1–4 and does not resolve in-run tool changes. Updated `mission_mechanical_trial_matrix.md`, `gripper_concept_brief.md`, `gripper_interface_measurements.md`, `mission_task_map_review.md`, and `architecture_gap_review.md`: handles remain candidate contact features, not required carry points; task-operation surfaces remain distinct and must be measured. Source: [Official Rulings for the 2027 MATE ROV Competition](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub).
 
+
+
+## 15 November 2026 — Standalone simple-gripper rack drive and pitch
+
+- Re-scoped the work to the supplied `Michelangelo Dealberti FInal Clamp Design.stl` only. Added `simple_gripper/rack_and_pinion_pitch_layout.scad` and its design note.
+- The layout shows a central sliding rod with rack teeth, a rear pinion/shaft interface, guide blocks, an adjustable jaw-clevis placeholder, and an independent pitch yoke. The servo body is omitted. Rack travel and pitch angle are independent OpenSCAD preview controls.
+- The STL is stored in GitHub as a binary reference; the GitHub connector can confirm its repository path and size but does not return binary mesh geometry for re-parsing in this session. The CAD therefore retains the original STL import and exposes its placement/interface assumptions for later measurement.
+- Status: concept layout only. Confirm rod-to-moving-jaw coupling, travel, servo mounting pattern/torque, tooth fit, pivot retention, and clearances before fabrication. No print-ready or load-capacity claim.
