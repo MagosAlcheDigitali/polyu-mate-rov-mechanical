@@ -1,26 +1,28 @@
-# Standalone simple gripper: rack drive and pitch
+# Standalone simple gripper: rack drive and pitch cradle
 
-This is a standalone mechanism study based on the supplied `Michelangelo Dealberti FInal Clamp Design.stl`. It uses the clamp mesh as a reference and does not include a servo body.
+This mechanism study is based only on `Michelangelo Dealberti FInal Clamp Design.stl`. The servo body is omitted.
 
-## How it works
+## Physical connection paths
 
-The central rod and rack slide along the clamp's long axis. A pinion sits behind the clamp at the proximal end. A servo mounted behind the clamp would turn the pinion through its output shaft; the rack then moves the rod in and out. The CAD exposes the pinion shaft bore and an adjustable mounting datum, but leaves the servo itself out.
+**Open/close drive:** the rack bar sits beside the gripper's existing central sliding rod. A split sleeve goes over the exposed rod end and two modeled M3 radial screws clamp onto it. A solid side web joins that sleeve to the rack bar. The rack teeth mesh with the pinion. A modeled cross pin locks the pinion to a 4 mm shaft that reaches the generic servo mounting plate. A servo mounted behind that plate can turn the shaft; its body and exact mounting standard are intentionally not modeled.
 
-The clamp, rod guides, rack, pinion support, and their pitch trunnions move together. A separate outer yoke holds the trunnions on a transverse axis so the complete simple-gripper assembly can tilt up and down without changing the rack's actuation geometry.
+**Tilt support:** two split saddle bands clamp around the gripper body. Their bridge blocks join a long cradle spine behind the clamp. The rack guides, pinion/shaft support, and servo interface plate attach to that spine, so the drive and gripper pitch as one assembly. The spine carries two X-axis trunnions; matching fixed yoke ears support those trunnions on the same axis as the pitch rotation.
 
-## Files
+**Pitch actuation interface:** a hole row on the moving cradle arm accepts a linkage pin, and a fixed lug on the yoke accepts the other end of a pushrod or actuator linkage. Connect a pitch actuator between those points to tilt the assembly. No pitch actuator or servo body is included.
 
-- `rack_and_pinion_pitch_layout.scad` — adjustable OpenSCAD assembly layout.
-- `../Michelangelo Dealberti FInal Clamp Design.stl` — original reference mesh retained in the repository.
+## Files and controls
 
-Open the SCAD file in OpenSCAD. It imports the STL by relative path. Set `rack_travel_mm` to animate rod movement and `tilt_angle_deg` to pitch the complete gripper. They are independent preview controls.
+- `rack_and_pinion_pitch_layout.scad` — parametric assembly layout.
+- `../Michelangelo Dealberti FInal Clamp Design.stl` — original reference mesh.
 
-## Real mechanism references
+Open the SCAD file in OpenSCAD. `rack_travel_mm` moves the rack and sleeve; `tilt_angle_deg` rotates the whole clamp-and-drive cradle about the X-axis. The two controls are independent. `rear_sign` selects whether the rack/servo sits at the low-Z or high-Z end.
 
-The rack-and-pinion arrangement follows established servo-driven linear-motion layouts: a gear rack passes through guide brackets and meshes with a pinion, converting servo rotation into straight-line motion. See the [ServoCity Servo-Driven Gear Rack Kit assembly manual](https://www.servocity.com/content/user_manuals/3207-0003-0001_assembly_instructions.min.pdf) and [goBILDA linear-motion kits](https://www.gobilda.com/linear-motion-kits/).
+## Fit parameters to measure from the clamp
 
-## Adjustable assumptions and required checks
+The current source uses approximate STL bounds X = -96.27…49.27 mm, Y = -38.00…14.44 mm, Z = -14.19…175.68 mm. Before fabrication, set:
 
-The reference mesh is treated as a visual/coordinate reference. The preliminary bounds used in the source are X = -96.27 to 49.27 mm, Y = -38.00 to 14.44 mm, and Z = -14.19 to 175.68 mm; check these against the exact mesh before changing the design. The long Z direction is used as the push/pull axis in this layout.
+- `rod_x`, `rod_y`, `existing_rod_d`, `coupler_z0`, and `rear_sign` to match the actual exposed moving rod.
+- `saddle_inner_w`, `saddle_inner_d`, `saddle_station_1`, and `saddle_station_2` to match two nonmoving clamp-body sections without covering jaw travel.
+- Rack stroke, tooth clearance, pinion/servo shaft coupling, servo bolt pattern, and pitch-link length/hole choice.
 
-The rack location, rack travel, pitch pivot, guide spacing, pinion size, servo mounting pattern, and rod-to-moving-jaw clevis are editable assumptions. The clevis is shown as a simple placeholder and must be positioned to match the actual moving feature. Measure the moving jaw interface and required stroke from the physical/reference CAD before fabrication. Confirm tooth module and backlash, rod buckling/side load, gear/servo torque, pitch pivot retention, pinch clearances, and wet-use materials. No actuator sizing, strength, fit, or printability claim is made here.
+Check the saddle bands and rack clearance against the actual model, then verify jaw stroke, gear engagement/backlash, fastener access, pitch range, pin retention, and strength. This is a connected concept layout, not yet a fabrication release or load-rated design.
