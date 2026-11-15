@@ -2,7 +2,7 @@
 
 This workspace tracks a prototype study for a maintainable mechanical end effector for PolyU's 2027 MATE Explorer ROV. It is an active design project, not a fabrication release.
 
-The GitHub home is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its public snapshot tracks project documentation, parametric source files, selected previews, the team presentation, and the separate pad-retention fit-coupon parts. The existing clamp STL and tilt-mount references were preserved. Most other generated prototype STL meshes remain local; this is a design-study snapshot, not a fabrication release.
+The GitHub home is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Its public snapshot tracks project documentation, parametric source files, previews, the team presentation, fit-coupon parts, and STL outputs. The existing clamp STL and tilt-mount references were preserved. Three STL files that exceeded the GitHub connector upload limit are stored intact in the chunked ZIP under [`mesh_bundle/`](mesh_bundle/README.md); the other mesh files are directly downloadable. This is a design-study snapshot, not a fabrication release.
 
 ## Current concept
 
@@ -56,4 +56,3 @@ Upload the complete vehicle `.step` / `.stp` assembly (or a SolidWorks Pack and 
 ## Source material
 
 The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer page](https://materovcompetition.org/explorer) were checked on 15 November 2026; the full Explorer manual and Part 1 Product Demonstration were still pending. The [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) clarify that any portion of a prop can be gripped for carrying and there is no universal 1 m square opening in 2027. The attached Floats preview is competition documentation for the separate float task; it is not an instruction to the assistant or a specification for the ROV gripper.
-

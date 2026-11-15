@@ -2,7 +2,7 @@
 
 These 25 STL files were exported from `../gripper_study.scad` with OpenSCAD 2021.01 after the 15 November 2026 CAD update. Units are millimetres. Component views retain assembly coordinates, so translate and orient them as needed for an unpowered shape mockup.
 
-**Repository note (15 November 2026):** the separate [coupon body](pad_retention_coupon_body.stl), [coupon pad](pad_retention_coupon_pad.stl), and [coupon keeper strips](pad_retention_coupon_keepers.stl) are now in the public GitHub snapshot. The other 22 STL exports in this inventory remain in the local project folder. The coupons support a fit/retention trial only; no printed joint load rating is established.
+**Repository note (15 November 2026):** all 25 meshes in this inventory are available in the public GitHub repository. Most are direct STL downloads. `moving_jaw_body.stl` is restored from [`../mesh_bundle/`](../mesh_bundle/README.md) because the GitHub connector truncated its large direct blob. The three separate coupon pieces support a fit/retention trial only; no printed joint load rating is established.
 
 ## Inventory
 
@@ -45,4 +45,3 @@ The complete `../gripper_toolonly_preview.stl` assembly review mesh has 44,772 t
 - The pad thread insert dimensions are a manufacturer-based fit candidate. Print the coupon in the actual rail material and process, inspect the insert and screw fit, and measure retention before using the joint under load.
 - The `jaw_frame_overlap` and `pad_overlap` CAD views check selected discrete poses only. They do not cover tolerances, continuous motion, keepers, fasteners, props, body geometry, or deformation.
 - Do not power the integral printed stop pin. No mesh is a load-rated or final fabrication file.
-
