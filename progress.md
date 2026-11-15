@@ -54,3 +54,10 @@ Do not mark this goal complete until each gate has direct evidence. Do not power
 - Corrected rack/pinion rotation so positive rack Z motion produces the matching positive pinion rotation. Moved the near rack guide 18 mm farther from the sleeve to reduce end-stroke overlap, and defined the missing servo-side shaft-end datum/length used by the CAD.
 - Replaced the README with the standalone simple-gripper scope and removed the instruction to use a different design. Updated the fit sheet and linked component report.
 - Saddle sizes/stations, exposed rod diameter/end, and moving/fixed feature semantics remain unverified; the component report is geometric only.
+
+
+## 15 November 2026 — Component projection completed
+
+- The bounded-output GitHub Actions run completed successfully. Added `simple_gripper/reference_mesh_projection.svg`, three orthographic views color-coded by disconnected mesh component, alongside the numerical bounds report.
+- Removed the temporary analysis workflow after capturing its results.
+- No editable CAD file has appeared in the repository yet; exact moving/fixed roles, rod end, and saddle-safe stations remain open until that model or measurements are available.
