@@ -95,7 +95,7 @@ jobs:
           svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">']
           svg.append('<rect width="1120" height="430" fill="white"/>')
           svg.append('<text x="20" y="24" font-family="sans-serif" font-size="18" font-weight="bold">Supplied clamp STL — component orthographic projections</text>')
-          sample_step = max(1, count//2800)
+          sample_step = max(1, count//300)
           view_w, view_h, gap, top = 340, 350, 25, 48
           for vi,(title,ax1,ax2,depth) in enumerate(projection_defs):
               vx = 20 + vi*(view_w+gap)
@@ -121,7 +121,9 @@ jobs:
           svg.append('</svg>')
           svg_text = "".join(svg)
           print("CLAMP_SVG_B64_BEGIN")
-          print(base64.b64encode(svg_text.encode()).decode())
+          svg_b64 = base64.b64encode(svg_text.encode()).decode()
+          for pos in range(0,len(svg_b64),6000):
+              print(svg_b64[pos:pos+6000])
           print("CLAMP_SVG_B64_END")
           all_pts = [v for tri in triangles for v in tri]
           report = {
