@@ -179,7 +179,15 @@ module rod_coupler_and_rack() {
             cylinder(d=existing_rod_d+0.4,h=rod_coupler_len+2,center=true);
             for (sz=[-1,1])
                 translate([0,rod_coupler_od/2-1,sz*5])
-                    y_cylinder(3.2,rod_coupler_od+2);
+                    y_cylinder(3.2,12);
+        }
+        // Two modeled M3 radial screws bear on the existing rod.
+        color([0.18,0.19,0.21])
+        for (sz=[-1,1]) {
+            translate([rod_x,rod_y+rod_coupler_od/2-3,coupler_z+sz*5])
+                y_cylinder(3,8);
+            translate([rod_x,rod_y+rod_coupler_od/2+0.8,coupler_z+sz*5])
+                y_cylinder(5.5,1.6);
         }
     }
 }
@@ -197,26 +205,40 @@ module rack_guide(zc) {
 }
 
 module pinion_and_servo_interface() {
+    // Pinion includes a cross-pin hole so it cannot spin freely on the output shaft.
     color([0.88,0.60,0.12])
     translate(pinion_center)
         rotate([0,gear_angle,0])
             difference() {
                 union() {
                     cylinder(d=2*pinion_rp-2,h=pinion_width,center=true);
+                    cylinder(d=14,h=pinion_width+4,center=true);
                     for (a=[0:360/pinion_teeth:359])
                         rotate([0,a,0])
                             translate([pinion_rp,0,0])
                                 cube([3,pinion_width,2.2],center=true);
                 }
-                y_cylinder(4,pinion_width+2);
+                y_cylinder(4,pinion_width+6);
+                x_cylinder(3.2,18);
             }
 
-    // Shaft joins the pinion to a generic servo mounting plate (servo not modeled).
+    // Metal cross-pin locks gear to the shaft; the shaft is drilled to match.
+    color([0.18,0.19,0.21])
+    translate(pinion_center)
+        rotate([0,gear_angle,0])
+            x_cylinder(3,16);
+
+    // Shaft joins pinion to the generic servo mounting datum; servo is not modeled.
     color([0.25,0.27,0.30])
+    difference() {
         translate([pinion_center[0],
                    (pinion_center[1]+servo_plate_y)/2,
                    pinion_center[2]])
             y_cylinder(4,servo_plate_y-pinion_center[1]+2);
+        translate(pinion_center)
+            rotate([0,gear_angle,0])
+                x_cylinder(3.2,18);
+    }
 
     color([0.42,0.44,0.47])
     difference() {
