@@ -153,8 +153,8 @@ module cradle_spine() {
             translate([body_cx+s*pitch_ear_offset,
                        (cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
                 cube([12,pitch_axis_y-cradle_plate_y+14,12],center=true);
-            translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z])
-                x_cylinder(14,22);
+            translate([body_cx+s*(pitch_ear_offset+13),pitch_axis_y,pitch_axis_z])
+                x_cylinder(14,18);
         }
         // Outboard support for the pitch-link arm; it clears the gripper body.
         translate([body_cx+pitch_ear_offset-12,
@@ -292,7 +292,7 @@ module fixed_pitch_yoke() {
     color([0.25,0.27,0.30])
     union() {
         translate([body_cx,pitch_axis_y,pitch_axis_z-82])
-            cube([2*pitch_ear_offset+20,14,10],center=true);
+            cube([2*(pitch_ear_offset+14)+20,14,10],center=true);
         // Fixed pin lug for the pitch pushrod/servo linkage.
         difference() {
             translate([body_cx+pitch_ear_offset-12,pitch_axis_y,pitch_axis_z-70])
@@ -302,10 +302,10 @@ module fixed_pitch_yoke() {
         }
         for (s=[-1,1])
             difference() {
-                translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z-34])
+                translate([body_cx+s*(pitch_ear_offset+14),pitch_axis_y,pitch_axis_z-34])
                     cube([12,30,100],center=true);
                 // X-axis bearing holes are coaxial with the moving trunnions.
-                translate([body_cx+s*pitch_ear_offset,pitch_axis_y,pitch_axis_z])
+                translate([body_cx+s*(pitch_ear_offset+14),pitch_axis_y,pitch_axis_z])
                     x_cylinder(14.5,14);
             }
     }
