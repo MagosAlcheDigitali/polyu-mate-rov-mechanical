@@ -8,7 +8,7 @@ Source: `Michelangelo Dealberti FInal Clamp Design.stl` in this repository. The 
 - 29 disconnected triangle components when vertices are joined after rounding coordinates to 0.001 mm.
 - Whole-mesh bounds: X -96.265…49.270 mm, Y -38.000…14.445 mm, Z -14.192…175.678 mm.
 
-The complete component bounds and centers are in the [component inventory](reference_mesh_components.md).
+The complete component bounds and centers are in the [component inventory](reference_mesh_components.md); [cross-sections near the candidate centerline](reference_mesh_axis_sections.md) show which STL surfaces actually intersect at Z slices.
 
 Two long, thin components (1,192 triangles each) have matching X/Z bounds and sit on opposite Y sides:
 
@@ -19,7 +19,7 @@ Two long, thin components (1,192 triangles each) have matching X/Z bounds and si
 
 Their X center is -21.3045 mm. Their Y centerlines are +1.300 and -21.700 mm, with a midpoint at -10.200 mm. The parametric cradle uses the two plates for clip geometry, and uses their midpoint as a **candidate** rod axis.
 
-The full 29-component inventory does not identify a distinct long, slender component on that candidate axis. Several components' bounding boxes overlap it, but their bounds are broad and do not establish a rod or its diameter. Thus the rack sleeve is an editable interface placeholder for the moving center member; its 8 mm bore target is an assumption.
+The full 29-component inventory does not identify a distinct long, slender component on that candidate axis. The Z=0…40 mm sections show the guide-plate surfaces 10.2…11.9 mm from the candidate centerline, with no rod surface identified inside that gap. The rack sleeve is therefore an editable interface placeholder for the moving center member; its 8 mm bore target is an assumption. Its 18 mm outside diameter leaves 1.2 mm per side in the measured 20.4 mm gap, and its set screws face along -X away from the guide plates.
 
 A second pair of broad, thin components lies at:
 - X -38.397…43.311, Y 0…5, Z 36.847…92.245 mm.
