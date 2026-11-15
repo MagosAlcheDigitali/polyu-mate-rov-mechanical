@@ -19,6 +19,15 @@ This is a separate mechanism study for the clamp reference mesh `Michelangelo De
 
 The reproducible check found empty guide/rack and guide/pinion intersections for its six tested cases. It does **not** test rack/pinion tooth mesh, moving clamp collisions, pitch-link range, structural strength, actuator coupling, vehicle fit, or underwater performance.
 
+
+## Pitch position previews
+
+Generated from the parametric assembly on GitHub with the reference STL visible:
+
+| Down (-20°) | Neutral (0°) | Up (+20°) |
+|---|---|---|
+| ![Pitch down](pitch_-20.png) | ![Neutral pitch](pitch_0.png) | ![Pitch up](pitch_20.png) |
+
 ## Fit status
 
 The separate `FIT_MEASUREMENTS.md` records current assumptions and evidence. Confirm the two guide plates are fixed and obtain editable clamp CAD or direct measurements for the moving member before building. Keep this as a layout candidate; it is not a fabrication or powered-use release.
