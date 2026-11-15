@@ -22,9 +22,11 @@
 
 ## Repository and presentation
 
-- Public project repository: [MagosAlcheDigitali/polyu-mate-rov-mechanical](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Public upload was explicitly approved by the user. The vehicle concept mesh and project history are present there; local changes may still need synchronization.
+- Public project repository: [MagosAlcheDigitali/polyu-mate-rov-mechanical](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Public upload was explicitly approved by the user. The current brief/progress, README, concept, actuator, mission, interface, mesh-index, and legacy-study notes have been synchronized to `main`. A recursive tree check found 109 paths, the presentation, vehicle STL, 24 prototype-mesh STL files, and the nine-part recovery bundle for three large meshes. This is a storage check, not a fabrication-readiness claim.
 - The team presentation is `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx`; it is a status deck, not a design release.
 - `brief.md` is the current decision/requirements summary. `README.md` is the artifact index. Detailed component reports remain the source for calculations and limits.
+
+- **15 November 2026 — CAD and repository verification:** OpenSCAD 2021.01 compiled the active `gripper_study.scad` with `--hardwarnings` (exit 0; no warnings). The legacy `simple_gripper/rack_and_pinion_pitch_layout.scad` still emits an undefined `servo_output_end_y` warning; it is now clearly marked archived with Cawl and Dalathrust audit findings. Synced the current project documentation to the public repository and verified the remote tree and body-mesh blob SHA. No formal software test suite exists; compilation does not test fit, strength, or operation.
 
 ## Next design actions
 
@@ -44,11 +46,3 @@
 - Fabrication package accepted by the team and synchronized to the public repository.
 
 Do not mark this goal complete until each gate has direct evidence. Do not power the current printed-stop design.
-
-
-## 15 November 2026 — Geometry extraction from the supplied STL
-
-- Used a temporary GitHub Actions job to inspect the original binary STL without accessing the user's computer. It contains 39,086 triangles in 29 disconnected components.
-- Two matching long guide plates center at X=-21.3045 mm and midpoint Y=-10.200 mm. Updated the rack/coupler axis defaults to this candidate line (X=-21.305, Y=-10.2).
-- Added `simple_gripper/reference_mesh_analysis.md` with component bounds and caveats, and linked it from the fit sheet/README.
-- The STL does not encode fixed/moving labels or exposed-rod semantics. Exact rod diameter/end, safe saddle stations, and pitch-carriage mounting remain unverified until the editable model or dimensions arrive. The temporary SVG projection job is still being retrieved; its first oversized-log attempt was canceled and a bounded-output rerun is active.
