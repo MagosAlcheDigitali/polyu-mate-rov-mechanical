@@ -80,6 +80,49 @@ jobs:
 
           components = sorted((component_report(v) for v in groups.values()),
                               key=lambda c:c["triangles"], reverse=True)
+          # Render a compact orthographic SVG, color-coded by disconnected STL component.
+          import colorsys, base64
+          component_groups = sorted(groups.items(), key=lambda kv:len(kv[1]), reverse=True)
+          palette = []
+          for idx in range(len(component_groups)):
+              rgb = colorsys.hsv_to_rgb((idx*0.61803398875)%1,0.70,0.82)
+              palette.append("#%02x%02x%02x" % tuple(int(255*x) for x in rgb))
+          projection_defs = [
+              ("Front: X / Z",0,2,1),
+              ("Side: Y / Z",1,2,0),
+              ("Top: X / Y",0,1,2)
+          ]
+          svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430">']
+          svg.append('<rect width="1120" height="430" fill="white"/>')
+          svg.append('<text x="20" y="24" font-family="sans-serif" font-size="18" font-weight="bold">Supplied clamp STL — component orthographic projections</text>')
+          sample_step = max(1, count//2800)
+          view_w, view_h, gap, top = 340, 350, 25, 48
+          for vi,(title,ax1,ax2,depth) in enumerate(projection_defs):
+              vx = 20 + vi*(view_w+gap)
+              amin = min(v[ax1] for tri in triangles for v in tri)
+              amax = max(v[ax1] for tri in triangles for v in tri)
+              bmin = min(v[ax2] for tri in triangles for v in tri)
+              bmax = max(v[ax2] for tri in triangles for v in tri)
+              scale = min((view_w-20)/max(1e-6,amax-amin),(view_h-20)/max(1e-6,bmax-bmin))
+              ox = vx + (view_w-(amax-amin)*scale)/2
+              oy = top + (view_h-(bmax-bmin)*scale)/2
+              svg.append('<text x="%s" y="%s" font-family="sans-serif" font-size="14" font-weight="bold">%s</text>' % (vx,top-8,title))
+              svg.append('<rect x="%s" y="%s" width="%s" height="%s" fill="none" stroke="#999"/>' % (vx,top,view_w,view_h))
+              for ci,(root,tris) in enumerate(component_groups):
+                  col = palette[ci]
+                  for ti in range(0,len(tris),sample_step):
+                      tri = tris[ti]
+                      pts = []
+                      for v in tri:
+                          px = ox + (v[ax1]-amin)*scale
+                          py = oy + (bmax-v[ax2])*scale
+                          pts.append("%.1f,%.1f" % (px,py))
+                      svg.append('<polygon points="%s" fill="%s" fill-opacity="0.48" stroke="%s" stroke-width="0.22"/>' % (" ".join(pts),col,col))
+          svg.append('</svg>')
+          svg_text = "".join(svg)
+          print("CLAMP_SVG_B64_BEGIN")
+          print(base64.b64encode(svg_text.encode()).decode())
+          print("CLAMP_SVG_B64_END")
           all_pts = [v for tri in triangles for v in tri]
           report = {
               "bytes":len(data),
