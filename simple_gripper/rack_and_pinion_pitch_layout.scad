@@ -3,7 +3,7 @@
 //
 // Preview controls
 tilt_angle_deg = 0;       // complete clamp and drive cradle pitch about X
-rack_travel_mm = 0;       // rack and clamped center-rod travel, suggested +/-20
+rack_travel_mm = 0;       // rack and moving-member sleeve travel, suggested +/-20
 show_reference_mesh = true;
 show_pitch_support = true;
 show_pitch_link = true;       // pin-to-pin pitch actuator interface (actuator body omitted)
@@ -22,21 +22,22 @@ body_cy = (ymin+ymax)/2;
 body_w = xmax-xmin;
 body_d = ymax-ymin;
 
-// Existing sliding rod interface. Adjust axis, diameter and coupling end to the STL.
-rod_x = -21.305;  // midpoint of the supplied STL's two long guide plates
-rod_y = -10.2;    // midpoint between the guide-plate centerlines; verify against the rod
-existing_rod_d = 8;
-coupler_z0 = zmin+8;
+// The STL does not identify a moving rod. These are editable fit assumptions.
+// Z is the candidate travel axis, parallel to the measured guide plates.
+moving_member_x = -21.305; // midpoint of the two guide plates; verify actual member center
+moving_member_y = -10.2;   // midpoint between their centerlines; verify actual member center
+moving_member_d = 8;       // assumed diameter; replace with the actual moving member
+moving_member_coupler_z0 = zmin+8; // assumed sleeve station; set on the exposed member
 rod_coupler_od = 18; // 1.2 mm side clearance in the measured 20.4 mm rail gap
 rod_coupler_len = 18;
 rear_sign = -1;           // -1: rack/servo at low-Z end; +1: high-Z end
 
-// Rack drive. Rack sits beside the existing rod and clamps to it at the sleeve.
+// Rack drive. Rack sits beside the assumed moving member and clamps to it at the sleeve.
 rack_length = 128; // provisional extension to keep both guides on the rack at +/-20 mm travel
 rack_travel_limit = 20;
 rack_w = 10;
 rack_h = 8;
-rack_x = rod_x + existing_rod_d/2 + rack_w/2 + 2;
+rack_x = moving_member_x + moving_member_d/2 + rack_w/2 + 2;
 assert(abs(rack_travel_mm)<=rack_travel_limit, "rack_travel_mm exceeds supported preview range");
 rack_pitch = 4.712;       // module 1.5
 tooth_depth = 3.3;
@@ -51,15 +52,15 @@ rack_guide_clearance_mm = 2;
 rack_guide_distances_mm = [76,100]; // from sleeve center along the rack
 rack_guide_support_w = 4;
 rack_guide_support_clearance_mm = 1;
-coupler_z = coupler_z0 + rack_travel_mm;
-rack_rear_z = coupler_z0 + rear_sign*rack_length + rack_travel_mm;
+coupler_z = moving_member_coupler_z0 + rack_travel_mm;
+rack_rear_z = moving_member_coupler_z0 + rear_sign*rack_length + rack_travel_mm;
 rack_mid_z = (coupler_z+rack_rear_z)/2;
 pinion_center = [rack_x+rack_w/2+tooth_depth/2+pinion_rp,
-                 rod_y,
-                 coupler_z0+rear_sign*pinion_distance_mm];
+                 moving_member_y,
+                 moving_member_coupler_z0+rear_sign*pinion_distance_mm];
 gear_angle = rack_travel_mm/pinion_rp*180/PI; // positive rack Z travel requires positive pinion rotation
-guide_z1 = coupler_z0 + rear_sign*rack_guide_distances_mm[0];
-guide_z2 = coupler_z0 + rear_sign*rack_guide_distances_mm[1];
+guide_z1 = moving_member_coupler_z0 + rear_sign*rack_guide_distances_mm[0];
+guide_z2 = moving_member_coupler_z0 + rear_sign*rack_guide_distances_mm[1];
 guide_min_from_sleeve_mm = rack_travel_limit+rod_coupler_len/2
     +rack_guide_z_t/2+rack_guide_clearance_mm;
 guide_max_from_rack_tail_mm = rack_length-rack_travel_limit
@@ -98,7 +99,7 @@ rail_clip_stations = [12,28];
 // rack guides, servo datum and pitch trunnions as one moving cradle.
 cradle_plate_y = 20;
 cradle_plate_t = 6;
-cradle_plate_z0 = min(coupler_z0,rack_rear_z)-20;
+cradle_plate_z0 = min(moving_member_coupler_z0,rack_rear_z)-20;
 cradle_plate_z1 = max(zmax,rail_clip_stations[1])+15;
 cradle_plate_zc = (cradle_plate_z0+cradle_plate_z1)/2;
 cradle_plate_h = cradle_plate_z1-cradle_plate_z0;
@@ -214,10 +215,10 @@ module rod_coupler_and_rack() {
     color([0.16,0.35,0.70])
     union() {
         // Rack bar and teeth translate as one body.
-        translate([rack_x,rod_y,rack_mid_z])
+        translate([rack_x,moving_member_y,rack_mid_z])
             cube([rack_w,rack_h,rack_hi-rack_lo],center=true);
         for (z=[rack_lo:rack_pitch:rack_hi])
-            translate([rack_x+rack_w/2,rod_y,z])
+            translate([rack_x+rack_w/2,moving_member_y,z])
                 rotate([90,0,0])
                     linear_extrude(height=rack_h,center=true)
                         polygon(points=[[0,-rack_pitch/2],
@@ -225,29 +226,29 @@ module rod_coupler_and_rack() {
                                         [tooth_depth,0],
                                         [2.2,rack_pitch/2],
                                         [0,rack_pitch/2]]);
-        // Split clamp sleeve fits over the gripper's existing center rod.
+        // Split clamp sleeve fits over the intended moving member; its dimensions are editable.
         // Two radial M3 screw holes lock it; the side arm joins the rack bar.
-        translate([rod_x,rod_y,coupler_z])
+        translate([moving_member_x,moving_member_y,coupler_z])
         difference() {
             union() {
                 cylinder(d=rod_coupler_od,h=rod_coupler_len,center=true);
                 // Side web overlaps both the collar wall and rack bar, clear of the rod bore.
-                translate([(rod_coupler_od/2+rack_x-rack_w/2-rod_x)/2,0,
+                translate([(rod_coupler_od/2+rack_x-rack_w/2-moving_member_x)/2,0,
                            -rear_sign*2])
                     cube([7,rack_h,rod_coupler_len-4],center=true);
             }
-            cylinder(d=existing_rod_d+0.4,h=rod_coupler_len+2,center=true);
+            cylinder(d=moving_member_d+0.4,h=rod_coupler_len+2,center=true);
             // Set-screw bores face away from the close guide-plate gap.
             for (sz=[-1,1])
                 translate([-rod_coupler_od/2+0.75,0,sz*5])
                     x_cylinder(3.2,12);
         }
-        // Two modeled M3 radial screws bear on the existing rod.
+        // Two modeled M3 radial screws bear on the intended moving member.
         color([0.18,0.19,0.21])
         for (sz=[-1,1]) {
-            translate([rod_x-rod_coupler_od/2+3,rod_y,coupler_z+sz*5])
+            translate([moving_member_x-rod_coupler_od/2+3,moving_member_y,coupler_z+sz*5])
                 x_cylinder(3,8);
-            translate([rod_x-rod_coupler_od/2-0.8,rod_y,coupler_z+sz*5])
+            translate([moving_member_x-rod_coupler_od/2-0.8,moving_member_y,coupler_z+sz*5])
                 x_cylinder(5.5,1.6);
         }
     }
@@ -257,17 +258,17 @@ module rack_guide(zc) {
     color([0.92,0.58,0.14])
     union() {
         difference() {
-            translate([rack_x,rod_y,zc])
+            translate([rack_x,moving_member_y,zc])
                 cube([30,24,rack_guide_z_t],center=true);
             // The centered rack bar and its +X tooth profile fit within this
             // through-window; the side support stays behind the -X rack edge.
-            translate([rack_x+2,rod_y,zc])
+            translate([rack_x+2,moving_member_y,zc])
                 cube([rack_w+7,rack_h+2,rack_guide_z_t+2],center=true);
         }
         translate([rack_x-rack_w/2-rack_guide_support_clearance_mm
                    -rack_guide_support_w/2,
-                   (rod_y+cradle_plate_y)/2,zc])
-            cube([rack_guide_support_w,cradle_plate_y-rod_y,
+                   (moving_member_y+cradle_plate_y)/2,zc])
+            cube([rack_guide_support_w,cradle_plate_y-moving_member_y,
                   rack_guide_z_t-2],center=true);
     }
 }
