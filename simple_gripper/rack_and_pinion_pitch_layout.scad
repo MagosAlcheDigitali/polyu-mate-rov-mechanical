@@ -202,8 +202,18 @@ module cradle_spine() {
         // Two slim longitudinal rails replace the full-height backplate.
         for (sgn=[-1,1]) {
             support_x = guide_plate_cx+sgn*cradle_frame_rail_x_offset;
-            translate([support_x,cradle_plate_y,cradle_plate_zc])
-                cube([8,cradle_plate_t,cradle_plate_h],center=true);
+            if (sgn==1)
+                difference() {
+                    translate([support_x,cradle_plate_y,cradle_plate_zc])
+                        cube([8,cradle_plate_t,cradle_plate_h],center=true);
+                    // Clear the rear pinion-output shaft through the right cradle rail.
+                    // The Ø6.4 passage gives the Ø4 shaft 1.2 mm radial clearance.
+                    translate([pinion_center[0],cradle_plate_y,pinion_center[2]])
+                        y_cylinder(6.4,cradle_plate_t+2);
+                }
+            else
+                translate([support_x,cradle_plate_y,cradle_plate_zc])
+                    cube([8,cradle_plate_t,cradle_plate_h],center=true);
         }
 
         // Crossbars anchor both rack guides to the two open-frame rails.
