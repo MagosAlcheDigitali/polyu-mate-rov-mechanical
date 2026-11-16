@@ -27,3 +27,8 @@ Open ser_face_mount_coupon.scad. The part_view selector can be assembly, plate_o
 ## Verification
 
 OpenSCAD 2021.01 compiled the assembly, plate_only STL, and pattern_check views with --hardwarnings and zero warnings. The plate_only STL contains 3,936 parsed ASCII STL vertices and has measured bounds of 78 x 40 x 3 mm. The assembly preview was rendered at 1280 x 900 and visually checked. These checks confirm only the drawing-pattern study geometry; they do not confirm vendor STEP fit, fastener specification, structural attachment, or load capacity.
+
+## Compact same-plane bore alternative
+
+The original 78 x 40 mm plate has a 43.83 mm corner radius. If it shares a plane with the existing Ø84 mm stop-enclosure bore, its corners exceed the 42 mm bore radius by 1.83 mm. `ser_face_mount_coupon_compact.scad` is a separate 66 x 36 x 3 mm alternative with a 37.59 mm corner radius, leaving 4.41 mm nominal radial margin in that same-plane screen. It keeps the four-hole pattern and has 13.5 mm / 5 mm minimum X/Y margins from hole edge to plate edge. The same-plane assumption has not been confirmed from an assembled model; neither coupon is connected to the yoke or vehicle. See `ser_face_mount_coupon_compact_README.md` and run `validate_compact_coupon.ps1` for the alternate study.
+
