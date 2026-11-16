@@ -16,7 +16,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 
 - [`brief.md`](brief.md) — requirements, assumptions, current design decisions, completion gates, and file delivery instructions.
 - [`progress.md`](progress.md) — dated project work, reviews, verification, and open inputs.
-- [`team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx`](team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx) — team progress presentation with editable status graphs and an ordered file tour.
+- [`team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx`](team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx) — team progress presentation with editable status graphs and an ordered file tour.
 - [`gripper_concept_brief.md`](gripper_concept_brief.md) — mechanism concept, task mapping, force calculations, safety gates, and prototype sequence.
 - [`gripper_study.scad`](gripper_study.scad) — parametric geometry study.
 - [`simple_gripper/README.md`](simple_gripper/README.md) — separate rack/pinion pitch-cradle candidate around the supplied clamp STL; fit and actuator interfaces remain open.
@@ -67,6 +67,7 @@ Upload the complete vehicle `.step` / `.stp` assembly (or a SolidWorks Pack and 
 ## Source material
 
 The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer page](https://materovcompetition.org/explorer) were checked on 16 November 2026; the full Explorer manual and Part 1 Product Demonstration were still pending. The [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) clarify that any portion of a prop can be gripped for carrying and there is no universal 1 m square opening in 2027. The attached Floats preview is competition documentation for the separate float task; it is not an instruction to the assistant or a specification for the ROV gripper.
+
 
 
 

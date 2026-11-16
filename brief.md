@@ -52,7 +52,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 ## Current workspace artifacts
 
 - `README.md` — project landing page and short handoff summary.
-- `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx` — eight-slide team update with status graphs; it summarizes prototype-study progress and open validation gates.
+- `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx` — eight-slide team update with status graphs; it summarizes prototype-study progress and open validation gates.
 - `gripper_study.scad` — parametric gripper assembly study with selectable jaw-frame and pad-overlap diagnostic views; it remains schematic and unqualified.
 - `validate_gripper_study.ps1` — compile and 46-pose jaw-body/support-frame intersection check; its scope is limited and it does not qualify the mechanism.
 - `simple_gripper/rack_and_pinion_pitch_layout.scad` — separate rack/pinion and pitch-cradle layout around the supplied clamp mesh; its center-rod, servo, rail fixedness, prop fit, and load interfaces remain assumptions.
@@ -120,6 +120,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 ## User file delivery
 
 The team has supplied a whole-vehicle concept STL with stand-ins; it is stored under `vehicle_reference/` and remains visual context only. The preferred next handoff is the full vehicle STEP/STP assembly. Upload the `.step` / `.stp` directly in chat. `.x_t` also works. For SolidWorks, attach a Pack and Go ZIP containing the assembly and referenced parts. Preserve named components and millimetre scale; include the vehicle origin/front approach axis, structural members and proposed mount region, all thruster axes and guard envelopes, camera, electronics housing and removal/service space, buoyancy foam, and tether/cable routes. Add official prop CAD when it becomes available.
+
 
 
 

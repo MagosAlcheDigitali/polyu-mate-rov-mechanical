@@ -25,7 +25,7 @@
 ## Repository and presentation
 
 - Public project repository: [MagosAlcheDigitali/polyu-mate-rov-mechanical](https://github.com/MagosAlcheDigitali/polyu-mate-rov-mechanical). Public upload was explicitly approved by the user. The current brief/progress, README, concept, actuator, mission, interface, mesh-index, and clamp-study notes have been synchronized to `main`, along with the vehicle concept STL. This is a storage check, not a fabrication-readiness claim.
-- The team presentation is `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-15.pptx`; it is a status deck, not a design release.
+- The team presentation is `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx`; it is a status deck, not a design release.
 - `brief.md` is the current decision/requirements summary. `README.md` is the artifact index. Detailed component reports remain the source for calculations and limits.
 
 - **15 November 2026 — CAD and repository verification:** OpenSCAD 2021.01 compiled the main `gripper_study.scad` and the updated rack/pitch cradle source with `--hardwarnings`, without warnings. Synced the current project documentation to the public repository and verified the remote tree and body-mesh blob SHA. No formal software test suite exists; geometry checks do not test fit, strength, or operation.
@@ -68,6 +68,5 @@
 - Fabrication package accepted by the team and synchronized to the public repository.
 
 Do not mark this goal complete until each gate has direct evidence. Do not power the current printed-stop design.
-
-
+- **16 November 2026 — team presentation refreshed:** replaced the walkthrough with the current guard enclosure candidate and 11-pose static clearance evidence, corrected mission-order guidance, updated vehicle STL limits, and a step-by-step file tour. The eight-slide deck retains editable status graphs and marks the design as a study, not a fabrication release.
 
