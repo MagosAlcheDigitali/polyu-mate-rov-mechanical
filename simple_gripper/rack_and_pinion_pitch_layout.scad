@@ -101,15 +101,17 @@ assert(rod_coupler_od <= rail_inner_gap_y-2*rail_clip_clearance,
 assert(rod_coupler_od >= moving_member_d+2*min_coupler_wall,
        "Moving-member sleeve has less than the minimum radial wall thickness.");
 
-// Rear spine stays beyond the mesh's Y maximum and supports the rail clips,
-// rack guides, servo datum and pitch trunnions as one moving cradle.
+// Open rear cradle: two narrow rails join the measured guide clips,
+// rack guides, servo datum and pitch trunnions.
 cradle_plate_y = 20;
 cradle_plate_t = 6;
-cradle_plate_z0 = min(moving_member_coupler_z0,rack_rear_z)-20;
-cradle_plate_z1 = max(zmax,rail_clip_stations[1])+15;
+pitch_axis_z = 80;
+cradle_frame_rail_x_offset = rail_clip_inner_w/2+rail_clip_wall/2;
+cradle_frame_span = rail_clip_inner_w+2*rail_clip_wall+8;
+cradle_plate_z0 = min(guide_z1,guide_z2,rail_clip_stations[0])-10;
+cradle_plate_z1 = max(guide_z1,guide_z2,rail_clip_stations[1],pitch_axis_z)+10;
 cradle_plate_zc = (cradle_plate_z0+cradle_plate_z1)/2;
 cradle_plate_h = cradle_plate_z1-cradle_plate_z0;
-pitch_axis_z = 80;
 pitch_ear_offset = rail_clip_outer_w/2+12;
 pitch_axis_y = cradle_plate_y+16;
 servo_plate_y = ymax+8;
@@ -195,20 +197,30 @@ module rail_clamps() {
 module cradle_spine() {
     color([0.30,0.33,0.37])
     union() {
-        translate([body_cx,cradle_plate_y,cradle_plate_zc])
-            cube([rail_clip_outer_w+32,cradle_plate_t,cradle_plate_h],center=true);
-        // Rigid crossbar joins pitch journals to the same rail-clip-mounted spine.
+        // Two slim longitudinal rails replace the full-height backplate.
+        for (sgn=[-1,1]) {
+            support_x = guide_plate_cx+sgn*cradle_frame_rail_x_offset;
+            translate([support_x,cradle_plate_y,cradle_plate_zc])
+                cube([8,cradle_plate_t,cradle_plate_h],center=true);
+        }
+
+        // Crossbars anchor both rack guides to the two open-frame rails.
+        for (zc=[guide_z1,guide_z2])
+            translate([guide_plate_cx,cradle_plate_y,zc])
+                cube([cradle_frame_span,cradle_plate_t,rack_guide_z_t-2],center=true);
+
+        // Pivot crossbar reaches both trunnions and ties into the rear rails.
         translate([body_cx,pitch_axis_y,pitch_axis_z])
-            cube([2*pitch_ear_offset,14,16],center=true);
-        for (s=[-1,1]) {
-            // Side arms bridge the cradle spine to the separated pitch-yoke plane.
-            translate([body_cx+s*pitch_ear_offset,
-                       (cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
-                cube([12,pitch_axis_y-cradle_plate_y+14,12],center=true);
-            translate([body_cx+s*(pitch_ear_offset+13),pitch_axis_y,pitch_axis_z])
+            cube([2*(pitch_ear_offset+13),14,16],center=true);
+        for (sgn=[-1,1]) {
+            support_x = guide_plate_cx+sgn*cradle_frame_rail_x_offset;
+            translate([support_x,(cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
+                cube([8,pitch_axis_y-cradle_plate_y+14,16],center=true);
+            translate([body_cx+sgn*(pitch_ear_offset+13),pitch_axis_y,pitch_axis_z])
                 x_cylinder(14,18);
         }
-        // Outboard support for the pitch-link arm; it clears the gripper body.
+
+        // Arm support ties directly into the right cradle rail.
         translate([body_cx+pitch_ear_offset-12,
                    (cradle_plate_y+pitch_axis_y)/2,pitch_axis_z])
             cube([8,pitch_axis_y-cradle_plate_y+12,8],center=true);
