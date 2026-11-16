@@ -81,6 +81,8 @@ keeper_inner_screw_pair_spacing_mm =
     * keeper_screw_reference_y_offsets_mm[0];
 
 support_depth = 39;
+support_cheek_height = 42; // shared with the structural side-cheek CAD envelope
+support_cheek_top_z = support_cheek_height/2;
 pivot_y = support_depth + pivot_forward_offset;
 support_cross_tie_width = jaw_gap+2*jaw_thickness+18;
 grip_start_y = reach;
@@ -537,11 +539,11 @@ module support_frame() {
             // Two side cheeks transfer clamp loads back to the bolt-on plate.
             for (side=[-1,1])
                 translate([side*(jaw_gap/2 + jaw_thickness/2), support_depth/2, 0])
-                    cube([jaw_thickness, support_depth, 42], center=true);
+                    cube([jaw_thickness, support_depth, support_cheek_height], center=true);
             // Extend the left reaction rail to the fixed anvil so it is load-connected.
             translate([-jaw_gap/2-jaw_thickness/2,
                        (support_depth + grip_end_y)/2, 0])
-                cube([jaw_thickness, grip_end_y - support_depth, 42], center=true);
+                cube([jaw_thickness, grip_end_y - support_depth, support_cheek_height], center=true);
             // Fixed jaw is the left-side reaction member.
             translate([-jaw_gap/2-jaw_thickness/2, grip_center_y, 0])
                 round_box([jaw_thickness, grip_length, jaw_height], 2);
@@ -1395,11 +1397,11 @@ module stop_guard_radial_wall() {
                 cylinder(d=stop_guard_inner_d,
                          h=stop_guard_top_z-stop_guard_bottom_z+0.2,center=true);
         }
-        // Full-height radial notch receives the right support cheek. The
-        // cheek fills the lower segment; the residual side aperture above it
-        // is 12.4 x 12.0 mm nominal under the packaging target.
-        translate([0,-44,(stop_guard_bottom_z+stop_guard_top_z)/2])
-            cube([slot_w,10,stop_guard_top_z-stop_guard_bottom_z+0.4],center=true);
+        // The radial notch receives the right support cheek only through its
+        // modeled height; the radial wall continues above the cheek to close
+        // the former 12.4 x 12.0 mm side aperture.
+        translate([0,-44,(stop_guard_bottom_z+support_cheek_top_z)/2])
+            cube([slot_w,10,support_cheek_top_z-stop_guard_bottom_z+0.2],center=true);
         // The cross-tie occupies its complete notched footprint through z=15.
         // Keep the wall continuous above z=15.2 and let the beam back the notch.
         translate([-jaw_gap/2-jaw_thickness/2,
@@ -1553,8 +1555,9 @@ module stop_guard_access_diagnostic() {
     echo(str("Cross-tie relief = ",support_cross_tie_width+2*stop_guard_floor_edge_clearance,
         " x ",10+2*stop_guard_floor_edge_clearance,
         " mm around ",support_cross_tie_width," x 10 mm beam; 0.2 mm nominal edge gaps, beam top z=15 mm, wall resumes z=15.2 mm."));
-    echo(str("Radial-wall cheek port = ",12+2*stop_guard_floor_edge_clearance,
-        " x ",stop_guard_top_z-21," mm nominal above the 12 mm-wide cheek; the cheek fills its lower portion."));
+    echo(str("Radial wall resumes at z = ",support_cheek_top_z,
+        " mm, above the modeled ",support_cheek_height,
+        " mm support cheek; the former side port is closed by solid wall."));
     echo(str("Floor fastener style = ",stop_guard_floor_fastener_style,
         "; boss OD/height = ",stop_guard_floor_boss_d," x ",
         stop_guard_floor_boss_h," mm; panel boss relief = ",
