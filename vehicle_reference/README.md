@@ -2,6 +2,8 @@
 
 `vehicle_body_concept.stl` is the team's supplied concept mesh with stand-ins for the electronics box and thrusters. It is stored for preliminary envelope and collision review only.
 
+Open `vehicle_reference_preview.scad` in OpenSCAD to view the mesh. The wrapper imports the STL beside it and changes no geometry. The STL most recently re-sent by the team is byte-for-byte identical to this archived copy (SHA-256 below), so there is no duplicate file.
+
 ## Mesh inspection
 
 - Binary STL from Autodesk Fusion; 3,860 triangles; 193,084 bytes.
@@ -16,4 +18,3 @@
 Import this mesh as a non-editable reference body, align the chosen vehicle front and gripper approach axis, then check the gripper's full open/closed sweep, reach, cable route, camera line of sight, and guard clearance. Do not define mount holes or claim structural fit from a triangulated stand-in. Replace this reference with the complete `.step`/`.stp` assembly when available, including actual frame members, thrusters and guards, camera, sealed electronics housing, service path, foam, and cables.
 
 The current gripper plate pattern and body envelope remain unverified. The source STL is a concept supplied by the team and is not an official MATE mission model. It gives no basis for choosing the gripper's location or orientation: the axes, thruster keep-outs, mount datum, and service path are not explicitly identified.
-
