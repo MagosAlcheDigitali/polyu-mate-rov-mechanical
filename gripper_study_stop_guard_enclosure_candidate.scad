@@ -301,6 +301,8 @@ jaw_angle = animate_jaw
           stop_close_hard_limit_deg);
 actuator_body_d = 20;
 actuator_body_l = 45;
+show_ser203x_package_proxy = false; // [true,false] comparison overlay only; not selected actuator or fit check
+ser203x_package_rotation_deg = 0; // rotate 70 x 32 mm housing footprint about its output axis
 actuator_coupler_d = 14;
 actuator_output_shaft_d = 6; // placeholder; replace from the selected actuator drawing
 actuator_motor_shaft_engagement = 3; // placeholder; confirm vendor shaft projection and engagement
@@ -1870,13 +1872,40 @@ module actuator_reaction_mount() {
 
 module actuator_proxy() {
     // Schematic coaxial rotary-drive envelope at the jaw hinge; type/rating TBD.
-    // The forward-offset pivot clears the cheek in this envelope study. Verify
-    // the actual drive, coupling, guard, cable exit, and service path from vendor CAD.
+    // The optional vendor-dimensioned case replaces this small generic cylinder
+    // for a fit comparison. Its connector is omitted and its guard/mount are not
+    // redesigned; do not use the overlay as evidence of fit or compliance.
     motor_center_z = -jaw_height/2-actuator_axial_gap-actuator_body_l/2;
-    color([0.30,0.34,0.39]) {
-        translate([jaw_gap/2 + jaw_thickness/2, pivot_y, motor_center_z])
-            cylinder(d=actuator_body_d, h=actuator_body_l, center=true);
+    pivot_x = jaw_gap/2+jaw_thickness/2;
+    if (show_ser203x_package_proxy) {
+        echo("SER203x/SER213x dimensional envelope active: connector omitted; generic reaction mount and Ø34 shroud remain unmodified and clash with this case.");
+        translate([pivot_x,pivot_y,actuator_motor_inner_face_z-72.1])
+            rotate([0,0,ser203x_package_rotation_deg])
+                ser203x_housing_and_top_feature_proxy();
+    } else {
+        color([0.30,0.34,0.39])
+            translate([pivot_x,pivot_y,motor_center_z])
+                cylinder(d=actuator_body_d,h=actuator_body_l,center=true);
     }
+}
+
+module ser203x_housing_and_top_feature_proxy() {
+    // Inline, review-only SER-203x/SER-213x case proxy. Dimensions follow the
+    // current BTE drawing: 70 x 32 x 67 mm case, 24 mm top feature and four
+    // Ø2.9 x 16 mm top holes on a 35 x 22 mm pattern. Corner radius and top
+    // feature height are visual approximations. The moving D-shaft is supplied
+    // separately by the gripper's coupler proxy. The connector and side holes
+    // are omitted. This module makes the overlay independent of an exported STL.
+    color([0.25,0.28,0.32])
+        difference() {
+            hull()
+                for (x=[-32,32],y=[-13,13])
+                    translate([x,y,0]) cylinder(r=3,h=67);
+            for (x=[-17.5,17.5],y=[-11,11])
+                translate([x,y,51]) cylinder(d=2.9,h=16.2);
+        }
+    color([0.36,0.39,0.43])
+        translate([0,0,67]) cylinder(d=24,h=5.1);
 }
 
 module actuator_guard_half(positive_side=1) {
