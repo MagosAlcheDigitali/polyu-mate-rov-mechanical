@@ -32,7 +32,7 @@ housing_corner_radius = 3.0;
 d_flat_depth_placeholder = 0.8;
 include_top_mount_holes = true;
 include_proxy_d_flat = true;
-part_view = "package"; // [package,housing_only,top_feature_and_shaft,top_mount_pattern]
+part_view = "package"; // [package,housing_and_top_feature,housing_only,top_feature_and_shaft,top_mount_pattern]
 $fn = 64;
 
 assert(body_length > 0 && body_width > 0 && body_height > 0,
@@ -79,9 +79,13 @@ module d_shaft() {
 }
 
 module package() {
+    housing_and_top_feature();
+    color([0.72,0.74,0.77]) d_shaft();
+}
+
+module housing_and_top_feature() {
     color([0.25,0.28,0.32]) housing();
     color([0.36,0.39,0.43]) top_feature();
-    color([0.72,0.74,0.77]) d_shaft();
 }
 
 module top_mount_pattern() {
@@ -97,7 +101,9 @@ echo("Top face: four Ø2.9 x 16 mm holes on 35 x 22 mm pattern; confirm screw an
 echo("D-flat depth and corner radii are visual placeholders, not confirmed interfaces.");
 
 if (part_view == "package") package();
+else if (part_view == "housing_and_top_feature") housing_and_top_feature();
 else if (part_view == "housing_only") housing();
 else if (part_view == "top_feature_and_shaft") { top_feature(); d_shaft(); }
 else if (part_view == "top_mount_pattern") top_mount_pattern();
 else assert(false,"Unknown part_view selector");
+
