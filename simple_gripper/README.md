@@ -1,34 +1,23 @@
-# Standalone clamp drive and pitch cradle study
+# Simple gripper rack drive and pitch cradle
 
-This parametric assembly uses `Michelangelo Dealberti FInal Clamp Design.stl` as the clamp reference. The layout keeps the gripper central and adds an open rack drive and tilt cradle around it.
+This subassembly uses only `Michelangelo Dealberti FInal Clamp Design.stl` as its gripper reference. It leaves the clamp intact and adds a rack drive around the existing center member plus a pitch cradle.
 
-## Mechanism layout
+## Drive layout
 
-- Four split clips attach the cradle to two long guide-plate components in the STL at Z=12 and 28 mm. Their measured X span and 2.6 mm plate thickness are geometry inputs; the mesh does not say whether these components are fixed chassis rails.
-- A candidate Ø18 mm sleeve and two M3 set screws connect the presumed center member to a translating rack through a solid side web. The mesh does not establish that member's axis, diameter, straight engagement length, or motion.
-- The rack translates on Z and meshes with a Y-axis pinion. The pinion drives a generic 4 mm shaft with a transverse-pin proxy and a rear servo plate. No servo body, output spline, rated hub, or actual coupling is selected.
-- The rack guide layout is a collision-checked candidate: 128 mm rack; pinion center 54 mm from the sleeve datum; guide centers 76 and 100 mm from that datum; ±20 mm rack travel. A side support rib is moved clear of the rack path.
-- The clamp and drive sit in an open, two-rail X-axis pitch cradle. A pinned telescoping link connects its moving arm to the fixed yoke; the pitch actuator and required angle/stroke are not selected.
+- The connected-component measurements identify the square center member (component 5) at approximately X=-26.397 mm, Z=61.751 mm, with a 20 x 20 mm section along Y. The rack now follows this Y axis.
+- A split square saddle captures that existing member and joins directly to the rack with a side web. No replacement center rod is added.
+- The rack teeth face the pinion; rack translation is along Y and pinion/output shaft rotation is about X. A generic 4 mm output shaft and a rear mounting datum are included. The servo body is intentionally omitted.
+- Rack guides and the pinion datum attach to the cradle so the drive tilts with the clamp.
+- The clamp and drive rotate together about the X pitch axis. The vehicle side uses a fixed yoke and a pin-to-pin telescoping pitch-link proxy. No pitch actuator body is included.
 
-## Files and checks
+## Files
 
-- `rack_and_pinion_pitch_layout.scad` — parametric layout and two intersection diagnostic views.
-- `validate_rack_pitch_study.ps1` — compiles this source with hard warnings and checks rack/guide and pinion/guide intersections at -20, 0, and +20 mm travel.
-- `reference_mesh_analysis.md`, `reference_mesh_components.md`, `reference_mesh_axis_sections.md`, and `reference_mesh_projection.svg` — mesh measurements and component visualization.
-- `FIT_MEASUREMENTS.md` — inputs still needed for exact interface fit.
+- `rack_and_pinion_pitch_layout.scad` — parametric assembly. Set `rack_travel_mm` for rack motion and `tilt_angle_deg` for pitch.
+- `FIT_MEASUREMENTS.md` — mesh-derived member dimensions and remaining fit inputs.
+- `reference_mesh_components.md`, `reference_mesh_axis_sections.md`, and `reference_mesh_projection.svg` — geometry inspection records.
+- `pitch_-20.png`, `pitch_0.png`, and `pitch_20.png` — rendered down, neutral, and up pitch poses.
+- `simple_gripper_tilt_model.zip` — model source and the reference STL in the correct relative folder layout.
 
-The reproducible check found empty guide/rack and guide/pinion intersections for its six tested cases. It does **not** test rack/pinion tooth mesh, moving clamp collisions, pitch-link range, structural strength, actuator coupling, vehicle fit, or underwater performance.
+## Limits
 
-
-## Pitch position previews
-
-Generated from the parametric assembly on GitHub with the reference STL visible:
-
-| Down (-20°) | Neutral (0°) | Up (+20°) |
-|---|---|---|
-| ![Pitch down](pitch_-20.png) | ![Neutral pitch](pitch_0.png) | ![Pitch up](pitch_20.png) |
-
-## Fit status
-
-The separate `FIT_MEASUREMENTS.md` records current assumptions and evidence. Confirm the two guide plates are fixed and obtain editable clamp CAD or direct measurements for the moving member before building. Keep this as a layout candidate; it is not a fabrication or powered-use release.
-
+The supplied STL is a static mesh, so it does not encode the jaw motion. This model shows the rack and square saddle pushing/pulling the existing center member; it does not animate the internal jaw parts. The saddle bore, member direction, rack stroke, rack/pinion tooth engagement, pitch-link range, and vehicle mounting loads still need final fit checks before fabrication.

@@ -1,33 +1,26 @@
-# Simple gripper connection fit sheet
+# Simple gripper drive fit sheet
 
-Reference: `Michelangelo Dealberti FInal Clamp Design.stl` only. This sheet maps the remaining fit inputs for `rack_and_pinion_pitch_layout.scad`.
+Reference: `Michelangelo Dealberti FInal Clamp Design.stl`. The center member is already part of this gripper; the model adds a drive saddle around it and does not add a replacement rod.
 
-## Connections modeled
+## Interfaces used
 
-- Four split channel clips clamp the two long guide plates at Z=12 and 28 mm. Their openings use the STL-derived plate span (58.599 mm) and thickness (2.6 mm), with 0.5 mm total clearance. Side ribs join each clip to the rear spine while routing around the centerline.
-- An 18 mm sleeve and two M3 set screws provide an adjustable connection from the candidate moving center member to the rack through a solid side web. The sleeve outside diameter is 18 mm, leaving 1.2 mm clearance to each guide plate in the measured 20.4 mm gap. The screws face along -X, away from the plates and rack web.
-- Rack teeth engage a pinion on a common datum: rack motion is along Z and the pinion shaft axis is Y. A 2 mm cross-pin connects the pinion to the generic 4 mm rear output shaft through a 2.2 mm hole, leaving 0.9 mm shaft walls; the servo body is omitted.
-- The clips, two-rail open spine, rack-guide crossbars, servo datum and pitch trunnions form one cradle. A fixed-yoke pin and a moving-arm pin are joined by a telescoping pitch-control interface with retaining pins. `tilt_angle_deg` updates its pin-to-pin length; the actuator body is omitted.
-
-## Evidence and unresolved geometry
-
-The [component inventory](reference_mesh_components.md) lists all 29 disconnected STL components. The [axis section table](reference_mesh_axis_sections.md) shows guide-plate surfaces around the assumed centerline, but no distinct central sliding-rod surface that can establish its diameter or exposed end. The candidate centerline X=-21.3045, Y=-10.200 mm is the midpoint of the two plate centerlines, not a confirmed moving-member axis. The model assumes the member travels along Z.
-
-| SCAD parameter | Current value | Needed to finalize |
+| Interface | Model value | STL basis / status |
 |---|---:|---|
-| `moving_member_x`, `moving_member_y` | -21.305, -10.2 mm candidate | Confirm moving member centerline and axis direction |
-| `moving_member_d` | 5 mm candidate plunger | Confirm the actual center-member diameter and passage |
-| `rod_coupler_od` | 18 mm | Confirm sleeve clears guide plates and neighboring parts |
-| `moving_member_insert_length` | 92 mm candidate | Confirm the clamp-side engagement, bore, and clearance over full rack stroke |
-| `rear_sign` | -1 | Confirm which end has room for the rack and servo |
-| `rail_clip_stations` | 12, 28 mm | Confirm the two guide plates are fixed and unobstructed there |
-| `pitch_axis_z` | 80 mm | Confirm pivot location and full-angle clearance |
-| `pitch_link_pin_dz` | -32 mm | Choose moving-arm hole and actuator stroke/load |
-| `rack_length` | 128 mm candidate | Recheck cradle extent and tooth engagement after rod/stroke measurement |
-| `pinion_distance_mm` | 54 mm candidate | Verify gear location against the real clamp and servo shaft envelope |
-| `rack_guide_distances_mm` | [76, 100] mm candidate | Preserve sleeve, pinion and rack-end clearances if rack dimensions change |
-| `rack_travel_limit` | 20 mm | Measure stroke needed to open and close the clamp |
-| `tilt_angle_deg` | preview input | Specify required up/down angle and actuator travel |
+| Existing center member axis | Y | Component 5 bounds run from Y=-38.000 to +14.445 mm |
+| Center member section | 20 x 20 mm | Component 5 bounds: X=-36.397…-16.397, Z=51.751…71.751 mm |
+| Center member center | X=-26.397, Z=61.751 mm | Component 5 center |
+| Split saddle bore | 20.6 x 20.6 mm | 0.6 mm total nominal clearance; check the actual member surface |
+| Saddle outside | 28 x 28 mm | 22 mm axial length with two M3.4 clamp-bolt passages |
+| Rack motion | Y, +/-20 mm preview | Provisional travel range |
+| Pinion axis | X | Gear face lies in the Y-Z plane |
+| Pinion | module 1.5, 16 teeth | Approximate visual gear geometry |
+| Servo output datum | 4 mm shaft, servo body omitted | Confirm selected servo shaft/coupling before manufacture |
+| Pitch | +/-20 degree preview | Clamp, drive, and cradle rotate about X |
 
-The candidate 5 mm plunger extends through the central block toward the clamp input region. The STL does not identify a mating bore or which jaw parts move, so the plunger-to-jaw attachment and full-stroke clearance remain unverified. The `validate_rack_pitch_study.ps1` check only covers rack/guide and pinion/guide intersections; it does not verify the plunger path, gear tooth mesh, or jaw motion. An editable STEP/STP/native clamp model or a dimensioned drawing of the center member and moving jaw linkage is needed to finalize the mating fit and full jaw sweep.
+The rear end is assumed to be the negative-Y side. `rack_direction` in the SCAD source controls that orientation.
 
+## Model limits
+
+The STL is a static mesh and does not carry assembly motion constraints. At the neutral setting, the saddle is placed around the measured square member. Changing `rack_travel_mm` moves the rack/saddle to show drive travel, while the reference STL remains in its neutral pose; this preview does not animate the internal jaw parts.
+
+The model does not establish the exact rack stroke needed to open/close the jaws, contact pressure required at the saddle, gear tooth contact, pitch actuator selection, vehicle bolt loads, or full collision clearance. The rack, pinion, mounting datum, and saddle are layout geometry for the user's existing gripper—not a fabrication release.
