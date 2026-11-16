@@ -1,0 +1,18 @@
+Integrated SER top-mount candidate — updated guard side-port closure
+Date: 2026-11-16
+OpenSCAD: 2021.01
+Command: .\validate_gripper_study_ser203x_topmount_candidate.ps1
+
+PASS: assembly CSG compile with --hardwarnings.
+PASS: actuator_package CSG compile with --hardwarnings.
+PASS: case versus moving jaw at 0, 22, 44 degrees.
+PASS: mount versus stop/yoke has no modeled shared volume at 0, 22, 44 degrees.
+PASS: stop guard versus mechanism at 0, 22, 44 degrees.
+PASS: case versus fixed structure at 0 degrees.
+PASS: upper bearing bracket versus frame at 0 degrees.
+PASS: SER coupler versus mount shield at 0 degrees.
+PASS: stop-guard floor versus actuator at 22 degrees.
+PASS: guard radial wall versus support frame at 0 degrees; empty intersection export, zero facets.
+
+LIMIT: faceted static checks only. No continuous-motion, tolerance-stack, vendor STEP/cable, material/strength, physical access-probe, vehicle, or mission-prop validation.
+
