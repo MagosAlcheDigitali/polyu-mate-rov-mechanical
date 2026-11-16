@@ -1,6 +1,6 @@
 # Standalone clamp drive and pitch cradle study
 
-This is a separate mechanism study for the clamp reference mesh `Michelangelo Dealberti FInal Clamp Design.stl`. It is not the active pivot-jaw model in the workspace root `gripper_study.scad`.
+This parametric assembly uses `Michelangelo Dealberti FInal Clamp Design.stl` as the clamp reference and adds a rack drive, pitch cradle, and linkage interfaces.
 
 ## Mechanism layout
 
@@ -13,7 +13,7 @@ This is a separate mechanism study for the clamp reference mesh `Michelangelo De
 ## Files and checks
 
 - `rack_and_pinion_pitch_layout.scad` — parametric layout and two intersection diagnostic views.
-- `validate_rack_pitch_study.ps1` (workspace root) — compiles this source with hard warnings and checks rack/guide and pinion/guide intersections at -20, 0, and +20 mm travel.
+- `validate_rack_pitch_study.ps1` — compiles this source with hard warnings and checks rack/guide and pinion/guide intersections at -20, 0, and +20 mm travel.
 - `reference_mesh_analysis.md`, `reference_mesh_components.md`, `reference_mesh_axis_sections.md`, and `reference_mesh_projection.svg` — mesh measurements and component visualization.
 - `FIT_MEASUREMENTS.md` — inputs still needed for exact interface fit.
 
