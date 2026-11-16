@@ -22,6 +22,7 @@ The screws/inserts are M3-class geometry proxies. Pullout strength, repeated ser
 `validate_gripper_study_stop_guard_enclosure_candidate.ps1` completed with exit code 0 using OpenSCAD 2021.01 and `--hardwarnings`:
 
 - `assembly` and `stop_guard_enclosure_only` compiled without warnings. The optional captive-nut and heat-set-insert lower-floor assembly layouts also emitted CSG geometry; their physical hardware fit is not established.
+- All five `guard_fastener_test_coupon.scad` selectors (`single_joint`, `multi_coupon_bed`, `boss_carrier_print`, `panel_coupon_print`, and `fastener_proxy`) emitted nonempty CSG with `--hardwarnings`.
 - Floor/support, floor/bearing, floor/actuator, floor/bridge, floor/shaft, aggregate floor/structure, shell/floor, and wall/support intersection outputs were empty.
 - Guard/mechanism intersections were empty at 0, 5, 10, 15, 20, 22, 25, 30, 35, 40, and 44 degrees (11 static samples).
 - Individual shell, left-panel, right-panel, lid, and hardware-proxy STL exports were nonempty.
@@ -43,3 +44,6 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - The vehicle STEP/STP assembly in millimetres is still needed to locate the end effector, mount, thrusters, cameras, and service envelope.
 - Official task props or measured faithful practice props are needed to set jaw opening, contact geometry, forces, and task coverage.
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
+
+
+
