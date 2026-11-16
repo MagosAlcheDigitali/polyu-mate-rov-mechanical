@@ -11,14 +11,14 @@ Reference: `Michelangelo Dealberti FInal Clamp Design.stl` only. This sheet maps
 
 ## Evidence and unresolved geometry
 
-The [component inventory](reference_mesh_components.md) lists all 29 disconnected STL components. The [axis section table](reference_mesh_axis_sections.md) shows guide-plate surfaces around the assumed centerline, but no distinct central sliding-rod surface that can establish its diameter or exposed end. The candidate centerline X=-21.3045, Y=-10.200 mm is the midpoint of the two plate centerlines, not a confirmed rod axis.
+The [component inventory](reference_mesh_components.md) lists all 29 disconnected STL components. The [axis section table](reference_mesh_axis_sections.md) shows guide-plate surfaces around the assumed centerline, but no distinct central sliding-rod surface that can establish its diameter or exposed end. The candidate centerline X=-21.3045, Y=-10.200 mm is the midpoint of the two plate centerlines, not a confirmed moving-member axis. The model assumes the member travels along Z.
 
 | SCAD parameter | Current value | Needed to finalize |
 |---|---:|---|
-| `rod_x`, `rod_y` | -21.305, -10.2 mm candidate | Confirm moving member centerline and axis direction |
-| `existing_rod_d` | 8 mm assumption | Measure moving member diameter or cross-section |
+| `moving_member_x`, `moving_member_y` | -21.305, -10.2 mm candidate | Confirm moving member centerline and axis direction |
+| `moving_member_d` | 8 mm assumption | Measure moving member diameter or cross-section |
 | `rod_coupler_od` | 18 mm | Confirm sleeve clears guide plates and neighboring parts |
-| `coupler_z0` | `zmin+8` | Locate exposed moving-member end and confirm 18 mm straight engagement |
+| `moving_member_coupler_z0` | `zmin+8` | Locate exposed moving-member end and confirm 18 mm straight engagement |
 | `rear_sign` | -1 | Confirm which end has room for the rack and servo |
 | `rail_clip_stations` | 12, 28 mm | Confirm the two guide plates are fixed and unobstructed there |
 | `pitch_axis_z` | 80 mm | Confirm pivot location and full-angle clearance |
