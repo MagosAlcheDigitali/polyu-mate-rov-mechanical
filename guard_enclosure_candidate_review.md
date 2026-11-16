@@ -33,6 +33,11 @@ Faustinius performed a read-only DfM review of the updated floor/shell seating a
 
 QA logs, CSG and STL outputs, actual previews, and labeled earlier collision meshes are kept under `gripper_study_stop_guard_enclosure_candidate_qa/` and in the companion ZIP archive. This validates nominal static CAD geometry only. It does not validate continuous motion clearance, tolerance stacks, strength, material, hardware sourcing, sealing, physical fit, access protection, or competition compliance.
 
+### Fresh source-matched verification — 16 November 2026
+
+After a review found that the older 11-pose log set did not identify the exact latest SCAD revision, `validate_gripper_study_stop_guard_enclosure_candidate.ps1` was rerun against the current source SHA-256 `BDDA467651BCA31817A99C2111841FDBE31E669AAC775416D76AF6EBC05FFFE3`. It exited 0 under OpenSCAD 2021.01 with `--hardwarnings`: both assembly/enclosure CSG compiles passed; floor/support, bearing, actuator, bridge and shaft checks, aggregate floor/structure, shell/floor, and wall/support intersections were empty; guard/mechanism checks were empty at all 11 poses (0, 5, 10, 15, 20, 22, 25, 30, 35, 40, 44°); five component STLs exported; and assembly/enclosure PNG previews rendered. The current run outputs are in `gripper_study_stop_guard_enclosure_candidate_qa/` and the companion ZIP.
+
+The optional SER-203x package overlay is outside that validator. It was separately compiled with `--hardwarnings` and rendered as `ser203x-overlay-assembly.png`; the image continues to show the dimensional case intersecting the generic reaction ring/rails and Ø34 mm shroud. This is conflict evidence only, not a redesigned mount or vendor STEP fit. The checks are discrete static geometry only; they do not establish motion continuity, tolerance robustness, real hardware fit, strength, material suitability, access compliance, vehicle fit, or fabrication readiness.
 ## MATE requirement and limits
 
 Explorer Part 2 §3.2.6 requires gear assemblies to be fully shrouded, gives an opening criterion of less than 12.5 mm or solid covering, and says the guard is inadequate if a finger can touch the gear assembly. The 12.4 mm cheek port is nominally only 0.1 mm below that opening value. The larger reliefs rely on adjacent solids filling them. Assemble the actual actuator, coupler, retainers, fasteners, structure, and panels; inspect every seam and service state with the team safety lead/inspector. Jaw pinch protection is a separate assessment. No MATE compliance claim is made.
@@ -45,3 +50,5 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - The vehicle STEP/STP assembly in millimetres is still needed to locate the end effector, mount, thrusters, cameras, and service envelope.
 - Official task props or measured faithful practice props are needed to set jaw opening, contact geometry, forces, and task coverage.
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
+
+
