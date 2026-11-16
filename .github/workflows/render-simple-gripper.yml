@@ -27,10 +27,24 @@ jobs:
               -o "simple_gripper/pitch_${angle}.png" \
               simple_gripper/rack_and_pinion_pitch_layout.scad
           done
+      - name: Package the tilt assembly with its reference STL
+        run: |
+          package_dir="$RUNNER_TEMP/simple_gripper_tilt_model"
+          mkdir -p "$package_dir/simple_gripper"
+          cp simple_gripper/rack_and_pinion_pitch_layout.scad "$package_dir/simple_gripper/"
+          cp "Michelangelo Dealberti FInal Clamp Design.stl" "$package_dir/"
+          cat > "$package_dir/OPEN_ME.txt" <<'EOF'
+          Open simple_gripper/rack_and_pinion_pitch_layout.scad in OpenSCAD.
+          Keep the original STL at the package root; the SCAD imports it by relative path.
+          Set tilt_angle_deg to a negative or positive value to preview down/up tilt.
+          Set rack_travel_mm to move the rack and rod coupler. Servo body is omitted.
+          EOF
+          mkdir -p simple_gripper
+          (cd "$package_dir" && zip -qr "$GITHUB_WORKSPACE/simple_gripper/simple_gripper_tilt_model.zip" .)
       - name: Commit preview renders
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add simple_gripper/pitch_-20.png simple_gripper/pitch_0.png simple_gripper/pitch_20.png
-          git commit -m "Render gripper pitch position previews" || exit 0
+          git add simple_gripper/pitch_-20.png simple_gripper/pitch_0.png simple_gripper/pitch_20.png simple_gripper/simple_gripper_tilt_model.zip
+          git commit -m "Package gripper tilt model and render previews" || exit 0
           git push
