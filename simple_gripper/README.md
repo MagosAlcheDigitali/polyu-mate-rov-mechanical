@@ -1,6 +1,6 @@
 # Standalone clamp drive and pitch cradle study
 
-This parametric assembly uses `Michelangelo Dealberti FInal Clamp Design.stl` as the clamp reference and adds a rack drive, pitch cradle, and linkage interfaces.
+This parametric assembly uses `Michelangelo Dealberti FInal Clamp Design.stl` as the clamp reference. The layout keeps the gripper central and adds an open rack drive and tilt cradle around it.
 
 ## Mechanism layout
 
@@ -8,7 +8,7 @@ This parametric assembly uses `Michelangelo Dealberti FInal Clamp Design.stl` as
 - A candidate Ø18 mm sleeve and two M3 set screws connect the presumed center member to a translating rack through a solid side web. The mesh does not establish that member's axis, diameter, straight engagement length, or motion.
 - The rack translates on Z and meshes with a Y-axis pinion. The pinion drives a generic 4 mm shaft with a transverse-pin proxy and a rear servo plate. No servo body, output spline, rated hub, or actual coupling is selected.
 - The rack guide layout is a collision-checked candidate: 128 mm rack; pinion center 54 mm from the sleeve datum; guide centers 76 and 100 mm from that datum; ±20 mm rack travel. A side support rib is moved clear of the rack path.
-- The clamp and drive are carried on an X-axis pitch cradle. A telescoping pin-to-pin linkage shows a possible actuator connection; the pitch actuator and required angle/stroke are not selected.
+- The clamp and drive sit in an open, two-rail X-axis pitch cradle. A pinned telescoping link connects its moving arm to the fixed yoke; the pitch actuator and required angle/stroke are not selected.
 
 ## Files and checks
 
