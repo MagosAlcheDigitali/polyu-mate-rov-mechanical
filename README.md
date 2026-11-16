@@ -16,7 +16,7 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 
 - [`brief.md`](brief.md) — requirements, assumptions, current design decisions, completion gates, and file delivery instructions.
 - [`progress.md`](progress.md) — dated project work, reviews, verification, and open inputs.
-- [`team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx`](team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx) — team progress presentation with editable status graphs and an ordered file tour.
+- [`team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16_rev3.pptx`](team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16_rev3.pptx) — 9-slide team progress presentation with editable status graphs, an ordered file tour, and an actuator-envelope mount-clash review.
 - [`gripper_concept_brief.md`](gripper_concept_brief.md) — mechanism concept, task mapping, force calculations, safety gates, and prototype sequence.
 - [`gripper_study.scad`](gripper_study.scad) — parametric geometry study.
 - [`simple_gripper/README.md`](simple_gripper/README.md) — separate rack/pinion pitch-cradle candidate around the supplied clamp STL; fit and actuator interfaces remain open.
