@@ -16,9 +16,9 @@ The [component inventory](reference_mesh_components.md) lists all 29 disconnecte
 | SCAD parameter | Current value | Needed to finalize |
 |---|---:|---|
 | `moving_member_x`, `moving_member_y` | -21.305, -10.2 mm candidate | Confirm moving member centerline and axis direction |
-| `moving_member_d` | 8 mm assumption | Measure moving member diameter or cross-section |
+| `moving_member_d` | 5 mm candidate plunger | Confirm the actual center-member diameter and passage |
 | `rod_coupler_od` | 18 mm | Confirm sleeve clears guide plates and neighboring parts |
-| `moving_member_coupler_z0` | `zmin+8` | Locate exposed moving-member end and confirm 18 mm straight engagement |
+| `moving_member_insert_length` | 92 mm candidate | Confirm the clamp-side engagement, bore, and clearance over full rack stroke |
 | `rear_sign` | -1 | Confirm which end has room for the rack and servo |
 | `rail_clip_stations` | 12, 28 mm | Confirm the two guide plates are fixed and unobstructed there |
 | `pitch_axis_z` | 80 mm | Confirm pivot location and full-angle clearance |
@@ -29,5 +29,5 @@ The [component inventory](reference_mesh_components.md) lists all 29 disconnecte
 | `rack_travel_limit` | 20 mm | Measure stroke needed to open and close the clamp |
 | `tilt_angle_deg` | preview input | Specify required up/down angle and actuator travel |
 
-The `validate_rack_pitch_study.ps1` check reports no rack/guide or pinion/guide intersection at -20, 0, and +20 mm rack travel. It does not prove rack/pinion tooth contact, moving-clamp clearance, rail fixedness, or physical fit. An editable STEP/STP/native clamp model, or a dimensioned drawing of the moving member and rail mounting surfaces, is still needed to verify the mating fit and full jaw sweep.
+The candidate 5 mm plunger extends through the central block toward the clamp input region. The STL does not identify a mating bore or which jaw parts move, so the plunger-to-jaw attachment and full-stroke clearance remain unverified. The `validate_rack_pitch_study.ps1` check only covers rack/guide and pinion/guide intersections; it does not verify the plunger path, gear tooth mesh, or jaw motion. An editable STEP/STP/native clamp model or a dimensioned drawing of the center member and moving jaw linkage is needed to finalize the mating fit and full jaw sweep.
 
