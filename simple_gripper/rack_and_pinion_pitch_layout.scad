@@ -94,6 +94,12 @@ rail_clip_band_t = 8;
 rail_clip_outer_w = rail_clip_inner_w+2*rail_clip_wall;
 rail_clip_outer_d = rail_clip_inner_d+2*rail_clip_wall;
 rail_clip_stations = [12,28];
+rail_inner_gap_y = max(guide_plate_y_centers)-min(guide_plate_y_centers)-guide_plate_thickness;
+min_coupler_wall = 3;
+assert(rod_coupler_od <= rail_inner_gap_y-2*rail_clip_clearance,
+       "Moving-member sleeve OD does not clear the measured guide-plate gap.");
+assert(rod_coupler_od >= moving_member_d+2*min_coupler_wall,
+       "Moving-member sleeve has less than the minimum radial wall thickness.");
 
 // Rear spine stays beyond the mesh's Y maximum and supports the rail clips,
 // rack guides, servo datum and pitch trunnions as one moving cradle.
