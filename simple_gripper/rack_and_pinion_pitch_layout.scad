@@ -7,6 +7,7 @@ rack_travel_mm = 0;       // rack and moving-member sleeve travel, suggested +/-
 show_reference_mesh = true;
 show_pitch_support = true;
 show_pitch_link = true;       // pin-to-pin pitch actuator interface (actuator body omitted)
+show_candidate_moving_member = true; // STL does not include the center pushrod
 $fn = 48;
 
 // Approximate bounds for the supplied STL. Verify the central rod and body
@@ -26,8 +27,9 @@ body_d = ymax-ymin;
 // Z is the candidate travel axis, parallel to the measured guide plates.
 moving_member_x = -21.305; // midpoint of the two guide plates; verify actual member center
 moving_member_y = -10.2;   // midpoint between their centerlines; verify actual member center
-moving_member_d = 8;       // assumed diameter; replace with the actual moving member
+moving_member_d = 5;       // candidate shaft; confirm before fabrication
 moving_member_coupler_z0 = zmin+8; // assumed sleeve station; set on the exposed member
+moving_member_insert_length = 58; // reaches the central block at neutral; rack adds +/-20 mm stroke
 rod_coupler_od = 18; // 1.2 mm side clearance in the measured 20.4 mm rail gap
 rod_coupler_len = 18;
 rear_sign = -1;           // -1: rack/servo at low-Z end; +1: high-Z end
@@ -272,6 +274,18 @@ module rod_coupler_and_rack() {
     }
 }
 
+module candidate_moving_member() {
+    // The STL has no center pushrod. This editable shaft makes the rack-to-
+    // gripper connection visible and travels with the sleeve.
+    if (show_candidate_moving_member)
+        color([0.18,0.52,0.78])
+            translate([moving_member_x,moving_member_y,
+                       coupler_z+(moving_member_insert_length-rod_coupler_len/2)/2])
+                cylinder(d=moving_member_d,
+                         h=moving_member_insert_length+rod_coupler_len/2,
+                         center=true);
+}
+
 module rack_guide(zc) {
     color([0.92,0.58,0.14])
     union() {
@@ -464,6 +478,7 @@ module moving_gripper_and_drive() {
             reference_clamp();
             pitch_cradle();
             rod_coupler_and_rack();
+            candidate_moving_member();
             rack_guide(guide_z1);
             rack_guide(guide_z2);
             pinion_and_servo_interface();
