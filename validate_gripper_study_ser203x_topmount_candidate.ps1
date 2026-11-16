@@ -88,6 +88,25 @@ function Invoke-SharedInterfaceReview([int]$Angle, [string]$Name) {
     }
 }
 
+function Invoke-EmptyMeshIntersectionAllowNoVolumeWarning([string]$View, [int]$Angle, [string]$Name) {
+    $out = Join-Path $outputRoot ($Name + '.stl')
+    $args = '-D "part_view=\"' + $View + '\"" -D "jaw_angle_deg=' + $Angle +
+        '" --hardwarnings -o "' + $out + '" "' + $scad + '"'
+    $r = Invoke-OpenSCAD $args $out $Name
+    if ($r.Facets -ne 0) {
+        throw "$View has $($r.Facets) intersection facets at $Angle deg; see $out"
+    }
+    $unexpectedLog = $r.Log -replace '(?im)^WARNING: Object may not be a valid 2-manifold and may need repair!\r?\n?', ''
+    $unexpectedLog = $unexpectedLog -replace '(?im)^EXPORT-WARNING: Exported object may not be a valid 2-manifold and may need repair!?\r?\n?', ''
+    if ($unexpectedLog -match '(?im)\b(WARNING|ERROR):') {
+        throw "$View emitted an unexpected warning/error at $Angle deg.`n$($r.Log)"
+    }
+    if ($r.ExitCode -ne 0) {
+        throw "$View failed at $Angle deg. Exit=$($r.ExitCode)`n$($r.Log)"
+    }
+    Write-Output "PASS: $View has no modeled shared volume at $Angle deg (empty intersection export)."
+}
+
 Invoke-Compile 'assembly' 'assembly'
 Invoke-Compile 'actuator_package' 'actuator-package'
 
@@ -100,6 +119,7 @@ Invoke-EmptyIntersection 'ser_case_fixed_structure_interference' 0 'case-fixed-s
 Invoke-EmptyIntersection 'bearing_bracket_frame_interference' 0 'upper-bearing-seat-0'
 Invoke-EmptyIntersection 'ser_coupler_guard_interference' 0 'coupler-mount-shield-0'
 Invoke-EmptyIntersection 'stop_guard_floor_vs_actuator' 22 'floor-vs-ser-package-22'
+Invoke-EmptyMeshIntersectionAllowNoVolumeWarning 'stop_guard_wall_vs_support' 0 'cheek-port-wall-support-0'
 
-Write-Output 'LIMIT: faceted static checks only; they do not verify connector/cable fit, real vendor STEP, structural strength, MECH-008 physical access, or vehicle/prop fit.'
+Write-Output 'LIMIT: faceted static checks only; they do not verify connector/cable fit, real vendor STEP, structural strength, MECH-008 physical access, tolerances, or vehicle/prop fit.'
 
