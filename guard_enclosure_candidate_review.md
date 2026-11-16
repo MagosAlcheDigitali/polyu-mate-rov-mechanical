@@ -8,23 +8,23 @@
 
 Key nominal values:
 
-- Radial enclosure: 92 mm OD / 84 mm ID; lid Ø100 x 2 mm.
-- Shaft passages: Ø11.8 mm; cheek port: 12.4 x 12 mm; split-panel seam: 0.4 mm.
+- Radial enclosure: 92 mm OD / 84 mm ID; removable lid Ø100 x 3.2 mm. The 5.5 x 1.5 mm recessed screw-head pockets leave a nominal 1.5 mm lid web.
+- Top-lid shaft opening: Ø10 mm around the nominal Ø8 mm shaft. The removable lower-panel shaft opening remains Ø11.8 mm; cheek channel remains 12.4 mm around a nominal 12 mm cheek; split-panel seam is 0.4 mm.
 - Floor panels: z=10.3 to 11.8 mm. Shell flange begins at z=12.0 mm, leaving 0.2 mm nominal vertical service clearance.
-- Lower bosses: Ø6.5 mm with Ø2.5 mm pilot, 3.2 mm engagement length; the reaction-rail-near station is placed at 165°. Panel relief Ø7.3 mm (0.4 mm radial clearance); a Ø9 x 1 mm underside screw-head flange bears on the panel around that relief.
-- Lid bosses: Ø8.5 mm with Ø2.5 mm pilot and 5.5 mm boss height. Placeholder screw shanks pass through the lid and into the pilots.
+- Lower bosses default to Ø6.5 mm with Ø2.5 mm pilot and 3.2 mm engagement length; the reaction-rail-near station is placed at 165°. Panel relief Ø7.3 mm (0.4 mm radial clearance); a Ø9 x 1 mm underside screw-head flange bears on the panel around that relief. CAD options also model captive-nut and heat-set-insert layouts; these are alternatives, not selected hardware.
+- Lid bosses: Ø8.5 mm with a 5.5 mm boss height. The current lid option is a generic M3 heat-set-insert pocket; switchable self-tapped pilots remain a placeholder option. Verify the actual insert and screw against supplier drawings.
 - Large bracket, support, and beam reliefs depend on their matched structural members fully occupying the removed panel/wall areas. A static no-intersection check does not prove that they close every access path.
 
-The screws are M3-class geometry proxies intended to self-tap into printed pilots. Pullout strength, repeated service life, print-material suitability, corrosion resistance, and exact hardware fit are untested. Select the print material and actual screws, then test pilot coupons before relying on the joint.
+The screws/inserts are M3-class geometry proxies. Pullout strength, repeated service life, print-material suitability, corrosion resistance, and exact hardware fit are untested. `guard_fastener_test_coupon.scad` supplies a lower-joint pilot comparison (Ø2.3/2.5/2.7 mm) with separate carrier and panel exports. It does not set proof load or qualify a screw/material combination; select real hardware and define the test load from the team's design loads.
 
 ## Verification
 
 `validate_gripper_study_stop_guard_enclosure_candidate.ps1` completed with exit code 0 using OpenSCAD 2021.01 and `--hardwarnings`:
 
-- `assembly` and `stop_guard_enclosure_only` compiled without warnings.
+- `assembly` and `stop_guard_enclosure_only` compiled without warnings. The optional captive-nut and heat-set-insert lower-floor assembly layouts also emitted CSG geometry; their physical hardware fit is not established.
 - Floor/support, floor/bearing, floor/actuator, floor/bridge, floor/shaft, aggregate floor/structure, shell/floor, and wall/support intersection outputs were empty.
 - Guard/mechanism intersections were empty at 0, 5, 10, 15, 20, 22, 25, 30, 35, 40, and 44 degrees (11 static samples).
-- Individual STL exports were nonempty: shell 2,136 facets; left panel 384; right panel 404; lid 1,456; hardware proxy 2,656.
+- Individual shell, left-panel, right-panel, lid, and hardware-proxy STL exports were nonempty.
 - Actual OpenSCAD previews were rendered for the full assembly and isolated enclosure.
 
 Faustinius performed a read-only DfM review of the updated floor/shell seating and fastener layout. The geometry now separates without modeled shell/panel interference and the lower screw head bridges the panel relief. The review does not validate printed self-tapped joints or physical assembly.
@@ -43,5 +43,3 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - The vehicle STEP/STP assembly in millimetres is still needed to locate the end effector, mount, thrusters, cameras, and service envelope.
 - Official task props or measured faithful practice props are needed to set jaw opening, contact geometry, forces, and task coverage.
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
-
-

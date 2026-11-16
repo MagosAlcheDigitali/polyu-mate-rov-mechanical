@@ -253,11 +253,13 @@ stop_guard_inner_d = 84;
 stop_guard_bottom_z = 12.0; // 0.2 mm service clearance above the removable floor panels
 stop_guard_top_z = 33;
 stop_guard_window_deg = 0; // closed radial wall in this candidate; the old 62-degree moving opening is removed
-stop_guard_cap_t = 2.0;
+stop_guard_cap_t = 3.2; // leaves 1.5 mm below a 1.5 mm head recess plus 0.2 mm cutter allowance
 stop_guard_cap_outer_d = 100;
+stop_guard_lid_shaft_hole_d = 10.0; // 1 mm nominal radial clearance to the 8 mm shaft; lid only
 stop_guard_lid_screw_d = 3.0; // placeholder removable M3-class screws
 stop_guard_lid_screw_clearance_d = 3.2;
 stop_guard_thread_pilot_d = 2.5; // nominal M3 printed/self-tapping pilot; validate in the chosen material
+stop_guard_lid_fastener_style = "heat_set_insert"; // [self_tapping, heat_set_insert] placeholder; confirm insert datasheet
 stop_guard_lid_head_d = 5.5;
 stop_guard_lid_head_t = 1.5; // recessed head proxy in the lid
 stop_guard_boss_d = 8.5;
@@ -275,11 +277,17 @@ stop_guard_floor_edge_clearance = 0.2;
 stop_guard_floor_seam = 0.4;
 stop_guard_floor_mount_radius = stop_guard_floor_outer_d/2-6;
 stop_guard_floor_mount_angles = [45,135,165,315]; // shifted to clear cross-tie, bridge foot and reaction rail
-stop_guard_floor_boss_d = 6.5; // printed pilot boss; self-tapping retention remains a prototype assumption
+stop_guard_floor_fastener_style = "self_tapping"; // [self_tapping, captive_nut, heat_set_insert]; comparative prototype choice, not hardware selection
+stop_guard_floor_base_boss_h = stop_guard_bottom_z+stop_guard_bottom_flange_t-stop_guard_floor_bottom_z;
+stop_guard_floor_boss_h = stop_guard_floor_fastener_style == "heat_set_insert"
+    ? max(stop_guard_floor_base_boss_h, stop_guard_insert_length+1.5)
+    : stop_guard_floor_base_boss_h;
+stop_guard_floor_boss_top_z = stop_guard_floor_bottom_z+stop_guard_floor_boss_h;
+stop_guard_floor_boss_d = stop_guard_floor_fastener_style == "self_tapping" ? 6.5 : 8.0;
 stop_guard_floor_boss_clearance = 0.4; // radial assembly clearance to split panel
 stop_guard_floor_screw_d = 3.0;
 stop_guard_floor_screw_clearance_d = 3.2;
-stop_guard_floor_head_d = 9.0; // washer-like head flange bridges panel relief around the boss
+stop_guard_floor_head_d = stop_guard_floor_fastener_style == "self_tapping" ? 9.0 : 10.0; // bridges panel relief around the boss
 stop_guard_floor_head_t = 1.0;
 stop_guard_fastener_socket_af = 2.5; // M3-class hex key proxy; select real hardware later
 stop_guard_fastener_socket_depth = 0.7;
@@ -1160,8 +1168,9 @@ module stop_guard_shell_body() {
                                      center=true);
             }
 
-        // Four hollow pilot bosses carry removable lid screws. Thread retention
-        // is a prototype assumption and must be validated in the printed material.
+        // Four hollow bosses carry removable lid screws. The selectable insert
+        // pocket is a generic packaging proxy; verify the chosen insert and
+        // printed pilot with its supplier data and a material-specific coupon.
         for (a=[45,135,225,315])
             rotate([0,0,a])
                 translate([stop_guard_lid_screw_radius,0,
@@ -1171,22 +1180,51 @@ module stop_guard_shell_body() {
                                  center=true);
                         cylinder(d=stop_guard_thread_pilot_d,
                                  h=stop_guard_boss_h+0.2,center=true);
+                        if (stop_guard_lid_fastener_style == "heat_set_insert")
+                            translate([0,0,stop_guard_top_z
+                                          -stop_guard_insert_length/2
+                                          -(stop_guard_top_z-stop_guard_boss_h/2)])
+                                cylinder(d=stop_guard_insert_pilot_d,
+                                         h=stop_guard_insert_length+0.2,
+                                         center=true);
                     }
 
-        // Four perimeter bosses support removable split lower panels; they
-        // join the annular flange and remain outside the bridge-post radius.
+        // Four perimeter bosses support removable split lower panels. The
+        // default retains the coupon-matched 6.5/2.5/3.2 mm self-tapping
+        // geometry. Optional captive-nut or heat-set-insert styles are explicit
+        // prototype alternatives; neither is selected hardware.
         for (a=stop_guard_floor_mount_angles)
             rotate([0,0,a])
                 translate([stop_guard_floor_mount_radius,0,
-                    (stop_guard_floor_bottom_z+stop_guard_bottom_z
-                     +stop_guard_bottom_flange_t)/2])
+                    (stop_guard_floor_bottom_z+stop_guard_floor_boss_top_z)/2])
                     difference() {
                         cylinder(d=stop_guard_floor_boss_d,
-                            h=stop_guard_bottom_z+stop_guard_bottom_flange_t
-                              -stop_guard_floor_bottom_z,center=true);
-                        cylinder(d=stop_guard_thread_pilot_d,
-                            h=stop_guard_bottom_z+stop_guard_bottom_flange_t
-                              -stop_guard_floor_bottom_z+0.2,center=true);
+                                 h=stop_guard_floor_boss_h,center=true);
+                        if (stop_guard_floor_fastener_style == "self_tapping")
+                            cylinder(d=stop_guard_thread_pilot_d,
+                                     h=stop_guard_floor_boss_h+0.2,center=true);
+                        else {
+                            cylinder(d=stop_guard_floor_screw_clearance_d,
+                                     h=stop_guard_floor_boss_h+0.2,center=true);
+                            if (stop_guard_floor_fastener_style == "captive_nut")
+                                translate([0,0,
+                                    (stop_guard_floor_boss_top_z
+                                     -joint_nut_h/2)
+                                     -(stop_guard_floor_bottom_z
+                                       +stop_guard_floor_boss_h/2)])
+                                    cylinder(d=joint_nut_af/cos(30),
+                                             h=joint_nut_h+0.2,
+                                             $fn=6,center=true);
+                            else if (stop_guard_floor_fastener_style == "heat_set_insert")
+                                translate([0,0,
+                                    (stop_guard_floor_boss_top_z
+                                     -stop_guard_insert_length/2)
+                                     -(stop_guard_floor_bottom_z
+                                       +stop_guard_floor_boss_h/2)])
+                                    cylinder(d=stop_guard_insert_pilot_d,
+                                             h=stop_guard_insert_length+0.2,
+                                             center=true);
+                        }
                     }
 
     }
@@ -1273,11 +1311,10 @@ module stop_guard_lower_floor_fasteners() {
     for (a=stop_guard_floor_mount_angles) rotate([0,0,a])
         translate([stop_guard_floor_mount_radius,0,0]) {
                 translate([0,0,(stop_guard_floor_bottom_z-stop_guard_floor_head_t
-                    +stop_guard_bottom_z+stop_guard_bottom_flange_t)/2])
+                    +stop_guard_floor_boss_top_z)/2])
                     color([0.72,0.75,0.78])
                         cylinder(d=stop_guard_floor_screw_d,
-                            h=stop_guard_bottom_z+stop_guard_bottom_flange_t
-                              -stop_guard_floor_bottom_z+stop_guard_floor_head_t,
+                            h=stop_guard_floor_boss_h+stop_guard_floor_head_t,
                             center=true);
                 translate([0,0,stop_guard_floor_bottom_z-stop_guard_floor_head_t/2])
                     color([0.72,0.75,0.78])
@@ -1394,9 +1431,10 @@ module stop_guard_lid() {
             translate([0,0,stop_guard_top_z+stop_guard_cap_t/2])
                 cylinder(d=stop_guard_cap_outer_d,h=stop_guard_cap_t,
                          center=true);
-            // Central rotating-shaft aperture is a nominal 11.8 mm circle.
+            // The top cover has its own smaller shaft aperture. The lower
+            // removable floor keeps the larger washer-clearance opening.
             translate([0,0,stop_guard_top_z+stop_guard_cap_t/2])
-                cylinder(d=actuator_guard_shaft_hole_d,
+                cylinder(d=stop_guard_lid_shaft_hole_d,
                          h=stop_guard_cap_t+0.2,center=true);
             for (a=[45,135,225,315]) rotate([0,0,a]) {
                 translate([stop_guard_lid_screw_radius,0,
@@ -1473,9 +1511,11 @@ module stop_guard_access_diagnostic() {
     echo(str("Radial wall: full 360 deg; nominal annular gap to stop-sector OD = ",
              stop_guard_inner_d/2-stop_sector_od/2," mm; circumferential side seam = 0 mm nominal."));
     echo(str("Removable lid perimeter seam = 0 mm nominal; top shaft aperture = ",
-             actuator_guard_shaft_hole_d," mm; four screw passages = ",
+             stop_guard_lid_shaft_hole_d," mm; four screw passages = ",
              stop_guard_lid_screw_clearance_d," mm; counterbores = ",
-             joint_stop_head_recess_d," mm."));
+             stop_guard_lid_head_d," x ",stop_guard_lid_head_t,
+             " mm; nominal residual lid web = ",
+             stop_guard_cap_t-stop_guard_lid_head_t-0.2," mm."));
     echo(str("Split lower panels: central shaft opening = ",
         actuator_guard_shaft_hole_d," mm; panel-to-panel seam = ",
         stop_guard_floor_seam," mm nominal; outer panel edge/skirt face seam = 0 mm nominal."));
@@ -1496,15 +1536,27 @@ module stop_guard_access_diagnostic() {
         " mm around ",support_cross_tie_width," x 10 mm beam; 0.2 mm nominal edge gaps, beam top z=15 mm, wall resumes z=15.2 mm."));
     echo(str("Radial-wall cheek port = ",12+2*stop_guard_floor_edge_clearance,
         " x ",stop_guard_top_z-21," mm nominal above the 12 mm-wide cheek; the cheek fills its lower portion."));
-    echo(str("Four floor boss pilots = ",stop_guard_thread_pilot_d,
-        " mm; panel boss relief = ",stop_guard_floor_boss_d+2*stop_guard_floor_boss_clearance,
-        " mm; underside head flange = ",stop_guard_floor_head_d,
-        " mm and bears outside the relief."));
-    echo(str("Lower screw boss OD = ",stop_guard_floor_boss_d,
-        " mm; pilot engagement length = ",
-        stop_guard_bottom_z+stop_guard_bottom_flange_t-stop_guard_floor_bottom_z,
-        " mm; M3 self-tapping retention in the chosen print material must be tested."));
-    echo("Top lid is removable with four placeholder screws; countersunk access is modeled for driver access. This is a service panel, not an IP-20 acceptance test.");
+    echo(str("Floor fastener style = ",stop_guard_floor_fastener_style,
+        "; boss OD/height = ",stop_guard_floor_boss_d," x ",
+        stop_guard_floor_boss_h," mm; panel boss relief = ",
+        stop_guard_floor_boss_d+2*stop_guard_floor_boss_clearance,
+        " mm; underside head flange = ",stop_guard_floor_head_d," mm."));
+    if (stop_guard_floor_fastener_style == "self_tapping")
+        echo(str("Self-tapping pilot/nominal thread engagement = ",
+            stop_guard_thread_pilot_d," / ",stop_guard_floor_boss_h,
+            " mm; printed-plastic retention and service life are untested."));
+    else if (stop_guard_floor_fastener_style == "captive_nut")
+        echo(str("Captive-nut proxy = AF ",joint_nut_af," x ",joint_nut_h,
+            " mm; screw clearance ",stop_guard_floor_screw_clearance_d,
+            " mm. Select and verify real nut/screw dimensions and retention."));
+    else if (stop_guard_floor_fastener_style == "heat_set_insert")
+        echo(str("Heat-set insert proxy pilot/length = ",
+            stop_guard_insert_pilot_d," / ",stop_guard_insert_length,
+            " mm; verify the selected insert datasheet and test retention."));
+    echo(str("Lid fastener style = ",stop_guard_lid_fastener_style,
+        "; insert pilot/length = ",stop_guard_insert_pilot_d," / ",
+        stop_guard_insert_length," mm when enabled. No actual insert or screw is selected."));
+    echo("Top lid is removable with four placeholder screws; recessed driver access is modeled. This is a service panel, not an IP-20 acceptance test.");
     echo(str("Floor top z = ",
         stop_guard_floor_bottom_z+stop_guard_floor_t,
         " mm; lower cross-pin head bottom z = ",

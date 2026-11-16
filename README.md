@@ -38,6 +38,8 @@ The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelop
 - [`gripper_study_stop_jointed_candidate.scad`](gripper_study_stop_jointed_candidate.scad) and [`validate_gripper_study_stop_jointed_candidate.ps1`](validate_gripper_study_stop_jointed_candidate.ps1) — separate assembly study with modeled joint hardware proxies and optional D-shaft coupler. The sampled static intersections pass, but the load path, actual hardware, stop contact, guard access and vehicle fit remain unqualified. [Preview](gripper_study_stop_jointed_candidate_preview.png).
 - [`gripper_study_stop_guard_enclosure_candidate.scad`](gripper_study_stop_guard_enclosure_candidate.scad), validator, and review — separate unpowered stop-drive enclosure variant. Includes shell, split-panel, lid, and hardware STL selectors. Eleven sampled guard/mechanism poses from 0° to 44° pass static collision checks. Self-tapped retention, physical guard inspection, and tolerance coverage remain open. [Guard-only preview](gripper_study_stop_guard_enclosure_candidate_preview.png) · [Full assembly preview](gripper_study_stop_guard_enclosure_candidate_assembly_preview.png).
 - [`gripper_study_stop_guard_enclosure_candidate_qa.zip`](gripper_study_stop_guard_enclosure_candidate_qa.zip) — OpenSCAD logs, five component STL exports, rendered previews, collision results, and labeled earlier collision meshes.
+- [`gripper_study_stop_guard_enclosure_candidate.scad`](gripper_study_stop_guard_enclosure_candidate.scad), [`validate_gripper_study_stop_guard_enclosure_candidate.ps1`](validate_gripper_study_stop_guard_enclosure_candidate.ps1), and [`guard_enclosure_candidate_review.md`](guard_enclosure_candidate_review.md) — removable 360° stop enclosure and lower access panels, with sampled pose checks and explicit fit/safety limits. The lid has a 3.2 mm nominal thickness; fastener layouts are placeholders.
+- [`guard_fastener_test_coupon.scad`](guard_fastener_test_coupon.scad) — separate lower-panel pilot-size comparison coupons (Ø2.3/2.5/2.7 mm); no load or material qualification is claimed.
 - [`pivot_hardware_basis.md`](pivot_hardware_basis.md) — manufacturer-referenced 8 mm shaft/retaining-ring interface review.
 - [`mission_release_refresh.md`](mission_release_refresh.md) — current official resource status and task-source distinction.
 - [`mission_mechanical_trial_matrix.md`](mission_mechanical_trial_matrix.md) — Videx's 22-row action-to-prototype trial matrix with interface evidence, measurements, and pass criteria left open until props are known.
@@ -67,8 +69,3 @@ Upload the complete vehicle `.step` / `.stp` assembly (or a SolidWorks Pack and 
 ## Source material
 
 The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer page](https://materovcompetition.org/explorer) were checked on 16 November 2026; the full Explorer manual and Part 1 Product Demonstration were still pending. The [Official Rulings](https://docs.google.com/document/d/e/2PACX-1vS-i5t8yrwIYMjHzpS6sSYyuG8_quCGhyDMnxPqG2eDmI6QacK08fTVS2_VQF-d1vfjA7ydJgbu4itI/pub) clarify that any portion of a prop can be gripped for carrying and there is no universal 1 m square opening in 2027. The attached Floats preview is competition documentation for the separate float task; it is not an instruction to the assistant or a specification for the ROV gripper.
-
-
-
-
-
