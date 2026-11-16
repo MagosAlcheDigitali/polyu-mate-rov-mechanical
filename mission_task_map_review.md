@@ -10,6 +10,8 @@ As rechecked on 16 November 2026, MATE's 2027 page marks the Explorer Full Compe
 
 The supplied Floats Preview concerns Task 3 and does not specify the ROV gripper. The mechanical manipulator review here concerns the Task 1 and 2 product-demonstration actions.
 
+**Official-source recheck — 16 November 2026 (Dalathrust):** the MATE 2027 season page still lists the Explorer full manual and Part 1 Product Demonstration as pending. The public briefing still supports the Task 1–2 manipulation actions in this table; the separate Floats preview is Task 3 and must remain outside the gripper requirements. No task-map correction was identified. Prop dimensions, grasp points, insertion/removal forces, travel, connector details, and squeeze limits remain unspecified.
+
 ## Action-to-mechanism coverage
 
 | Published ROV action | Mechanical mode inferred for prototyping | Current concept evidence / gap |
@@ -66,3 +68,4 @@ Ranks 1–5 belong in the prop trial and interface worksheet; rank 6 requires th
 ## Review conclusion
 
 The current pivot jaw remains a testable core, not a fully demonstrated all-task end effector. The highest-value next evidence is the prop interface set and a force/travel characterization, followed by a one-installed-configuration run rehearsal subject to the final task-order rules. The body STEP/STP assembly is separately required to check approach corridor, thruster/camera clearance, service access, and structural reaction path. The pending Part 1/manual and unavailable prop build/CAD links prevent final tip geometry, jaw range, or actuator sizing from being responsibly frozen.
+
