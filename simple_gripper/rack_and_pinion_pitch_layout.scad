@@ -128,6 +128,9 @@ pitch_link_rod_d = 6;
 pitch_pin_d = 4;
 pitch_link_sleeve_fraction = 0.62;
 pinion_cross_pin_d = 2;   // leaves a usable wall through the 4 mm output shaft
+servo_output_shaft_d = 4;
+shaft_clearance = 1.2;
+cradle_shaft_passage_d = servo_output_shaft_d + 2*shaft_clearance;
 
 module x_cylinder(d,h) { rotate([0,90,0]) cylinder(d=d,h=h,center=true); }
 module y_cylinder(d,h) { rotate([90,0,0]) cylinder(d=d,h=h,center=true); }
@@ -209,7 +212,7 @@ module cradle_spine() {
                     // Clear the rear pinion-output shaft through the right cradle rail.
                     // The Ø6.4 passage gives the Ø4 shaft 1.2 mm radial clearance.
                     translate([pinion_center[0],cradle_plate_y,pinion_center[2]])
-                        y_cylinder(6.4,cradle_plate_t+2);
+                        y_cylinder(cradle_shaft_passage_d,cradle_plate_t+2);
                 }
             else
                 translate([support_x,cradle_plate_y,cradle_plate_zc])
@@ -350,7 +353,7 @@ module pinion_and_servo_interface() {
                             translate([pinion_rp,0,0])
                                 cube([3,pinion_width,2.2],center=true);
                 }
-                y_cylinder(4,pinion_width+6);
+                y_cylinder(servo_output_shaft_d,pinion_width+6);
                 x_cylinder(pinion_cross_pin_d+0.2,18);
             }
 
@@ -366,7 +369,7 @@ module pinion_and_servo_interface() {
         translate([pinion_center[0],
                    (pinion_center[1]+servo_output_end_y)/2,
                    pinion_center[2]])
-            y_cylinder(4,shaft_len);
+            y_cylinder(servo_output_shaft_d,shaft_len);
         translate(pinion_center)
             rotate([0,gear_angle,0])
                 x_cylinder(pinion_cross_pin_d+0.2,18);
@@ -377,7 +380,7 @@ module pinion_and_servo_interface() {
         translate([pinion_center[0],servo_plate_y,pinion_center[2]])
             cube([36,servo_plate_t,34],center=true);
         translate([pinion_center[0],servo_plate_y,pinion_center[2]])
-            y_cylinder(6,servo_plate_t+2);
+            y_cylinder(servo_output_shaft_d+2*shaft_clearance,servo_plate_t+2);
         for (dx=[-1,1],dz=[-1,1])
             translate([pinion_center[0]+dx*servo_mount_hole_dx,
                        servo_plate_y,pinion_center[2]+dz*servo_mount_hole_dz])
