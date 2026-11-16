@@ -85,3 +85,12 @@ The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer
 
 The isolated actuator_face_mount_study folder contains a 78 x 40 x 3 mm plate coupon and preview for the SER-203x/SER-213x face pattern. It checks only drawing-based hole and center-feature clearances; the fastener choices are provisional, and the plate has no yoke, vehicle, or hard-stop connection. It is not a load-rated mount.
 The optional SER overlay in the current gripper candidate now reports 139.1 mm total Z study envelope when enabled, reflecting the 72.1 mm actuator case drop. This remains a package estimate; the generic reaction mount and shroud visibly clash with the case.
+
+## Compact SER face-mount fit study
+
+`actuator_face_mount_study/ser_face_mount_coupon_compact.scad` adds a 66 x 36 x 3 mm alternative for the same 35 x 22 mm drawing-based hole pattern. The compact plate keeps its rectangular corners inside a hypothetical coplanar Ø84 mm bore with a nominal 4.41 mm radial margin. This is a geometry screen only; axial alignment to that bore and connection to the yoke are not established. See the [compact coupon notes](actuator_face_mount_study/ser_face_mount_coupon_compact_README.md); `validate_compact_coupon.ps1` regenerates the STL and preview locally.
+
+## SER top-face mount architecture
+
+The separate [top-face architecture study](actuator_face_mount_study/ser203x_topmount_architecture_README.md) rotates the case 90°, uses the top screw pattern for servo torque reaction, routes the mount through four posts into a widened bearing bridge, and guards only the exposed coupler. It is an isolated packaging concept, not integrated with the full gripper or the team's vehicle. `validate_ser203x_topmount_architecture.ps1` checks the source and regenerates its preview and component study meshes locally.
+
