@@ -53,3 +53,10 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
 
 
+
+## Integrated SER candidate side-port closure
+
+A focused safety review found that the candidate's support-cheek notch extended to the top of the stop enclosure, leaving a nominal 12.4 x 12 mm gap above the modeled 42 mm cheek. The integrated candidate now cuts only the wall segment occupied by the cheek; the wall resumes at z=21 mm, above the cheek. The lower 12.4 mm installation channel (12 mm cheek plus 0.2 mm clearance on each side) remains. This removes the large nominal side port in CAD but leaves close-fit seams and service-state openings to inspect physically.
+
+The first shortened-notch trial placed the cutter at the old full-wall center; it intersected support solids (28 facets) and was rejected. The corrected cutter is centered on the interval from the guard floor to the modeled cheek top. OpenSCAD 2021.01 `--hardwarnings` exported `stop_guard_wall_vs_support` with exit 0 and zero intersection facets. Empty STL exports may emit OpenSCAD's generic non-manifold warning; the integrated candidate validator's new specialized check allows only those known empty-export warning lines when facet count is zero. The full candidate validation passed after this revision: both CSG compiles, sampled case/jaw, mount/yoke and guard/mechanism checks at 0°, 22°, and 44°, plus the case/fixed-structure, bearing/frame, coupler/guard, floor/actuator and wall/support checks. No physical probe/access result or compliance claim follows from the mesh check.
+
