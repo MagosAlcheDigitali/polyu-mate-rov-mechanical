@@ -54,7 +54,7 @@ The nominal Ø8 mm pivot-groove study now uses the Rotor Clip DSH-8 DIN 471 refe
 ## Current workspace artifacts
 
 - `README.md` — project landing page and short handoff summary.
-- `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16.pptx` — eight-slide team update with status graphs; it summarizes prototype-study progress and open validation gates.
+- `team_update/PolyU_MATE_ROV_End_Effector_Progress_2026-11-16_rev3.pptx` — nine-slide team update with editable status graphs, ordered file tour, and SER envelope clash review; it summarizes prototype-study progress and open validation gates.
 - `gripper_study.scad` — parametric gripper assembly study with selectable jaw-frame and pad-overlap diagnostic views; it remains schematic and unqualified.
 - `validate_gripper_study.ps1` — compile and 46-pose jaw-body/support-frame intersection check; its scope is limited and it does not qualify the mechanism.
 - `simple_gripper/rack_and_pinion_pitch_layout.scad` — separate rack/pinion and pitch-cradle layout around the supplied clamp mesh; its center-rod, servo, rail fixedness, prop fit, and load interfaces remain assumptions.
@@ -126,3 +126,7 @@ The team has supplied a whole-vehicle concept STL with stand-ins; it is stored u
 
 
 
+
+## New actuator interface study
+
+The separate actuator_face_mount_study folder contains a 78 x 40 x 3 mm SER face-pattern coupon and preview. The plate-hole and center clearances are provisional and it is not connected to the yoke, vehicle, or hard-stop load path. Enabling the SER package overlay in gripper_study_stop_guard_enclosure_candidate.scad reports a 115 x 103.5 x 139.1 mm estimated package envelope; the prior 112 mm generic-actuator estimate is not the SER fit envelope. The proxy still clashes with the current reaction ring, rails, and Ø34 mm shroud.

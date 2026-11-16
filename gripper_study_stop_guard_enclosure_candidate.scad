@@ -303,6 +303,7 @@ actuator_body_d = 20;
 actuator_body_l = 45;
 show_ser203x_package_proxy = false; // [true,false] comparison overlay only; not selected actuator or fit check
 ser203x_package_rotation_deg = 0; // rotate 70 x 32 mm housing footprint about its output axis
+ser203x_case_below_output_face = 72.1; // 67 mm case plus 5.1 mm top feature; vendor drawing proxy
 actuator_coupler_d = 14;
 actuator_output_shaft_d = 6; // placeholder; replace from the selected actuator drawing
 actuator_motor_shaft_engagement = 3; // placeholder; confirm vendor shaft projection and engagement
@@ -408,8 +409,10 @@ study_envelope_x_max = max(jaw_gap/2+jaw_thickness/2+stop_guard_outer_d/2,
 study_envelope_y_min = -plate_t;
 study_envelope_y_max = max(grip_end_y,
     pivot_y+hook_lip_center_y+hook_lip_width_y/2);
+study_actuator_drop_below_face = show_ser203x_package_proxy
+    ? ser203x_case_below_output_face : actuator_body_l;
 study_envelope_z_min = -jaw_height/2-actuator_axial_gap
-    -actuator_body_l-actuator_guard_bottom_extension;
+    -study_actuator_drop_below_face-actuator_guard_bottom_extension;
 study_envelope_z_max = plate_h/2;
 echo(str("Swept study envelope with adapter plate [X,Y,Z]: ",
          study_envelope_x_max-study_envelope_x_min," x ",

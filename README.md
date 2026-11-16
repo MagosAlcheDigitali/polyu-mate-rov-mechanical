@@ -8,6 +8,8 @@ The GitHub home is [`MagosAlcheDigitali/polyu-mate-rov-mechanical`](https://gith
 
 The OpenSCAD study uses a removable vehicle adapter, structural yoke, fixed reaction/push face, one pivoting jaw, replaceable contact pads, a guarded stop, and a generic actuator package. Current defaults are approximately 24 mm open pad gap, 0–44° commanded sweep, 3.18 mm analytic hard-close gap, a 95 x 103.5 x 112 mm study envelope, and 97.5 mm forward reach from the model datum. These are study values only.
 
+The generic 95 x 103.5 x 112 mm bounds are the baseline study envelope. When the optional SER-203x/SER-213x package overlay is enabled in the stop-guard candidate, the reported estimate becomes 115 x 103.5 x 139.1 mm; its case still clashes with the generic reaction mount and shroud.
+
 **Actuator clarification:** `gripper_study.scad` has no selected servo. Its Ø20 x 45 mm cylinder and Ø6 mm shaft are generic packaging placeholders, not SG90 dimensions or a confirmed motor choice. `sg90_quick_gripper.scad` is a separate, simple, low-load classroom-style mockup built around an SG90 horn; it does not drive the main pivot-jaw model and is not an underwater-rated actuator recommendation.
 
 The provided vehicle image and verbal 250 x 150 x 150 mm electronics-bay envelope are context, not CAD fit evidence. The newly supplied whole-body concept STL is stored in `vehicle_reference/`; its scale, coordinate axes, and structural mount details are not confirmed. The team selected STEP/STP assembly as the preferred vehicle-CAD format. That assembly and mission practice-prop geometry have not been supplied. The official Explorer Part 1 mission manual is currently listed as pending, so task-specific grasp/contact features remain provisional.
@@ -78,3 +80,8 @@ The [MATE 2027 resource page](https://materovcompetition.org/2027) and [Explorer
 
 
 
+
+## SER face-pattern coupon
+
+The isolated actuator_face_mount_study folder contains a 78 x 40 x 3 mm plate coupon and preview for the SER-203x/SER-213x face pattern. It checks only drawing-based hole and center-feature clearances; the fastener choices are provisional, and the plate has no yoke, vehicle, or hard-stop connection. It is not a load-rated mount.
+The optional SER overlay in the current gripper candidate now reports 139.1 mm total Z study envelope when enabled, reflecting the 72.1 mm actuator case drop. This remains a package estimate; the generic reaction mount and shroud visibly clash with the case.
