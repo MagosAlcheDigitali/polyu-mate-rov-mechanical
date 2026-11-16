@@ -130,3 +130,12 @@ The team has supplied a whole-vehicle concept STL with stand-ins; it is stored u
 ## New actuator interface study
 
 The separate actuator_face_mount_study folder contains a 78 x 40 x 3 mm SER face-pattern coupon and preview. The plate-hole and center clearances are provisional and it is not connected to the yoke, vehicle, or hard-stop load path. Enabling the SER package overlay in gripper_study_stop_guard_enclosure_candidate.scad reports a 115 x 103.5 x 139.1 mm estimated package envelope; the prior 112 mm generic-actuator estimate is not the SER fit envelope. The proxy still clashes with the current reaction ring, rails, and Ø34 mm shroud.
+
+### Compact servo-face coupon and mount screen
+
+The alternate `actuator_face_mount_study/ser_face_mount_coupon_compact.scad` is 66 x 36 x 3 mm and preserves the drawing-based 35 x 22 mm four-hole pattern. Its 37.59 mm corner radius leaves 4.41 mm nominal clearance inside a hypothetical same-plane Ø84 mm bore; the original 78 x 40 mm rectangle would overhang that bore. `validate_compact_coupon.ps1` passed three OpenSCAD hard-warning selector compiles, STL and preview exports, and measured the exported plate at 66 x 36 x 3 mm. The same-plane relationship, actual vendor STEP interface, mount-to-yoke bridge, screw strength, and load path remain unverified.
+
+### Separate SER mount architecture concept
+
+`actuator_face_mount_study/ser203x_topmount_architecture_study.scad` explores a 90° case rotation, top-face screw attachment, four reaction posts, a widened 48 x 40 mm lower-bearing bridge, and a short coupler-only guard. The calculated package clearances and current yoke-hole datum are preliminary. OpenSCAD hard-warning compiles and component STL exports passed; static post/case, post/guard, coupler/guard, and faceplate/case intersection checks were empty. This is an isolated packaging study and is not connected to the full jaw, actual yoke, stop sector, body, or vendor STEP. Run `validate_ser203x_topmount_architecture.ps1` to regenerate the local preview and component meshes.
+
