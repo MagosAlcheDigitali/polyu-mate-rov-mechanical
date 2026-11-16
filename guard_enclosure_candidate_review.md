@@ -21,14 +21,15 @@ The screws/inserts are M3-class geometry proxies. Pullout strength, repeated ser
 
 `validate_gripper_study_stop_guard_enclosure_candidate.ps1` completed with exit code 0 using OpenSCAD 2021.01 and `--hardwarnings`:
 
-- `assembly` and `stop_guard_enclosure_only` compiled without warnings. The optional captive-nut and heat-set-insert lower-floor assembly layouts also emitted CSG geometry; their physical hardware fit is not established.
+- `assembly` and `stop_guard_enclosure_only` compiled without warnings. Both optional captive-nut and heat-set-insert floor layouts compiled; floor/structure and shell/floor intersections were empty for each, and guard/mechanism intersections were empty at 0° and 44° for each. The default self-tapping variant has the separate 11-angle sweep below. Optional styles have not had the same full sweep.
 - All five `guard_fastener_test_coupon.scad` selectors (`single_joint`, `multi_coupon_bed`, `boss_carrier_print`, `panel_coupon_print`, and `fastener_proxy`) emitted nonempty CSG with `--hardwarnings`.
 - Floor/support, floor/bearing, floor/actuator, floor/bridge, floor/shaft, aggregate floor/structure, shell/floor, and wall/support intersection outputs were empty.
 - Guard/mechanism intersections were empty at 0, 5, 10, 15, 20, 22, 25, 30, 35, 40, and 44 degrees (11 static samples).
 - Individual shell, left-panel, right-panel, lid, and hardware-proxy STL exports were nonempty.
 - Actual OpenSCAD previews were rendered for the full assembly and isolated enclosure.
+- `validate_guard_fastener_options.ps1` retains the optional-style checks in `guard_fastener_variant_qa/`. This is endpoint/static geometry evidence only; it does not establish hardware fit or strength.
 
-Faustinius performed a read-only DfM review of the updated floor/shell seating and fastener layout. The geometry now separates without modeled shell/panel interference and the lower screw head bridges the panel relief. The review does not validate printed self-tapped joints or physical assembly.
+Faustinius performed a read-only DfM review of the updated floor/shell seating and fastener layout. Cawl's follow-up found and corrected a stale lid-web comment (3.2 mm lid minus the 1.5 mm recess and 0.2 mm cutter allowance leaves 1.5 mm nominal web), and confirmed the optional boss layouts have empty sampled intersections. These checks do not validate printed joints or physical assembly. The Ø8.5 mm lid insert bosses sit close to the Ø100 mm lid edge; check cracking/flex with the actual insert and print process.
 
 QA logs, CSG and STL outputs, actual previews, and labeled earlier collision meshes are kept under `gripper_study_stop_guard_enclosure_candidate_qa/` and in the companion ZIP archive. This validates nominal static CAD geometry only. It does not validate continuous motion clearance, tolerance stacks, strength, material, hardware sourcing, sealing, physical fit, access protection, or competition compliance.
 
@@ -44,6 +45,3 @@ Source: [official 2027 Explorer Part 2 manual](https://20693798.fs1.hubspotuserc
 - The vehicle STEP/STP assembly in millimetres is still needed to locate the end effector, mount, thrusters, cameras, and service envelope.
 - Official task props or measured faithful practice props are needed to set jaw opening, contact geometry, forces, and task coverage.
 - Verify selected actuator torque/current, shaft/coupler fit, and load path before powered operation.
-
-
-

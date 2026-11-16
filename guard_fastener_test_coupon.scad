@@ -15,7 +15,6 @@ boss_engagement_h = 3.2;
 panel_relief_d = 7.3;          // 0.4 mm radial clearance around Ø6.5 boss
 panel_t = 1.5;
 carrier_flange_t = 1.5;
-carrier_flange_boss_overlap = 1.5; // integrated flange/boss overlap in source CAD
 panel_carrier_gap = 0.2;       // source candidate nominal service gap
 head_flange_d = 9.0;
 head_flange_t = 1.0;

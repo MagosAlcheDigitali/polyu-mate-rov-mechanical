@@ -1441,7 +1441,7 @@ module stop_guard_lid() {
                            stop_guard_top_z+stop_guard_cap_t/2])
                     cylinder(d=stop_guard_lid_screw_clearance_d,
                              h=stop_guard_cap_t+0.2,center=true);
-                // Counterbore leaves a nominal 0.5 mm lid floor; fastener
+                // Counterbore leaves a nominal 1.5 mm lid web; fastener
                 // head/protrusion and inspection remain to be checked.
                 translate([stop_guard_lid_screw_radius,0,
                            stop_guard_top_z+stop_guard_cap_t
